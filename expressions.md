@@ -38,7 +38,8 @@ You can also join strings with the concatenate operator (&):
 Excellent will attempt to cast strings to the following types when used in functions:
  * Strings
  * Decimal values
- * Datetimes: (ISO 8601) or `dd-mm-yyyy HH:MM(:SS)` or `mm-dd-yyyy HH:MM(:SS)` 
+ * Datetimes: (ISO 8601) or `dd-mm-yyyy HH:MM(:SS)` or `mm-dd-yyyy HH:MM(:SS)`
+ * Boolean: True or False (case insensitive)
 
 ### Logical comparisons
 
