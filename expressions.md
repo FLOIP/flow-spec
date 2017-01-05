@@ -51,7 +51,7 @@ Note that when comparing text values, the equals (=) and not-equals (<>) operato
 
 ## Templating
  
-For templating, RapidPro uses the `@` character to denote either a single variable substitution or the beginning of a
+For templating, RapidPro uses the `@` character to denote either a single variable substitution or the beginning of an
 Excellent block. `@` was chosen as it is known how to type by a broad number of users regardless of keyboard. It does have
 the disadvantage of being used in email addresses and Twitter handles, but these are rarely ambiguous and escaping can
 be done easily via doubling of the character (`@@`).
