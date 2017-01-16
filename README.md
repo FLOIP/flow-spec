@@ -13,7 +13,7 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 
 ## Specification - Table of Contents
 
-1. Project Charter and Governance Rules
+1. [Project Charter and Governance Rules](charter.md)
 2. Fundamentals
  1. Glossary and Definitions
  2. Flows
