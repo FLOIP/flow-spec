@@ -67,11 +67,11 @@ The required keys for a Block are:
   - tag (string): This is an identifier for the output, unique within the Block
   - config (mapping): This contains additional information required for each mode supported by the block. Details are provided within the Block documentation
   
-  ### Example
+### Example
   
-  ```
-  TODO
-  ```
+```
+TODO
+```
   
 
 
