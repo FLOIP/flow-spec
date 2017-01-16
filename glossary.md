@@ -6,7 +6,7 @@ Term      | Description                     | Synonyms (discouraged)
 ----      |---------------------------------|------------------------
 Flow Definition | A document which fully describes the blocks and logical connections in a flow. A Flow Runner can execute a Flow Definition. | Tree, Flow Content
 Run       | An instance of a Contact traversing through a Flow. | Flow execution, session
-Block     | A block is an action within a Flow. Blocks can execute instantly, or take time to wait for contact input. Blocks have multiple outputs, and Connections from their Outputs to the start of other blocks. | Step, Action, Ruleset
+Block     | A block is an action within a Flow. Blocks can execute instantly, or take time to wait for contact input. Blocks have one or more Outputs, and Connections from their Outputs to the start of other blocks. | Step, Action, Ruleset
 Contact   | An entity which can interact with a Flow. | Phonebook Entry, Subscriber
 Context   | A dictionary of variables providing the necessary context for running a Flow with a Contact. This includes things like the details of the Contact, information on the active channel, etc. | 
 Runner    | A system capable of executing a Flow Definition with a Contact and doing something useful with the results. | Engine
