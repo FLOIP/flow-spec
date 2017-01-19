@@ -6,11 +6,11 @@ The purpose of the project is to enable useful interoperability between Flow-bas
 
 ## Members
 
-The initial collaborating organisations are Nyaruka, InSTEDD, Ona, and VOTO Mobile.  UNICEF and USAID is providing guidance and input.  The project received initial funding from USAID. We recognize and hope that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations.
+The initial collaborating organisations are Nyaruka, InSTEDD, Ona, and VOTO Mobile.  UNICEF and USAID are providing guidance and input.  The project received initial funding from USAID. We recognize and hope that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations.
 
 ## Scope
 
-- We will create an open specification that allows sharing flow definitions across platforms, so that flows can be authored, run, and visualized across platforms
+- We will create an open specification that allows sharing flow definitions across platforms, so that flows can be authored, run, and visualized across platforms.
 - We will create an open specification for the data resulting from interacting with flows, so that data can move across platforms and accelerate the creation of dashboards, analysis tools, and archiving.
 - We will create a set of supporting tools to incentivize and accelerate adoption of these two specifications.
 
@@ -18,17 +18,17 @@ The initial collaborating organisations are Nyaruka, InSTEDD, Ona, and VOTO Mobi
 
 The principles of the project will guide and be used as a criteria for decision-making:
 
-- Think about and enable a future ecosystem. 
-- Do the hard work to make it simple
-- Start with needs 
-- Focus on what’s good for end-users, within our context
-- There are multiple good solutions; 
-- Aim for consistency when possible but recognize unique needs
-- Multiple perspectives are an asset
-- “This will do”
-- Make evidence-based decisions
-- Understand that iteration will be needed (short-term, but also in the long-term to stay relevant and adapt)
-- Make it open [includes how the initial partners work together, but also how others can join]
+1. Think about and enable a future ecosystem. 
+2. Do the hard work to make it simple
+3. Start with needs 
+4. Focus on what’s good for end-users, within our context
+5. There are multiple good solutions; 
+6. Aim for consistency when possible but recognize unique needs
+7. Multiple perspectives are an asset
+8. “This will do”
+9. Make evidence-based decisions
+10. Understand that iteration will be needed (short-term, but also in the long-term to stay relevant and adapt)
+11. Make it open [includes how the initial partners work together, but also how others can join]
 
 ## Governance and Decision-making on the overall project:
 
@@ -44,7 +44,9 @@ The principles of the project will guide and be used as a criteria for decision-
     - One partner is less aligned on the direction of the project
     - Or one voice is consistently not being heard
 - Pull requests for incorporation into the spec require “all to approve” among the core team
-  - The implicit default if no response is received in a week, or no official position given in a month, is to abstain.
+  - Time limits for input: 
+    - If an organization doesn't respond within one week, this will automatically indicate an "abstain". (Responding means leaving a comment, suggesting changes, or communicating in some way to ask for more time)
+    - If an organization responds but does not give their official vote within one month, this will automatically indicate an "abstain".
 - Anyone in the world can contribute to a branch
 - Core team is the ones that can merge into master
 - Where/how the discussion happens:
