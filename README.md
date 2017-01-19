@@ -15,22 +15,21 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 
 1. [Project Charter and Governance Rules](charter.md)
 2. Fundamentals
- 1. Glossary and Definitions
- 2. Flows
- 3. Blocks
- 4. Connections
- 5. Expressions
- 6. Layers in the Specification
+  1. Glossary and Definitions
+  2. Flows
+  3. Blocks
+  4. Connections
+  5. Expressions
+  6. Layers in the Specification
 3. Layer Documentation
- 1. Layer 1: Core Primitives
-   1. Blocks
-   2. Expression context
- 2. Layer 2: Mobile Primitives
-   1. Blocks
-   2. Expression Context
- 3. Layer 3: Mobile Components
-   1. Blocks
-   2. Expression Context
+  1. Layer 1: Core Primitives
+    1. Blocks
+    2. Expression context
+  2. Layer 2: Mobile Primitives
+    1. Blocks
+    2. Expression Context
+  3. Layer 3: Mobile Components
+    1. Blocks
+    2. Expression Context
 4. Flow Results
 
- 
