@@ -5,7 +5,7 @@ This list provides a consistent definition of terms used in the FLOIP Specificat
 Term      | Description                     | Synonyms (discouraged)
 ----      |---------------------------------|------------------------
 Block     | A block is an action within a Flow. Blocks can execute instantly, or take time to wait for contact input. Blocks have one or more Exits, and Connections from their Exits to the start of other blocks. | Step, Action, Ruleset
-Channel   | The details of the connection a Flow is being Run across, to communicate with a Contact. This could include the details of an SMS provider and shortcode, a telephone number and telecom connection, or a Facebook bot.
+Channel   | The details of the communication medium a Flow is being Run across, to communicate with a Contact. This could include the details of an SMS provider and shortcode, a telephone number and telecom connection, or a Facebook bot.
 Connection  | A logical link between the Exit of a Block and the start of another Block. Connections + Blocks fully specify a Flow Definition. | Noodle
 Contact   | An entity (often, a person with a digital identity and device) which can interact with a Flow. Note: Basic flows with only primitive Blocks might not need to deal with Contacts. | Phonebook Entry, Subscriber
 Context   | A dictionary of variables providing the necessary context for running a Flow with a Contact. A Context may have a Contact, and other variables such as the Channel. | 
