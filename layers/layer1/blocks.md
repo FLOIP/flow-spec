@@ -56,7 +56,7 @@ Required keys for each exit's `config` mapping are:
 
 Key | Description
 --- | ---
-test | The expression to be evaluated. If the expression evalutes to a "truthy" value, the block will terminate through this exit.
+`test` | The expression to be evaluated. If the expression evalutes to a "truthy" value, the block will terminate through this exit.
 
 ### Example
 ```
@@ -74,8 +74,8 @@ Required keys in the block's `config` mapping are:
 
 Key | Description
 --- | ---
-operation (enum: `and` or `or`)| In `and` mode, all expressions must be truthy for the block to choose the first exit. In `or` mode, at least one expression must be truthy to choose the first exit.
-tests| A list of expressions to evaluate 
+`operation` (enum: `and` or `or`)| In `and` mode, all expressions must be truthy for the block to choose the first exit. In `or` mode, at least one expression must be truthy to choose the first exit.
+`tests`| A list of expressions to evaluate 
 
 Required keys for each exit's `config` mapping are:
 
