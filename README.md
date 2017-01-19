@@ -23,14 +23,14 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
  6. Layers in the Specification
 3. Layer Documentation
  1. Layer 1: Core Primitives
-  1. Blocks
-  2. Expression context
+   1. Blocks
+   2. Expression context
  2. Layer 2: Mobile Primitives
-  1. Blocks
-  2. Expression Context
+   1. Blocks
+   2. Expression Context
  3. Layer 3: Mobile Components
-  1. Blocks
-  2. Expression Context
+   1. Blocks
+   2. Expression Context
 4. Flow Results
 
  
