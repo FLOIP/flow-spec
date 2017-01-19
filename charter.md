@@ -51,7 +51,7 @@ The principles of the project will guide and be used as a criteria for decision-
   - Asynchronous conversations on Github Issues and pull requests
   - Bi-weekly phone calls with the core team (and open to anyone), to discuss the tickets that need discussion
 - In each ‘approval’ process, there is one vote per core organization. The vote choices are: Approve, Abstain, Disagree but Allow, Block
-  - Agree: The org thinks the change is positive and approves it.
-  - Abstain: The org doesn't have a position on this change, but approves it.
-  - Disagree but Allow: The org thinks the change is negative but is willing to approve it.
-  - Block: The org thinks the change is negative and is not willing to approve it until concerns are addressed.
+  - Agree :+1: : The org thinks the change is positive and approves it.
+  - Abstain :see_no_evil: : The org doesn't have a position on this change, but approves it.
+  - Disagree but Allow :-1: : The org thinks the change is negative but is willing to approve it.
+  - Block :no_entry_sign: : The org thinks the change is negative and is not willing to approve it until concerns are addressed.
