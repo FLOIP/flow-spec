@@ -69,6 +69,7 @@ Key | Description
 `label` (string)| A human-readable label for this block. This is only expressed in a single language
 `type` (string)| A specific string designating the type or "subclass" of this Block. This must be one of the Block type names within the specification [TODO: layers of specification]
 `semantic_label` (string, optional)| A user-controlled field that can be used to label the meaning of the data collected by this block, e.g.: an ICD10 category name or other semantic classification system. ("ICD10::gender")
+`config` (mapping)| Additional parameters that are specific to the type of the block. Details are provided within the Block documentation.
 `exits`| a list of all the exits for the block. Exits must contain the required keys below, and can contain additional keys based on the Block type
 
 Each exit must contain:
