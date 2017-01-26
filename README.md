@@ -15,7 +15,7 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 
 1. [Project Charter and Governance Rules](charter.md)
 2. Fundamentals
-  1. Glossary and Definitions
+  1. [Glossary and Definitions](fundamentals/glossary.md)
   2. Flows
   3. Blocks
   4. Connections
