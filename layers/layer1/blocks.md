@@ -76,4 +76,27 @@ Key | Description
 TODO
 ```
 
+## Output Block
+
+- Type: `Output`
+- Number of exits: 1
+
+This block provides a connection to the Flow Results specification, by storing a named Output variable.
+
+Required keys in the block's `config` mapping are:
+
+Key | Description
+--- | ---
+`name` (string) | The variable name in the Flow Results output to write.
+`value` (expression)| The expression that will be evaluated and written to the Results. [TODO: Can this be a localized resource?]
+
+### Details
+
+Not all block interactions and low-level logs are important to users; most users are concerned with a subset of results that have specific meaning -- the "Flow Results".  [TODO: Flow Results specification]  Any block type, as part of its specified runtime behaviour, may write to the Flow Results.  The Output Block is a low-level block that does just this one thing: write a named value to the Flow Results.
+
+### Example
+```
+TODO
+```
+
 
