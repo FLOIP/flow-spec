@@ -17,12 +17,12 @@ also for flow control.
        code: eng / fra / spa
        name: English / French / Spanish
        __string__: English
-       __default__: eng
+       __value__: eng
  * timezone: contains the timezone that the flow is currently running in
        code: UTC+500
        name: US Pacific
        __string__: US Pacific
-       __default__: UTC+500
+       __value__: UTC+500
  * localization: contains configuration details around localization of variables
        date_format: whether we are day or month first
        decimal_format: whether we use commas or periods
@@ -66,7 +66,7 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
     "exit": "1234-1234-1234-1234-1234",
     "exit_label": "Middle Aged",
     "mime_type": "text/plain", # optional, assumed to be text/plain
-    __default__: 36
+    __value__: 36
   },
   "gender": {
     "block": "1234-1234-1234-1234-1234",
@@ -75,7 +75,7 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
     "input": "m",
     "exit": "1234-1234-1234-1234-1234",
     "exit_label": "Male",
-    __default__: "M"
+    __value__: "M"
   },
   "voicemail": {
     "block": "1234-1234-1234-1234-1234",
@@ -85,7 +85,7 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
     "input": "https://s3.aws/1234-1234-1234-1234.wav",
     "exit": "1234-1234-1234-1234-1234",
     "exit_label": "Long Message",
-    __default__: "https://s3.aws/1234-1234-1234-1234.wav",
+    __value__: "https://s3.aws/1234-1234-1234-1234.wav",
     "meta": {
       "duration": 2332 # ms?
     }
@@ -98,7 +98,7 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
     "input": "https://s3.aws/1234-1234-1234-1234.jpeg",
     "exit": "1234-1234-1234-1234-1234",
     "exit_label": "Valid Image",
-    __default__: "https://s3.aws/1234-1234-1234-1234.jpeg",
+    __value__: "https://s3.aws/1234-1234-1234-1234.jpeg",
     "meta": {
       "dimensions": "300x500"
     }
