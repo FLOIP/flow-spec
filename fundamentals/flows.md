@@ -74,10 +74,11 @@ Each exit must contain:
 
 Key | Description
 --- | ---
-`destination` (uuid)| This is the uuid of the Block this exit connects to
-`label` (resource)| This is the name of the exit (as a translated resource)
+`uuid` (64 bit integer uuid TODO)| A globally unique identifier for this Exit
+`label` (resource)| This is the human-readable name of the exit (as a translated resource), which might be presented to a contact.
+`tag` (string, word characters only)| This is an identifier for the exit, suitable for use as a variable name in rolling up results (e.g.: "male"). It does not need to be unique within the block; multiple exits may be tagged the same. (Some authoring tools may choose to auto-generate the tag from the label's primary language, to avoid usability problems with these getting out of sync.)
+`destination_block` (uuid)| This is the uuid of the Block this exit connects to.
 `semantic_label` (string, optional)| A user-controlled field that can be used to label the meaning of the exit, e.g.: an ICD10 category name or other semantic classification system. ("ICD10::female")
-`tag` (string)| This is an identifier for the exit, unique within the Block. TODO: Is this a uuid, sequential integer, or free-form?
 `config` (mapping)| This contains additional information required for each mode supported by the block. Details are provided within the Block documentation
   
 ### Example
