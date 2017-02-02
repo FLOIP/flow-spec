@@ -38,7 +38,7 @@ You can also join strings with the concatenate operator (&):
 Excellent will attempt to cast strings to the following types when used in functions:
  * Strings
  * Decimal values
- * Datetimes: (ISO 8601) or `dd-mm-yyyy HH:MM(:SS)` or `mm-dd-yyyy HH:MM(:SS)`
+ * Datetimes: (ISO 8601) or `dd-mm-yyyy HH:MM(:SS)` or `mm-dd-yyyy HH:MM(:SS)` or `mm-dd` or `dd-mm` or `mm-dd-yy` or `dd-mm-yy` (environment will help with ambiguous cases)
  * Boolean: True or False (case insensitive)
 
 ### Logical comparisons
@@ -70,7 +70,7 @@ Examples below use the following context:
      "age": 30,
      "tel": "+12065551212",
      "birthday": "22-04-1986",
-     "__string__": "Marshawn Lynch"
+     "__value__": "Marshawn Lynch"
    },
    "channel": {
      "name": "Twilio 1423",
@@ -82,8 +82,8 @@ Examples below use the following context:
 | Template                     | Evaluated                                       | Notes                                     |
 | ---------------------------- | ----------------------------------------------- | ----------------------------------------- |
 | Hi @contact.name           | Hi Marshawn Lynch                             |                                           |
-| Hi @contact                | Hi Marshawn Lynch                             | if a dictionary is referred to which has a `__string__` element, that is used in substitution |
-| Hi @channel                | Hi { "name": "Twilio 1423", "address": "1423" }| without a `__string__` element, JSON representation is substituted |
+| Hi @contact                | Hi Marshawn Lynch                             | if a dictionary is referred to which has a `__value__` element, that is used in substitution |
+| Hi @channel                | Hi { "name": "Twilio 1423", "address": "1423" }| without a `__value__` element, JSON representation is substituted |
 | You can contact us at foo@bar.com | You can contact us at foo@bar.com      | bar is not in context, so passed through  |
 | You can contact us at foo@contact.com | You can contact us at foo@contact.com | contact.com not in context, so passed through |
 | You can contact us at foo@@contact.tel | You can contact us at foo@contact.tel | `@@` escapes to `@` |
