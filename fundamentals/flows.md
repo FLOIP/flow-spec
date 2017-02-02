@@ -39,8 +39,7 @@ Key | Description
 `interaction_timeout` (integer)| The number of seconds of inactivity after which Contact input for this flow is no longer accepted, and Runs in progress are terminated
 `platform_metadata` (mapping)| A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific Platform.
 `supported_modes` (list)|A list of the supported Modes that the Flow has content suitable for. (See below)
-`blocks` (list)| A list of the Blocks in the flow. (See below)
-`starting_block_id` (string)| the uuid of the first Block in the Flow to start running.
+`blocks` (list)| A list of the Blocks in the flow (see below).  The flow will start execution at the _first_ block in this list.
 
 Supported modes include:
   - `text`: general text-based interactions
