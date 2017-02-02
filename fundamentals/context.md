@@ -5,9 +5,9 @@ during execution. The context is populated by the engine before and during
 execution, different variables will be available depending on which flow
 extensions are available.
 
-## Configuration variables
+## Flow Environment
 
-Configuration variables live under the `@config` key in the context. They control
+Environment variables live under the `@env` key in the context. They control
 the execution of the flow in various ways, mostly related to localization but
 also for flow control.
 
@@ -60,7 +60,6 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
 {
   "age": {
     "block": "1234-1234-1234-1234-1234",
-    "created_by": "1234-1234-1234-1234-1234",
     "created_on": "2017-01-17 14:14",
     "value": 36,
     "input": "I am 36 years old",
@@ -71,7 +70,6 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
   },
   "gender": {
     "block": "1234-1234-1234-1234-1234",
-    "created_by": "1234-1234-1234-1234-1234",
     "created_on": "2017-01-17 14:14",
     "value": "M",
     "input": "m",
@@ -81,7 +79,6 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
   },
   "voicemail": {
     "block": "1234-1234-1234-1234-1234",
-    "created_by": "1234-1234-1234-1234-1234",
     "created_on": "2017-01-17 14:14",
     "value": "https://s3.aws/1234-1234-1234-1234.wav",
     "mime_type": "audio/wav"
@@ -94,7 +91,7 @@ The `@flow` variable contains a mapping of variables populated by Case blocks
     }
   },
   "mugshot": {
-    "created_by": "1234-1234-1234-1234-1234",
+    "block": "1234-1234-1234-1234-1234",
     "created_on": "2017-01-17 14:14",
     "value": "https://s3.aws/1234-1234-1234-1234.jpeg",
     "mime_type": "image/jpeg"
