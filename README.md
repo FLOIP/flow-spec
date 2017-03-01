@@ -16,20 +16,23 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 1. [Project Charter and Governance Rules](charter.md)
 2. Fundamentals
   1. [Glossary and Definitions](fundamentals/glossary.md)
-  2. Flows
-  3. Blocks
+  2. [Flows](fundamentals/flows.md)
+  3. [Blocks](fundamentals/flows.md#blocks)
   4. Connections
-  5. Expressions
+  5. [Expressions](fundamentals/expressions.md)
   6. Layers in the Specification
 3. Layer Documentation
   1. Layer 1: Core Primitives
-    1. Blocks
+    1. [Blocks](layers/layer1/blocks.md)
     2. Expression context
-  2. Layer 2: Mobile Primitives
-    1. Blocks
+  2. Layer 2: Console IO
+    1. [Blocks](layers/layer2/blocks.md)
     2. Expression Context
-  3. Layer 3: Mobile Components
-    1. Blocks
+  3. Layer 3: Mobile Primitives
+    1. [Blocks](layers/layer3/blocks.md)
+    2. Expression Context
+  4. Layer 3: Mobile Components
+    1. [Blocks](layers/layer4/blocks.md)
     2. Expression Context
 4. Flow Results
 
