@@ -39,8 +39,7 @@ Key | Description
 `interaction_timeout` (integer)| The number of seconds of inactivity after which Contact input for this flow is no longer accepted, and Runs in progress are terminated
 `platform_metadata` (mapping)| A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific Platform.
 `supported_modes` (list)|A list of the supported Modes that the Flow has content suitable for. (See below)
-`blocks` (list)| A list of the Blocks in the flow. (See below)
-`starting_block_id` (string)| the uuid of the first Block in the Flow to start running.
+`blocks` (list)| A list of the Blocks in the flow (see below).  The flow will start execution at the _first_ block in this list.
 
 Supported modes include:
   - `text`: general text-based interactions
@@ -77,9 +76,10 @@ Each exit must contain:
 
 Key | Description
 --- | ---
-`destination` (uuid)| This is the uuid of the Block this exit connects to
-`tag` (string, word-characters only)| This is an identifier for the exit, unique within the Block. (TODO: Is this a uuid, sequential integer, or free-form? Should it be called `name` instead?)
-`label` (string, optional)| This is a user-provided, human-readable description of the exit
+`uuid` (64 bit integer uuid TODO)| A globally unique identifier for this Exit
+`label` (resource)| This is the human-readable name of the exit (as a translated resource), which might be presented to a contact.
+`tag` (string, word characters only)| This is an identifier for the exit, suitable for use as a variable name in rolling up results (e.g.: "male"). It does not need to be unique within the block; multiple exits may be tagged the same. (Some authoring tools may choose to auto-generate the tag from the label's primary language, to avoid usability problems with these getting out of sync.)
+`destination_block` (uuid)| This is the uuid of the Block this exit connects to.
 `semantic_label` (string, optional)| A user-controlled field that can be used to label the meaning of the exit, e.g.: an ICD10 category name or other semantic classification system. ("ICD10::female")
 `test` (expression, optional)| For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen.
 `config` (mapping)| This contains additional information required for each mode supported by the block. Details are provided within the Block documentation
