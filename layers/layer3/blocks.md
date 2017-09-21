@@ -7,10 +7,10 @@ These blocks may make use of the [Expression Specification](../expressions.md) f
 *Namespace*: `MobilePrimitives`
 
 ## Contents
-- [Message Block]
-- [Select One Response (Multiple Choice Question) Block]
-- [Numeric Response Block]
-- [Open Response (Open-ended Question) Block]
+- [Message Block](#message-block)
+- [Select One Response (Multiple Choice Question) Block](#select-one-response-multiple-choice-question-block)
+- [Numeric Response Block](#numeric-response-block)
+- [Open Response (Open-ended Question) Block](#open-response-open-ended-question-block)
 
 
 ## Message Block
