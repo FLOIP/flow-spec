@@ -6,7 +6,7 @@ Support for this layer should be implemented by all engines that target the `off
 Namespace: `SmartDevices`
 
 ## Contents
-- [Location Response Block](#location-response-block)
+- [Location Response Block](#location-response-gps-block)
 - [Photo Response Block](#photo-response-block)
 
 
