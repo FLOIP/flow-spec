@@ -23,11 +23,11 @@ Key | Description
 
 ### Detailed behaviour
 
-- text (SMS): Sends `message` as an SMS to the contact.
-- text (USSD): Displays `message` as the next USSD prompt to the user. (Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.)
-- ivr: Plays `message-audio` to the contact.
-- rich_messaging: Display `message` within the conversation with the contact. Optionally, platforms may attach the `message-prompt` (if provided) as an audio attachment that the contact can choose to play.
-- offline: Display `message` within the session with the contact.
+- `text` (SMS): Sends `message` as an SMS to the contact.
+- `text` (USSD): Displays `message` as the next USSD prompt to the user. (Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.)
+- `ivr`: Plays `message-audio` to the contact.
+- `rich_messaging`: Display `message` within the conversation with the contact. Optionally, platforms may attach the `message-prompt` (if provided) as an audio attachment that the contact can choose to play.
+- `offline`: Display `message` within the session with the contact.
 
 ### Output behaviour
 None (TODO: Should the length of message listened be reported in variables, or only be part of the detailed flow interaction logs?)
@@ -41,6 +41,7 @@ TODO
 
 - Type: `MobilePrimitives\SelectOne`
 - Suggested number of exits: 1 + error exit, or multiple based on choices
+- Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact must choose a single choice from a set of choices.
 
@@ -58,10 +59,10 @@ This block can be configured to have a single exit, or a number of exits with po
 
 ### Detailed behaviour
 
-- text (SMS): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. (Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.)
-- text (USSD): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. (Dismissal of the session, timeout, or invalid response: proceed through the error exit.)
-- ivr: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  (Hangup, timeout, or invalid response: proceed through the error exit.)
-- rich_message: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  (If displaying menu items, platforms should display only `question_prompt`.) (Timeout or invalid response: proceed through the error exit.)
+- `text` (SMS): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. (Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.)
+- `text` (USSD): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. (Dismissal of the session, timeout, or invalid response: proceed through the error exit.)
+- `ivr`: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  (Hangup, timeout, or invalid response: proceed through the error exit.)
+- `rich_messaging`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  (If displaying menu items, platforms should display only `question_prompt`.) (Timeout or invalid response: proceed through the error exit.)
 - offline: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to capture a menu selection.
 
 ### Output behaviour
@@ -77,6 +78,7 @@ TODO
 
 - Type: `MobilePrimitives\Numeric`
 - Suggested number of exits: 1 + error exit, or multiple based on ranges of interest
+- Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
 This block obtains a numeric response from the contact.
 
@@ -98,11 +100,11 @@ This block can be configured to have a single exit, or a number of exits with po
 
 ### Detailed behaviour
 
-- text (SMS): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. (Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.)
-- text (USSD): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. (Dismissal of the session, timeout, or invalid response: proceed through the error exit.)
-- ivr: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  (Hangup, timeout, or invalid response: proceed through the error exit.)
-- rich_message: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display a numeric entry widget and wait to capture a response. (Timeout or invalid response: proceed through the error exit.)
-- offline: Display the prompt text according to the prompt configuration in `config` above, and display a numeric entry widget. Wait to capture a response.
+- `text` (SMS): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. (Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.)
+- `text` (USSD): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. (Dismissal of the session, timeout, or invalid response: proceed through the error exit.)
+- `ivr`: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  (Hangup, timeout, or invalid response: proceed through the error exit.)
+- `rich_messaging`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display a numeric entry widget and wait to capture a response. (Timeout or invalid response: proceed through the error exit.)
+- `offline`: Display the prompt text according to the prompt configuration in `config` above, and display a numeric entry widget. Wait to capture a response.
 
 ### Output behaviour
 
