@@ -37,9 +37,9 @@ None (TODO: Should the length of message listened be reported in variables, or o
 TODO
 ```
 
-## Select One Block
+## Select One Response (Multiple Choice Question) Block
 
-- Type: `MobilePrimitives\SelectOne`
+- Type: `MobilePrimitives\SelectOneResponse`
 - Suggested number of exits: 1 + error exit, or multiple based on choices
 - Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
@@ -74,9 +74,9 @@ This block writes the tag of the selected choice to the output variable correspo
 TODO
 ```
 
-## Numeric Block
+## Numeric Response Block
 
-- Type: `MobilePrimitives\Numeric`
+- Type: `MobilePrimitives\NumericResponse`
 - Suggested number of exits: 1 + error exit, or multiple based on ranges of interest
 - Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
@@ -109,6 +109,49 @@ This block can be configured to have a single exit, or a number of exits with po
 ### Output behaviour
 
 This block writes the numeric value received to the output variable corresponding to the `name` of the block.
+
+### Example
+```
+TODO
+```
+
+
+## Open Response (Open-ended Question) Block
+
+- Type: `MobilePrimitives\OpenResponse`
+- Suggested number of exits: 1 + error exit, or multiple based on patterns of interest
+- Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+
+This block obtains an open-ended response from the contact. Dependent on the channel, this is a text response, audio recording, or other type of media recording (e.g. video).
+
+### Block `config`
+
+Key | Description
+--- | ---
+`prompt` (resource) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years."
+`prompt-audio` (resource, required for `ivr`) | For channels that play audio, the localized recordings to play.
+
+#### Channel-specific `config`:
+Key | Description
+--- | ---
+`ivr`: `max-duration-seconds` (number) | The maximum duration to record for, before proceeding to the next block.
+`text`: `max-response-characters` (number, optional) | The maximum number of characters to prompt for and accept. (If not provided, no limit.)
+
+This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks). 
+
+### Detailed behaviour
+
+- `text` (SMS): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. (Lack a response after the flow's configured `timeout`: proceed through the error exit.)
+- `text` (USSD): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. (Dismissal of the session or timeout: proceed through the error exit.)
+- `ivr`: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  (Hangup or timeout with nothing recorded: proceed through the error exit.)
+- `rich_messaging`: Display the prompt text according to the prompt configuration in `config` above, and wait to capture a text response or an upload (audio, video) from the contact. (Timeout: proceed through the error exit.)
+- `offline`: Display the prompt text according to the prompt configuration in `config` above, and display a text entry widget. Wait to capture a response.
+
+### Output behaviour
+
+For `text`, `offline`, and `rich_messaging` channels that capture a text response, this block writes the text received to the output variable corresponding to the `name` of the block. For responses captured as media (`ivr`, `rich_messaging`) the ID of the recording is written. (For more information on standards for IDs of recordings, see [Captured Media Recording IDs](TODO).)
+
+TODO: Do we want to capture the length of the recording other than in the detailed flow interaction log?
 
 ### Example
 ```
