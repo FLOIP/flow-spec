@@ -1,7 +1,7 @@
 # Layer 3: Mobile Primitives
 
 Layer 3 contains the specification for I/O blocks that represent discrete single actions, that have direct analogues across several channels used in mobile messaging (e.g. IVR, SMS, USSD).
-Support for this layer should be implemented by all engines that target the `ivr`, `simple-text` (SMS and USSD), and `rich-messaging` channels. 
+Support for this layer should be implemented by all engines that target the `ivr`, `text` (SMS and USSD), and `rich_messaging` channels. 
 These blocks may make use of the [Expression Specification](../expressions.md) for generating output.  Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
 
 *Namespace*: `MobilePrimitives`
