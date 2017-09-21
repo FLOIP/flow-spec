@@ -9,7 +9,7 @@ Namespace: `MobilePrimitives`
 ## Message Block
 
 - Type: `MobilePrimitives\Message`
-- Number of exits: 1
+- Suggested number of exits: 1
 - Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
 This block presents a single message to the contact. The form of the message can depend on the channel: e.g. a voice recording for the `ivr` channel, and text for the `text` channel.
@@ -21,6 +21,17 @@ Key | Description
 `message` (resource) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering.
 `message-audio` (resource) | For channels that play audio, the localized recordings to play.
 
+### Detailed behaviour
+
+- text (SMS): Sends `message` as an SMS to the contact.
+- text (USSD): Displays `message` as the next USSD prompt to the user. (Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.)
+- ivr: Plays `message-audio` to the contact.
+- rich_messaging: Display `message` within the conversation with the contact. Optionally, platforms may attach the `message-prompt` (if provided) as an audio attachment that the contact can choose to play.
+- offline: Display `message` within the session with the contact.
+
+### Output behaviour
+None (TODO: Should the length of message listened be reported in variables, or only be part of the detailed flow interaction logs?)
+
 ### Example
 ```
 TODO
@@ -28,8 +39,8 @@ TODO
 
 ## Select One Block
 
-- Type: `ConsoleIO\SelectOne`
-- Number of exits: 1, or dependent on number of choices
+- Type: `MobilePrimitives\SelectOne`
+- Suggested number of exits: 1 + error exit, or multiple based on choices
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact must choose a single choice from a set of choices.
 
@@ -43,11 +54,59 @@ Key | Description
 `choices-prompt` (resource, optional, required by `question-prompt`) | For instances when the question prompt should be separated from the presentation of choices, e.g. "Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry."
 `choices` (mapping of choice tags to choice resources) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`.
 
-This block can be configured to have a single exit, or a number of exits chosen based on the response given.
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks). 
+
+### Detailed behaviour
+
+- text (SMS): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. (Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.)
+- text (USSD): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. (Dismissal of the session, timeout, or invalid response: proceed through the error exit.)
+- ivr: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  (Hangup, timeout, or invalid response: proceed through the error exit.)
+- rich_message: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  (If displaying menu items, platforms should display only `question_prompt`.) (Timeout or invalid response: proceed through the error exit.)
+- offline: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to capture a menu selection.
 
 ### Output behaviour
 
 This block writes the tag of the selected choice to the output variable corresponding to the `name` of the block.
+
+### Example
+```
+TODO
+```
+
+## Numeric Block
+
+- Type: `MobilePrimitives\Numeric`
+- Suggested number of exits: 1 + error exit, or multiple based on ranges of interest
+
+This block obtains a numeric response from the contact.
+
+### Block `config`
+
+Key | Description
+--- | ---
+`prompt` (resource) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years."
+`prompt-audio` (resource, required for `ivr`) | For channels that play audio, the localized recordings to play.
+`validation-minimum` (number) | The minimum value (inclusive) that will be accepted as a response to this block; responses less than this will proceed through the error exit.
+`validation-maximum` (number) | The maximum value (inclusive) that will be accepted as a response to this block; responses greater than this will proceed through the error exit.
+
+#### Channel-specific `config`:
+Key | Description
+--- | ---
+`ivr`: `max-digits` (number) | After receiving this many digits, do not wait for any more; accept the digits entered so far as the complete response.
+
+This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks). 
+
+### Detailed behaviour
+
+- text (SMS): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. (Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.)
+- text (USSD): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. (Dismissal of the session, timeout, or invalid response: proceed through the error exit.)
+- ivr: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  (Hangup, timeout, or invalid response: proceed through the error exit.)
+- rich_message: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display a numeric entry widget and wait to capture a response. (Timeout or invalid response: proceed through the error exit.)
+- offline: Display the prompt text according to the prompt configuration in `config` above, and display a numeric entry widget. Wait to capture a response.
+
+### Output behaviour
+
+This block writes the numeric value received to the output variable corresponding to the `name` of the block.
 
 ### Example
 ```
