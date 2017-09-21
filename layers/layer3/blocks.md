@@ -4,7 +4,14 @@ Layer 3 contains the specification for I/O blocks that represent discrete single
 Support for this layer should be implemented by all engines that target the `ivr`, `simple-text` (SMS and USSD), and `rich-messaging` channels. 
 These blocks may make use of the [Expression Specification](../expressions.md) for generating output.  Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
 
-Namespace: `MobilePrimitives`
+*Namespace*: `MobilePrimitives`
+
+## Contents
+- [Message Block]
+- [Select One Response (Multiple Choice Question) Block]
+- [Numeric Response Block]
+- [Open Response (Open-ended Question) Block]
+
 
 ## Message Block
 
