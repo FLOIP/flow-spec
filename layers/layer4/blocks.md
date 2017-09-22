@@ -25,7 +25,7 @@ Key | Description
 `accuracy-timeout-seconds` (number, optiona, default 120) | The timeout in seconds that is a maximum that the device should wait for the required accuracy.
 
 ### Detailed Behaviour
-- `offline`: This block first queries the device's in-built GPS capability to return the current GPS location of the device. If the device is not GPS capable, the block presents the user with a map and waits for them to choose their location.  If the device is GPS capable but location services are disabled, the device may prompt the user to enable location services. After receiving a location via manual selection or from the location service that meets the accuracy threshold, proceeds to the next block.  (No selection provided or unable to capture the required accuracy: proceed through the error exit.)
+- `offline`: This block first queries the device's in-built GPS capability to return the current GPS location of the device. If the device is not GPS capable, the block presents the user with a map and waits for them to choose their location.  If the device is GPS capable but location services are disabled, the device may prompt the user to enable location services. This block then waits to receive a location via manual selection or from the location service that meets the accuracy threshold.  (No selection provided or unable to capture the required accuracy: proceed through the error exit.)
 - `rich_messaging`: This block prompts the Contact for permission to access their location from their device, or choose a location manually, and waits for a compatible response. (No selection provided or unable to capture the required accuracy: proceed through the error exit.)
 
 ### Output behaviour
@@ -58,7 +58,7 @@ Key | Description
 None | 
 
 ### Detailed Behaviour
-- `offline`, `rich_messaging`: This block first attempts to activate the camera on the device and prompts the user to take a picture, or select a saved picture on the device. (No picture selected or captured: proceed through the error exit.)
+- `offline`, `rich_messaging`: This block first prompts the user to activate the camera on the device and waits for the user to take a picture, or select a saved picture on the device. (No picture selected or captured: proceed through the error exit.)
 
 ### Output behaviour
 This block writes the ID of the captured media to the output variable corresponding to the `name` of the block. (For more information on standards for IDs of recordings, see [Captured Media Recording IDs](TODO).)  
