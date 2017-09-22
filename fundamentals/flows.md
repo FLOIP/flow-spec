@@ -38,7 +38,7 @@ application/vnd.org.flowinterop.flows+json</td>
 
 ## Format
 
-Containers and Flow Definitions are a set of nested key-value elements formatted in [YAML, version 1.2](http://www.yaml.org/spec/1.2/spec.html).
+Containers and Flow Definitions are a set of nested key-value objects formatted in [JSON, version ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 
 ## Container
 
