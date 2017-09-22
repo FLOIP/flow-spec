@@ -46,12 +46,11 @@ Flows are a modern paradign for describing the logic of digital information syst
 
 ### Who is working on this?
 
-This is an initial collaboration between makers of Flow-like platforms and supporting tools: Nyaruka, InSTEDD, Ona, and VOTO Mobile.  UNICEF and USAID are providing guidance and input.  The project received initial funding from USAID. We intend that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations.
+This is an initial collaboration between makers of Flow-like platforms and supporting tools: Nyaruka, InSTEDD, Ona, and VOTO Mobile.  UNICEF and USAID are providing guidance and input.  The project received initial funding from USAID. We intend that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations. For more information on how to contribute, see [Project Charter and Governance Rules](charter.md).
 
 ## Specification - Table of Contents
 
 0. [Language](#language)
-1. [Project Charter and Governance Rules](charter.md)
 2. Fundamentals
     1. [Glossary and Definitions](fundamentals/glossary.md)
     2. [Flow Fundamentals](fundamentals/flows.md)
