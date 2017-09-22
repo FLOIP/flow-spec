@@ -1,6 +1,40 @@
-# Flows
+# Flow Specification
 
-Flows represent a collection of actions ("Blocks") and the decision-making logic that links Blocks together into a flowchart-like description of an interactive mobile service, business process, or anything else you'd like to model with them.
+A container and data format for describing the *content and logic of digital interactions*, using the Flow Data paradigm. It provides for the open publication, exchange, and analysis of Flow-like content across supporting platforms. 
+
+Flows represent a collection of actions ("Blocks") and the decision-making logic that links Blocks together into a flowchart-like description of an interactive mobile service, business process, or anything else that can be modelled as programmatic flow-chart.
+
+<table>
+  <tr>
+    <td>Authors</td>
+    <td>Mark Boots (VOTO Mobile)<br>
+Peter Lubell-Doughtie (Ona)<br>
+Eduardo Jezierski (InSTEDD)<br>
+Gustavo Giráldez (InSTEDD)<br>
+Evan Wheeler (UNICEF)
+  </tr>
+  <tr>
+    <td>Media Type</td>
+    <td>TODO: once registered:
+application/vnd.org.flowinterop.flows+json</td>
+  </tr>
+  <tr>
+    <td>Version</td>
+    <td>1.0.0-rc.1</td>
+  </tr>
+  <tr>
+    <td>Last updated</td>
+    <td>2017-09-22</td>
+  </tr>
+  <tr>
+    <td>Created</td>
+    <td>2016-09-10</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 
 ## Format
 
