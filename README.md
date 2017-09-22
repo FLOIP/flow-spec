@@ -53,16 +53,16 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 0. [Language](#language)
 1. [Glossary and Definitions](fundamentals/glossary.md)
 2. [Flow Fundamentals](fundamentals/flows.md)
-        1. [Containers](fundamentals/flows.md#containers)
-        2. [Flows](fundamentals/flows.md#flows)
-        3. [Blocks](fundamentals/flows.md#blocks)
+    1. [Containers](fundamentals/flows.md#containers)
+    2. [Flows](fundamentals/flows.md#flows)
+    3. [Blocks](fundamentals/flows.md#blocks)
 3. [Expressions](fundamentals/expressions.md)
-4. Layers in the Specification
+4. [Layers in the Specification](layers.md)
 5. Layer Documentation
-        1. [Layer 1: Core](layers/layer1/blocks.md)
-        2. [Layer 2: Console IO](layers/layer2/blocks.md)
-        3. [Layer 3: Mobile Primitives](layers/layer3/blocks.md)
-        4. [Layer 4: Smart Devices](layers/layer4/blocks.md)
+    1. [Layer 1: Core](layers/layer1/blocks.md)
+    2. [Layer 2: Console IO](layers/layer2/blocks.md)
+    3. [Layer 3: Mobile Primitives](layers/layer3/blocks.md)
+    4. [Layer 4: Smart Devices](layers/layer4/blocks.md)
 
 ## Language
 
