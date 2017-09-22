@@ -51,15 +51,14 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 ## Specification - Table of Contents
 
 0. [Language](#language)
-2. Fundamentals
-    1. [Glossary and Definitions](fundamentals/glossary.md)
-    2. [Flow Fundamentals](fundamentals/flows.md)
+1. [Glossary and Definitions](fundamentals/glossary.md)
+2. [Flow Fundamentals](fundamentals/flows.md)
         1. [Containers](fundamentals/flows.md#containers)
         2. [Flows](fundamentals/flows.md#flows)
         3. [Blocks](fundamentals/flows.md#blocks)
-    5. [Expressions](fundamentals/expressions.md)
-    6. Layers in the Specification
-    7. Layer Documentation
+3. [Expressions](fundamentals/expressions.md)
+4. Layers in the Specification
+5. Layer Documentation
         1. [Layer 1: Core](layers/layer1/blocks.md)
         2. [Layer 2: Console IO](layers/layer2/blocks.md)
         3. [Layer 3: Mobile Primitives](layers/layer3/blocks.md)
