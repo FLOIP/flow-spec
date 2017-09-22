@@ -4,7 +4,6 @@ Flows represent a collection of actions ("Blocks") and the decision-making logic
 
 ## Contents
 
-* [Language](#language)
 * [Format](#format)
 * [Data Formats](#format)
     * [Resources](#resources)
