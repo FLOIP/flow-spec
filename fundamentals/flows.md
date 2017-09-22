@@ -9,7 +9,7 @@ Flows represent a collection of actions ("Blocks") and the decision-making logic
     * [Resources](#resources)
     * [UUID Format](#uuid-format)
 * [Top-level Specification Elements](#top-level-specification-elements)
-    * [Container](#container)
+    * [Containers](#containers)
     * [Flows](#flows)
     * [Blocks](#blocks)
 
@@ -28,7 +28,7 @@ The term "uuid" refers to a universally unique identifier. TODO: Format for us t
 
 ## Top-level Specification Elements
 
-### Container
+### Containers
 
 A Container is a "package" document containing one or more Flow Definitions, useful for sharing multiple Flows in a single document. The required keys for a Container object are:
 
@@ -50,11 +50,11 @@ TODO
 
 ### Flows
 
-The required keys for a Flow are:
+A Flow represents a set of Blocks and their direct connections. The required keys for a Flow are:
 
 Key | Description
 --- | ---
-`uuid` (64 bit integer TODO)| A globally unique identifier for this Flow. [TODO: format of uuids]
+`uuid` (uuid)| A globally unique identifier for this Flow. (See [UUID Format](#uuid-format).)
 `name` (string)| A human-readable name for the Flow content
 `label` (string, optional)| An extended user-provided description for the flow.
 `last_modified` (timestamp, UTC)| The time when this flow was last modified, in UTC, with microsecond precision: "2016-12-25 13:42:05.234598"
