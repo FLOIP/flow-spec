@@ -54,8 +54,8 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 2. Fundamentals
     1. [Glossary and Definitions](fundamentals/glossary.md)
     2. [Flow Fundamentals](fundamentals/flows.md)
-        3. [Containers](fundamentals/flows.md#containers)
-        3. [Flows](fundamentals/flows.md#flows)
+        1. [Containers](fundamentals/flows.md#containers)
+        2. [Flows](fundamentals/flows.md#flows)
         3. [Blocks](fundamentals/flows.md#blocks)
     5. [Expressions](fundamentals/expressions.md)
     6. Layers in the Specification
