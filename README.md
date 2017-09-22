@@ -58,7 +58,6 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
     3. [Blocks](fundamentals/flows.md#blocks)
 3. [Expressions](fundamentals/expressions.md)
 4. [Layers in the Specification](layers.md)
-5. Layer Documentation
     1. [Layer 1: Core](layers/layer1/blocks.md)
     2. [Layer 2: Console IO](layers/layer2/blocks.md)
     3. [Layer 3: Mobile Primitives](layers/layer3/blocks.md)
