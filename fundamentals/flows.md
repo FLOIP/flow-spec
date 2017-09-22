@@ -18,13 +18,56 @@ Flows represent a collection of actions ("Blocks") and the decision-making logic
 Containers and Flow Definitions are a set of nested key-value objects formatted in [JSON, version ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 
 ## Data Formats
-Throughout the specification, the terms "string", "object", and "array" refer to the corresponding entities in the JSON specification.
+Throughout the specification, the terms "string", "object", and "array" refer to the corresponding entities in the JSON specification.  An "expression" is a string conforming to the [Expressions Specification](../expressions.md).
 
 ### Resources
-TODO
+A Resource describes a collection of localized strings or media resources, used when content needs to be presented to Contacts in multiple languages.  Resources have the following following structure:
+
+```
+[resource-uuid]:{
+  "text":{
+    [iso-639-3 language code]:[localized text],
+    [iso-639-3 language code]:[localized text],
+    ...
+    [iso-639-3 language code]:[localized text],
+  },
+  "audio":{
+    [iso-639-3 language code]:[media ID],
+    [iso-639-3 language code]:[media ID],
+    ...
+    [iso-639-3 language code]:[media ID],
+  }
+}
+```
+
+for instance,
+
+```
+"6681c54c-9fcd-11e7-abc4-cec278b6b50a":{
+  "text":{
+    "eng":"How are you?",
+    "aka":"Wo ho te sɛn?",
+    "dag":"A mal’ alaafee?"
+  },
+  "audio":{
+    "eng":"5718eb16.wav",
+    "aka":"5f6e4694.wav",
+    "dag":"68bd67f2.wav"
+  }
+}
+```
+
+[ISO 639-3](http://www-01.sil.org/iso639-3/) codes are used for language identifiers, to support all current and historically spoken human languages.  A resource may include only `text`, only `audio`, or both, depending on the place within the specification where it is used. For example, resources providing localized expressions need only provide `text`.
 
 ### UUID Format
-The term "uuid" refers to a universally unique identifier. TODO: Format for us to use?
+The term "uuid" refers to a universally unique identifier. Implementations may use any UUID version from [RFC4122](https://tools.ietf.org/html/rfc4122) or [Version 6 IDs](https://bradleypeabody.github.io/uuidv6/). Platforms are recommended to use version 6 IDs for performance and compatibility.  The hyphenated string representation of the UUID must be used within JSON documents, for instance:
+
+```
+"uuid":"2b375764-9fcc-11e7-abc4-cec278b6b50a"
+```
+
+### Media IDs
+TODO
 
 ## Top-level Specification Elements
 
@@ -40,7 +83,7 @@ Key | Description
 `description` (string)| An extended human-readable description of the content.
 `platform_metadata` (object)| A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific Platform.
 `flows` (array)| A list of the Flows within the Container (see below)
-`resources` (array)| A list of the Resources needed for executing the Flows in the Container
+`resources` (object)| A set of the Resources needed for executing the Flows in the Container, keyed by resource uuid.
 
 #### Example
 
@@ -61,6 +104,7 @@ Key | Description
 `interaction_timeout` (integer)| The number of seconds of inactivity after which Contact input for this flow is no longer accepted, and Runs in progress are terminated
 `platform_metadata` (object)| A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific Platform.
 `supported_modes` (array)|A list of the supported Modes that the Flow has content suitable for. (See below)
+`languages` (array)| A list of the languages that the Flow has suitable content for, expressed as ISO 639-3 codes. The first language in the list is considered the default/primary language. Example: `["eng","aka","dag"]`
 `blocks` (array)| A list of the Blocks in the flow (see below).  The flow will start execution at the _first_ block in this list.
 
 Supported modes include:
