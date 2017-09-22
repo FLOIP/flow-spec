@@ -109,7 +109,7 @@ TODO
 ## Output Block
 
 - Type: `Core\Output`
-- Number of exits: 1
+- Suggested number of exits: 1
 - Supported channels: all
 
 This block provides a connection to the Flow Results specification, by storing a named Output variable.
