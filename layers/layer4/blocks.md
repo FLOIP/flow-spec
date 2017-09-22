@@ -1,12 +1,12 @@
 # Layer 4: Smart Devices
 
 Layer 4 contains the specifications for blocks that represent functionality specific to using a flow player on a smart device (e.g. smart phone, tablet).
-Support for this layer should be implemented by all engines that target the `offline` channel. These blocks may make use of the [Expression Specification](../expressions.md) for generating output.
+Support for this layer should be implemented by all engines that target the `offline` channel. These blocks may make use of the [Expression Specification](../../fundamentals/expressions.md) for generating output.
 
 Namespace: `SmartDevices`
 
 ## Contents
-- [Location Response Block](#location-response-gps-block)
+- [Location Response (GPS) Block](#location-response-gps-block)
 - [Photo Response Block](#photo-response-block)
 
 
