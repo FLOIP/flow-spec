@@ -4,26 +4,41 @@ Layer 1 contains the specification for basic logical blocks that can be used wit
 These blocks provide basic flow control for Flows.  
 They make use of the [Expression Specification](../expressions.md) for generating content and evaluating decisions.
 
-TODO: Do we want to have layer namespacing on block types? Block names could be:
-> - `If`
-> - `IfBlock`
-> - `Primitive\If`
-> What do we want?
+*Namespace*: `Core`
+
+## Contents
+- [Log Block](#log-block)
+- [Case Block](#case-block)
+- [Run Another Flow Block](#run-another-flow-block)
+- [Output Block](#output-block)
 
 ## Log Block
 
-- Type: `Log`
-- Number of exits: 1
+- Type: `Core\Log`
+- Suggested number of exits: 1
+- Supported channels: all
 
-This block appends a low-level message to the context's log.  Required keys in the block's `config` mapping are:
+This block appends a low-level message to the Context's `log`.
+
+### Block `config`
 
 Key | Description
 --- | ---
 `message` (string or resource) | The content to be output. This can be a string or a localized resource; it supports parsing of expressions in rendering
 
-### Details
+### Detailed Behaviour
 
-It is expected that the context for a Flow will have a `log` key, which preserves a mapping of timestamps and log messages for debugging. These logs must be maintained for the duration of the Run, and may be maintained for a longer period.  The Log Block provides a way of writing to this log.
+The Context for a Flow shall have a `log` key, which preserves a mapping of timestamps and log messages for debugging. These logs must be maintained for the duration of the Run, and may be maintained for a longer period.  The Log Block provides one way for a Flow to write to this log.  On executing this block, the platform will append a key/value pair to the `log` object within the Context as below, and then proceed to the next block.
+
+```
+[Timestamp in RFC 3339 date-time format with timezone extension]:[message]
+```
+
+e.g.,
+
+```
+"2017-03-05T12:30:42.123+00:00":"This is a sample log message."
+```
 
 ### Example
 ```
@@ -32,18 +47,19 @@ TODO
 
 ## Case Block
 
-- Type: `Case`
-- Number of exits: variable
+- Type: `Core\Case`
+- Suggested number of exits: variable
+- Supported channels: all
 
 This block evaluates a list of expressions, one for each exit, and terminates through the first exit where the corresponding expression evaluates to a "truthy" result.
 
-Required keys in the block's `config` mapping are:
+### Block `config`
 
 Key | Description
 --- | ---
 none |
 
-Required keys for each exit are:
+Required keys for each `exit` are:
 
 Key | Description
 --- | ---
@@ -52,6 +68,11 @@ Key | Description
 
 Each exit must specify one of either `test` or `default`. Each Case block must have exactly one `default` exit. Conventionally the `default` exit is listed last in the list.
 
+### Detailed Behaviour
+This block will sequentially evaluate the `test` expressions in each exit (passing over any `default` exit), in order.  If the `test` expression evaluates to a truthy value using the Context and [Expressions](../../fundamentals/expressions.md) framework, flow proceeds through the corresponding exit (and no further exits are evaluated).  If no `test` expressions are found truthy, the flow proceeds through the `default` exit.
+
+Truthy values include all values that are not `0`, `false`, `null`, or `undefined`.
+
 ### Example
 ```
 TODO
@@ -59,17 +80,26 @@ TODO
 
 ## Run Another Flow Block
 
-- Type: `RunFlow`
-- Number of exits: 1 [TODO: Should there be multiple exits, e.g.: if the sub-flow encounters an exception?]
+- Type: `Core\RunFlow`
+- Suggested number of exits: 1 + error exit
+- Supported channels: all
 
 This block starts and runs another Flow, and returns execution to the current Flow when finished.
 
-Required keys in the block's `config` mapping are:
+### Block `config`
 
 Key | Description
 --- | ---
 `flow_id` (uuid)| The UUID of the other Flow to run.
 
+### Detailed behaviour
+*Entry:*
+
+On entry to this block, control proceeds into the other Flow given by `flow_id`.  The Context for the outer flow is saved and stored within the new inner Flow's Context under the `parentFlowContext` key.  
+
+*Exit:*
+
+Multiple levels of nested Flows shall be supported.  When an inner Flow terminates, this block resumes execution in the outer Flow. The Context for the inner flow is saved and stored under the `childFlowContext` key, and flow proceeds through the next block.  If an exception exit is triggerred within an inner flow causing the inner flow to terminate, flow proceeds through the error exit.
 
 ### Example
 ```
@@ -78,21 +108,21 @@ TODO
 
 ## Output Block
 
-- Type: `Output`
-- Number of exits: 1
+- Type: `Core\Output`
+- Suggested number of exits: 1
+- Supported channels: all
 
 This block provides a connection to the Flow Results specification, by storing a named Output variable.
 
-Required keys in the block's `config` mapping are:
+### Block `config`
 
 Key | Description
 --- | ---
-`name` (string) | The variable name in the Flow Results output to write.
-`value` (expression)| The expression that will be evaluated and written to the Results. [TODO: Can this be a localized resource?]
+`value` (expression)| The expression that will be evaluated and written to the Results.
 
-### Details
+### Detailed Behaviour
 
-Not all block interactions and low-level logs are important to users; most users are concerned with a subset of results that have specific meaning -- the "Flow Results".  [TODO: Flow Results specification]  Any block type, as part of its specified runtime behaviour, may write to the Flow Results.  The Output Block is a low-level block that does just this one thing: write a named value to the Flow Results.
+Not all block interactions and low-level logs are important to users; most users are concerned with a subset of results that have specific meaning -- the "Flow Results".  (See [Flow Results specification](https://github.com/FLOIP/flow-results/blob/master/specification.md).)  Any block type, as part of its specified runtime behaviour, may write to the Flow Results.  The Output Block is a low-level block that does just simply one thing: write a named variable corresponding to the `name` of the block to the Flow Results, determined by the `value` expression. 
 
 ### Example
 ```
