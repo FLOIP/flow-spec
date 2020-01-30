@@ -1,14 +1,14 @@
 # Layer 4: Smart Devices
 
 Layer 4 contains the specifications for blocks that represent functionality specific to using a flow player on a smart device \(e.g. smart phone, tablet\).  
-Support for this layer should be implemented by all engines that target the `offline` channel. These blocks may make use of the [Expression Specification](../../fundamentals/expressions.md) for generating output.
+Support for this layer should be implemented by all engines that target the `offline` channel. These blocks may make use of the [Expression Specification](../expressions.md) for generating output.
 
 Namespace: `SmartDevices`
 
 ## Contents
 
-* [Location Response \(GPS\) Block](#location-response-gps-block)
-* [Photo Response Block](#photo-response-block)
+* [Location Response \(GPS\) Block](blocks-3.md#location-response-gps-block)
+* [Photo Response Block](blocks-3.md#photo-response-block)
 
 ## Location Response \(GPS\) Block
 
@@ -21,7 +21,7 @@ This block allows a device user to capture a location on a map, e.g. using a GPS
 ### Block `config`
 
 | Key | Description |
-| --- | --- |
+| :--- | :--- |
 | `accuracy-threshold-meters` \(number, optional, default 5.0\) | The GPS resolution that a device should wait for and achieve before capturing this location. |
 | `accuracy-timeout-seconds` \(number, optiona, default 120\) | The timeout in seconds that is a maximum that the device should wait for the required accuracy. |
 
@@ -32,21 +32,21 @@ This block allows a device user to capture a location on a map, e.g. using a GPS
 
 ### Output behaviour
 
-This block writes the location coordinates to the output variable corresponding to the `name` of the block.  The format of the coordinates is an array of 4 floating point numbers: latitude, longitude, elevation \(in meters\), and accuracy \(in meters\):
+This block writes the location coordinates to the output variable corresponding to the `name` of the block. The format of the coordinates is an array of 4 floating point numbers: latitude, longitude, elevation \(in meters\), and accuracy \(in meters\):
 
-```
+```text
 [lat, long, elevation, accuracy]
 ```
 
 e.g.
 
-```
+```text
 [52.0835780,-106.6104880, 501.23, 0.5]
 ```
 
 ### Example
 
-```
+```text
 TODO
 ```
 
@@ -59,7 +59,7 @@ TODO
 ### Block `config`
 
 | Key | Description |
-| --- | --- |
+| :--- | :--- |
 | None |  |
 
 ### Detailed Behaviour
@@ -68,5 +68,5 @@ TODO
 
 ### Output behaviour
 
-This block writes the ID of the captured media to the output variable corresponding to the `name` of the block. \(For more information on standards for IDs of recordings, see [Captured Media Recording IDs](TODO).\)
+This block writes the ID of the captured media to the output variable corresponding to the `name` of the block. \(For more information on standards for IDs of recordings, see [Captured Media Recording IDs](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/layer4/TODO/README.md).\)
 
