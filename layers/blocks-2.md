@@ -24,14 +24,14 @@ This block presents a single message to the contact. The form of the message can
 | Key | Description |
 | :--- | :--- |
 | `message` \(resource\) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering. |
-| `message-audio` \(resource\) | For channels that play audio, the localized recordings to play. |
+| `message_audio` \(resource\) | For channels that play audio, the localized recordings to play. |
 
 ### Detailed behaviour
 
 * `text` \(SMS\): Sends `message` as an SMS to the contact.
 * `text` \(USSD\): Displays `message` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
-* `ivr`: Plays `message-audio` to the contact.
-* `rich_messaging`: Display `message` within the conversation with the contact. Optionally, platforms may attach the `message-prompt` \(if provided\) as an audio attachment that the contact can choose to play.
+* `ivr`: Plays `message_audio` to the contact.
+* `rich_messaging`: Display `message` within the conversation with the contact. Optionally, platforms may attach the `message_prompt` \(if provided\) as an audio attachment that the contact can choose to play.
 * `offline`: Display `message` within the session with the contact.
 
 ### Output behaviour
@@ -57,9 +57,9 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 | Key | Description |
 | :--- | :--- |
 | `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What is your favorite kind of ice-cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." |
-| `prompt-audio` \(resource, required for `ivr`\) | For channels that play audio, the localized recordings to play. |
-| `question-prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice-cream?". If included, must also provide `choices-prompt` and omit `prompt`. |
-| `choices-prompt` \(resource, optional, required by `question-prompt`\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." |
+| `prompt_audio` \(resource, required for `ivr`\) | For channels that play audio, the localized recordings to play. |
+| `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice-cream?". If included, must also provide `choices_prompt` and omit `prompt`. |
+| `choices_prompt` \(resource, optional, required by `question_prompt`\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." |
 | `choices` \(mapping of choice tags to choice resources\) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`. |
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
@@ -95,15 +95,15 @@ This block obtains a numeric response from the contact.
 | Key | Description |
 | :--- | :--- |
 | `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years." |
-| `prompt-audio` \(resource, required for `ivr`\) | For channels that play audio, the localized recordings to play. |
-| `validation-minimum` \(number\) | The minimum value \(inclusive\) that will be accepted as a response to this block; responses less than this will proceed through the error exit. |
-| `validation-maximum` \(number\) | The maximum value \(inclusive\) that will be accepted as a response to this block; responses greater than this will proceed through the error exit. |
+| `prompt_audio` \(resource, required for `ivr`\) | For channels that play audio, the localized recordings to play. |
+| `validation_minimum` \(number\) | The minimum value \(inclusive\) that will be accepted as a response to this block; responses less than this will proceed through the error exit. |
+| `validation_maximum` \(number\) | The maximum value \(inclusive\) that will be accepted as a response to this block; responses greater than this will proceed through the error exit. |
 
 #### Channel-specific `config`:
 
 | Key | Description |
 | :--- | :--- |
-| `ivr`: `max-digits` \(number\) | After receiving this many digits, do not wait for any more; accept the digits entered so far as the complete response. |
+| `ivr`: `max_digits` \(number\) | After receiving this many digits, do not wait for any more; accept the digits entered so far as the complete response. |
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
@@ -138,14 +138,14 @@ This block obtains an open-ended response from the contact. Dependent on the cha
 | Key | Description |
 | :--- | :--- |
 | `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years." |
-| `prompt-audio` \(resource, required for `ivr`\) | For channels that play audio, the localized recordings to play. |
+| `prompt_audio` \(resource, required for `ivr`\) | For channels that play audio, the localized recordings to play. |
 
 #### Channel-specific `config`:
 
 | Key | Description |
 | :--- | :--- |
-| `ivr`: `max-duration-seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
-| `text`: `max-response-characters` \(number, optional\) | The maximum number of characters to prompt for and accept. \(If not provided, no limit.\) |
+| `ivr`: `max_duration_seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
+| `text`: `max_response_characters` \(number, optional\) | The maximum number of characters to prompt for and accept. \(If not provided, no limit.\) |
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
