@@ -1,7 +1,7 @@
-# Summary
+# Table of contents
 
 * [Introduction](README.md)
-* [Glossary and Definitions](fundamentals/glossary.md)
+* [Glossary and Definitions](glossary.md)
 * [Flow Fundamentals](fundamentals/flows.md)
 * [Expressions](fundamentals/expressions.md)
 * [Layers](layers.md)
