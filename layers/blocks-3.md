@@ -23,7 +23,7 @@ This block allows a device user to capture a location on a map, e.g. using a GPS
 | Key | Description |
 | :--- | :--- |
 | `accuracy-threshold-meters` \(number, optional, default 5.0\) | The GPS resolution that a device should wait for and achieve before capturing this location. |
-| `accuracy-timeout-seconds` \(number, optiona, default 120\) | The timeout in seconds that is a maximum that the device should wait for the required accuracy. |
+| `accuracy-timeout-seconds` \(number, optional, default 120\) | The timeout in seconds that is a maximum that the device should wait for the required accuracy. |
 
 ### Detailed Behaviour
 
