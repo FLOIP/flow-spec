@@ -121,7 +121,6 @@ Supported modes include:
   * `facebook_messenger`
   * `wechat`
   * `telegram`
-* `offline`: content used for offline data collection apps
 
 #### Example
 
