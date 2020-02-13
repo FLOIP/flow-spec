@@ -1,6 +1,6 @@
 # Layer 3: Mobile Primitives
 
-Layer 3 contains the specification for I/O blocks that represent discrete single actions, that have direct analogues across several channels used in mobile messaging \(e.g. IVR, SMS, USSD\). Support for this layer should be implemented by all engines that target the `ivr`, `text` \(SMS and USSD\), and `rich_messaging` channels. These blocks may make use of the [Expression Specification](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/expressions.md) for generating output. Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
+Layer 3 contains the specification for I/O blocks that represent discrete single actions, that have direct analogues across several channels used in mobile messaging \(e.g. IVR, SMS, USSD\). Support for this layer should be implemented by all engines that target the `ivr`, `text` \(SMS and USSD\), `rich_messaging` and `offline` channels. These blocks may make use of the [Expression Specification](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/expressions.md) for generating output. Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
 
 _Namespace_: `MobilePrimitives`
 
@@ -70,7 +70,7 @@ This block can be configured to have a single exit, or a number of exits with po
 * `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session, timeout, or invalid response: proceed through the error exit.\)
 * `ivr`: Play the audio prompt, acccording to the prompt configuration in `config` above, then wait to capture the DTMF reponse.  \(Hangup, timeout, or invalid response: proceed through the error exit.\)
 * `rich_messaging`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  \(If displaying menu items, platforms should display only `question_prompt`.\) \(Timeout or invalid response: proceed through the error exit.\)
-* offline: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to capture a menu selection.
+* `offline`: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to capture a menu selection.
 
 ### Output behaviour
 
