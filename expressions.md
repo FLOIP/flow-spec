@@ -219,7 +219,7 @@ Returns the maximum value of all arguments
 
 `Please complete at most @MAX(flow.questions, 10) questions`
 
-**MIN\(arg1, arg2, ...﻿\)**
+**MIN\(arg1, arg2, ... \)**
 
 Returns the minimum value of all arguments
 
@@ -365,13 +365,13 @@ Extracts the nth word from the given text string. If stop is a negative number, 
 
 `@WORD("hello cow-boy", -1)` will return "boy"
 
-**WORD\_COUNT\(text, \[by\_spaces\]﻿\)**
+**WORD\_COUNT\(text, \[by\_spaces\] \)**
 
 Returns the number of words in the given text string. If by\_spaces is specified and is TRUE then the function splits the text into words only by spaces. Otherwise the text is split by punctuation characters as well
 
 `You entered @WORD_COUNT(step.value) words`
 
-**WORD\_SLICE\(text, start, \[stop\], \[by\_spaces\]﻿\)**
+**WORD\_SLICE\(text, start, \[stop\], \[by\_spaces\] \)**
 
 Extracts a substring of the words beginning at start, and up to but not-including stop. If stop is omitted then the substring will be all words from start until the end of the text. If stop is a negative number, then it is treated as count backwards from the end of the text. If by\_spaces is specified and is TRUE then the function splits the text into words only by spaces. Otherwise the text is split by punctuation characters as well
 
@@ -382,4 +382,24 @@ Extracts a substring of the words beginning at start, and up to but not-includin
 `@WORD_SLICE("RapidPro expressions are fun", 1, -2)` will return "RapidPro expressions"
 
 `@WORD_SLICE("RapidPro expressions are fun", -1)` will return "fun"
+
+#### Type Checking Functions
+
+**ISNUMBER\(arg\)**
+
+Returns TRUE if the argument is a number.
+
+`@ISNUMBER(contact.age)`  will return TRUE if the contact's age is a number.
+
+**ISBOOL\(arg\)**
+
+Returns TRUE if the argument is a boolean.
+
+`@ISBOOL(block.value)`  will return TRUE if the block returned a boolean value.
+
+**ISSTRING\(arg\)**
+
+Returns TRUE if the argument is a string.
+
+`@ISSTRING(contact.name)`  will return TRUE if the contact's name is a string.
 
