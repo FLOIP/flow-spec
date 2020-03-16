@@ -8,7 +8,7 @@ Flows represent a collection of actions \("Blocks"\) and the decision-making log
 | :--- | :--- |
 | Media Type | TODO: once registered: application/vnd.org.flowinterop.flows+json |
 | Version | 1.0.0-rc.1 |
-| Last updated | 2017-09-22 |
+| Last updated | 2019-03-16 |
 | Created | 2016-09-10 |
 |  |  |
 
@@ -42,4 +42,10 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 ## Language
 
 The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in RFC 2119.
+
+## Dates
+
+All dates are RFC 3339 5.6 date-time, with offset-based timezone and space instead of T option. 
+
+Example: **2017-06-30 15:35:27.134+00:00**
 
