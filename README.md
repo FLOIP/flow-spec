@@ -45,7 +45,7 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ## Dates
 
-All dates are RFC 3339 5.6 date-time, with offset-based timezone and space instead of T option. 
+All dates are RFC 3339 5.6 date-time, with offset-based timezone and space instead of T option.
 
 Example: **2017-06-30 15:35:27.134+00:00**
 
