@@ -113,15 +113,11 @@ A Flow represents a set of Blocks and their direct connections. The required key
 Supported modes include:
 
 * `text`: general text-based interactions. This includes SMS and USSD channels, which may have distinct behaviour while sharing the same content.
-  * `sms`: content specific for SMS
-  * `ussd`: content specific for USSD
+* `sms`: content specific for SMS
+* `ussd`: content specific for USSD
 * `ivr`: content specific for interactive voice response
-* `rich_messaging`: content used for messaging platforms, for example:
-  * `twitter`
-  * `facebook_messenger`
-  * `wechat`
-  * `telegram`
-* `offline`: content used for offline data collection apps 
+* `rich_messaging`: content used for data channels that support multimedia including text, audio, images, and video, such as social network chatbots \(Facebook Messenger, WhatsApp, Twitter, Telegram, etc.\)
+* `offline`: content used for mobile apps designed to run offline without a data connection.
 
 #### Example
 
@@ -151,7 +147,7 @@ Each exit must contain:
 | `uuid` \(uuid\) | A globally unique identifier for this Exit |
 | `label` \(resource\) | This is the human-readable name of the exit \(as a translated resource\), which might be presented to a contact. |
 | `tag` \(string, word characters only\) | This is an identifier for the exit, suitable for use as a variable name in rolling up results \(e.g.: "male"\). It does not need to be unique within the block; multiple exits may be tagged the same. \(Some authoring tools may choose to auto-generate the tag from the label's primary language, to avoid usability problems with these getting out of sync.\) |
-| `destination_block` \(uuid\) | This is the uuid of the Block this exit connects to. It can be null if the exit does not connect to a block \(if it is the final block\).  |
+| `destination_block` \(uuid\) | This is the uuid of the Block this exit connects to. It can be null if the exit does not connect to a block \(if it is the final block\). |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to label the meaning of the exit, e.g.: an ICD10 category name or other semantic classification system. \("ICD10::female"\) |
 | `test` \(expression, optional\) | For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen. |
 | `config` \(object\) | This contains additional information required for each mode supported by the block. Details are provided within the Block documentation |
