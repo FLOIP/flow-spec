@@ -23,42 +23,77 @@ Throughout the specification, the terms "string", "object", and "array" refer to
 
 ### Resources
 
-A Resource describes a collection of localized strings or media resources, used when content needs to be presented to Contacts in multiple languages. Resources have the following following structure:
+A Resource describes a collection of localized strings or media resources, used when content needs to be presented to Contacts in multiple languages. Resources have the following logical structure:
 
 ```text
-  "text":{
-    [iso-639-3 language code]:[localized text],
-    [iso-639-3 language code]:[localized text],
-    ...
-    [iso-639-3 language code]:[localized text],
-  },
-  "audio":{
-    [iso-639-3 language code]:[media ID],
-    [iso-639-3 language code]:[media ID],
-    ...
-    [iso-639-3 language code]:[media ID],
-  }
+Resource {
+  uuid: string,
+  values: ResourceValue[]
+}
+
+ResourceValue {
+  language_id: string,
+  content_type: SupportedContentType,
+  mime_type: string,
+  modes: SupportedMode[],
+  value: string,
+}
+
+SupportedContentType {
+  TEXT = 'text',
+  AUDIO = 'audio',
+  IMAGE = 'image',
+  VIDEO = 'video',
+}
+
+SupportedMode {
+  TEXT = 'text',
+  SMS = 'sms',
+  USSD = 'ussd',
+  IVR = 'ivr',
+  RICH_MESSAGING = 'rich_messaging',
+  OFFLINE = 'offline',
 }
 ```
 
-for instance,
+for example,
 
 ```text
-"6681c54c-9fcd-11e7-abc4-cec278b6b50a":{
-  "text":{
-    "eng":"How are you?",
-    "aka":"Wo ho te sɛn?",
-    "dag":"A mal’ alaafee?"
-  },
-  "audio":{
-    "eng":"5718eb16.wav",
-    "aka":"5f6e4694.wav",
-    "dag":"68bd67f2.wav"
-  }
+{
+   uuid: "c2dbafbd-e9bd-408f-aabc-25cf67040002",
+   values: [
+      {
+         language_id: "47",
+         modes: ["sms", "ussd"],
+         content_type: "text",
+         mime_type: "text/plain",
+         value: "Howdy! You've reached the Museum of Interoperability!"
+      },
+      {
+         language_id: "47",
+         modes: ["rich_messaging"],
+         content_type: "text",
+         mime_type: "text/plain",
+         value: "Howdy! You've reached the Museum of Interoperability! This is a long message for you because we've gone beyond the limitations for 180 characters. I'm your guide, Florian. I hope you're excited for this two hour tour through the history of interoperable data systems."
+      },
+      {
+         language_id: "47",
+         modes: ["rich_messaging"],
+         content_type: "image",
+         mime_type: "image/png",
+         value: "https://your-server-somewhere.flowinteroperability.org/example-image.png"
+      }
+   ]
 }
 ```
 
-[ISO 639-3](http://www-01.sil.org/iso639-3/) codes are used for language identifiers, to support all current and historically spoken human languages. A resource may include only `text`, only `audio`, or both, depending on the place within the specification where it is used. For example, resources providing localized expressions need only provide `text`.
+A resource may provide one or many values within it. This provides flexibility to use the same text or media for several modes, or to specify unique media or text in each mode. 
+
+The `mime_type` field should be provided for all values; when provided, this must be an IANA media type \(RFC 6838\).
+
+### Language Identifiers
+
+TODO
 
 ### UUID Format
 

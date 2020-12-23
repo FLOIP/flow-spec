@@ -389,17 +389,17 @@ Extracts a substring of the words beginning at start, and up to but not-includin
 
 Returns TRUE if the argument is a number.
 
-`@ISNUMBER(contact.age)` will return TRUE if the contact's age is a number.
+`@ISNUMBER(contact.age)`  will return TRUE if the contact's age is a number.
 
 **ISBOOL\(arg\)**
 
 Returns TRUE if the argument is a boolean.
 
-`@ISBOOL(block.value)` will return TRUE if the block returned a boolean value.
+`@ISBOOL(block.value)`  will return TRUE if the block returned a boolean value.
 
 **ISSTRING\(arg\)**
 
 Returns TRUE if the argument is a string.
 
-`@ISSTRING(contact.name)` will return TRUE if the contact's name is a string.
+`@ISSTRING(contact.name)`  will return TRUE if the contact's name is a string.
 
