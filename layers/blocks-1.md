@@ -6,7 +6,7 @@ Namespace: `ConsoleIO`
 
 ## Print Block
 
-* Type: `ConsoleIO\Print`
+* Type: `ConsoleIO.Print`
 * Number of exits: 1
 
 This block prints a message to standard output, by evaluating an expression.
@@ -23,16 +23,15 @@ TODO
 
 ## Read Block
 
-* Type: `ConsoleIO\Read`
+* Type: `ConsoleIO.Read`
 * Number of exits: 2
 
 This block reads a line from standard input, and stores it in one or more context variables.
 
 | Key | Description |
 | :--- | :--- |
-
-
-`format_string` \(string\) \| This is a ["scanf"](http://www.cplusplus.com/reference/cstdio/scanf/)-compatible format string, where any %-characters will be read into context variables `destination_variables` \(list\) \| This is a list of strings, containing the variable names in the context where the results will be stored. The number of variable names must match the number of %-characters in `format_string`.
+| `format_string` \(string\) | This is a ["scanf"](http://www.cplusplus.com/reference/cstdio/scanf/)-compatible format string, where any %-characters will be read into context variables. |
+| `destination_variables` \(list\) | This is a list of strings, containing the variable names in the context where the results will be stored. The number of variable names must match the number of %-characters in `format_string`. |
 
 This block has 2 exits: the first is chosen when all variables are read successfully. The second is chosen when there is a read error.
 

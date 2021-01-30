@@ -14,7 +14,7 @@ _Namespace_: `Core`
 
 ## Log Block
 
-* Type: `Core\Log`
+* Type: `Core.Log`
 * Suggested number of exits: 1
 * Supported channels: all
 
@@ -48,7 +48,7 @@ TODO
 
 ## Case Block
 
-* Type: `Core\Case`
+* Type: `Core.Case`
 * Suggested number of exits: variable
 * Supported channels: all
 
@@ -60,12 +60,12 @@ This block evaluates a list of expressions, one for each exit, and terminates th
 | :--- | :--- |
 | none |  |
 
-Required keys for each `exit` are:
+Keys for each `exit` are:
 
 | Key | Description |
 | :--- | :--- |
 | `test` | The expression to be evaluated. If the expression evalutes to a "truthy" value, the block will terminate through this exit. |
-| `default` | If this key is present, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true. |
+| `default` \(boolean\) | If this key is present and true, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true. |
 
 Each exit must specify one of either `test` or `default`. Each Case block must have exactly one `default` exit. Conventionally the `default` exit is listed last in the list.
 
@@ -83,7 +83,7 @@ TODO
 
 ## Run Another Flow Block
 
-* Type: `Core\RunFlow`
+* Type: `Core.RunFlow`
 * Suggested number of exits: 1 + error exit
 * Supported channels: all
 
@@ -113,7 +113,7 @@ TODO
 
 ## Output Block
 
-* Type: `Core\Output`
+* Type: `Core.Output`
 * Suggested number of exits: 1
 * Supported channels: all
 
