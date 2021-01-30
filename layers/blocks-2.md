@@ -25,7 +25,7 @@ This block presents a single message to the contact. The form of the message can
 | :--- | :--- |
 | `message` \(resource\) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering. |
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Sends `message` as an SMS to the contact.
 * `text` \(USSD\): Displays `message` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
@@ -62,7 +62,7 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. \(Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.\)
 * `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session, timeout, or invalid response: proceed through the error exit.\)
@@ -73,6 +73,45 @@ This block can be configured to have a single exit, or a number of exits with po
 ### Output behaviour
 
 This block writes the tag of the selected choice to the output variable corresponding to the `name` of the block.
+
+### Example
+
+```text
+TODO
+```
+
+## Select Many Responses \(Multiple Choice Question\) Block
+
+* Type: `MobilePrimitives.SelectManyResponses`
+* Suggested number of exits: 1 + error exit, or multiple based on choices
+* Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+
+This block obtains the answer to a Multiple Choice question from the contact. The contact can select from zero to many options from a set of choices.
+
+### Block `config`
+
+| Key | Description |
+| :--- | :--- |
+| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What kinds of ice-cream do you like: chocolate, vanilla, strawberry? Select all that apply." |
+| `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What kinds of ice-cream do you like?". If included, must also provide `choices_prompt` and omit `prompt`. |
+| `choices_prompt` \(resource, optional, required by `question_prompt`\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "chocolate, vanilla, strawberry" |
+| `choices` \(mapping of choice tags to choice resources\) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`. |
+| `minimum_choices` \(integer, optional\) | The minimum number of choices the Contact must select to proceed. Default if not provided: 0. |
+| `maximum_choices` \(integer\) | The maximum number of choices the Contact can select. Default if not provided: unlimited \(ie: the total number of `choices`\). |
+
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
+
+### Detailed behaviour by mode
+
+* `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture multiple responses. \(Lack of the right number of responses after the flow's configured `timeout`, or an invalid response: proceed through the error exit.\)
+* `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture text describing multiple choices. \(Dismissal of the session, timeout, or invalid response: proceed through the error exit.\)
+* `ivr`: Play the prompt, according to the prompt configuration in `config` above, then wait to capture multiple DTMF responses. Implementations may choose to optimize the user experience for additional guidance on answering multiple options.  \(Hangup, timeout, or invalid response: proceed through the error exit.\)
+* `rich_messaging`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  \(If displaying menu items, platforms should display only `question_prompt`.\) \(Timeout or invalid response: proceed through the error exit.\)
+* offline: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to receive a menu confirmation.
+
+### Output behaviour
+
+This block writes an array of tags of the selected choices to the output variable corresponding to the `name` of the block.
 
 ### Example
 
@@ -104,7 +143,7 @@ This block obtains a numeric response from the contact.
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. \(Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.\)
 * `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session, timeout, or invalid response: proceed through the error exit.\)
@@ -145,7 +184,7 @@ This block obtains an open-ended response from the contact. Dependent on the cha
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. \(Lack a response after the flow's configured `timeout`: proceed through the error exit.\)
 * `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session or timeout: proceed through the error exit.\)
