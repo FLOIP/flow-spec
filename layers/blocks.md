@@ -11,6 +11,8 @@ _Namespace_: `Core`
 * [Case Block](blocks.md#case-block)
 * [Run Another Flow Block](blocks.md#run-another-flow-block)
 * [Output Block](blocks.md#output-block)
+* [Set Contact Property Block](blocks.md#set-contact-property)
+* [Set Group Membership Block](blocks.md#set-group-membership)
 
 ## Log Block
 
