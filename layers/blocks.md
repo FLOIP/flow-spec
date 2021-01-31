@@ -147,7 +147,7 @@ A common use-case for platforms that run flows on Contacts is to modify the Cont
 
 | Key | Description |
 | :--- | :--- |
-| `set_contact_property` \(object\) | See below |
+| `set_contact_property` \(object, required\) | See below |
 
 #### `set_contact_property` object
 
