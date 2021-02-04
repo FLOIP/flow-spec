@@ -126,7 +126,31 @@ A Container is a "package" document containing one or more Flow Definitions, use
 #### Example
 
 ```text
-TODO
+{
+  "flows": [
+    {
+      "specification_version": "1.0.0-rcl",
+	  "uuid": "8559aa33-215e-4131-9090-8c9610d29677",
+      "name": "Test Flow",
+	  "description": "Test Description",
+      "label": "Test Label",
+      "last_modified": "2021-02-04 15:18:30.506Z",
+      "interaction_timeout": 172800,
+      "supported_modes": [
+        "sms",
+        "ivr",
+        "ussd",
+        "rich_messaging",
+        "offline"
+      ],
+      "platform_metadata": {},
+      "blocks": [],
+      "first_block_id": ""
+    }
+  ],
+  "resources": []
+}
+
 ```
 
 ### Flows
