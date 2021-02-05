@@ -7,6 +7,7 @@ Flows represent a collection of actions \("Blocks"\) and the decision-making log
 * [Format](flows.md#format)
 * [Data Formats](flows.md#format)
   * [Resources](flows.md#resources)
+  * [Language Objects and Identifiers](flows.md#language-objects-and-identifiers)
   * [UUID Format](flows.md#uuid-format)
 * [Top-level Specification Elements](flows.md#top-level-specification-elements)
   * [Containers](flows.md#containers)
@@ -32,7 +33,7 @@ Resource {
 }
 
 ResourceValue {
-  language_id: string,
+  language_id: string (Language Identifier),
   content_type: SupportedContentType,
   mime_type: string,
   modes: SupportedMode[],
@@ -63,21 +64,21 @@ for example,
    uuid: "c2dbafbd-e9bd-408f-aabc-25cf67040002",
    values: [
       {
-         language_id: "47",
+         language_id: "eng",
          modes: ["sms", "ussd"],
          content_type: "text",
          mime_type: "text/plain",
          value: "Howdy! You've reached the Museum of Interoperability!"
       },
       {
-         language_id: "47",
+         language_id: "eng",
          modes: ["rich_messaging"],
          content_type: "text",
          mime_type: "text/plain",
          value: "Howdy! You've reached the Museum of Interoperability! This is a long message for you because we've gone beyond the limitations for 180 characters. I'm your guide, Florian. I hope you're excited for this two hour tour through the history of interoperable data systems."
       },
       {
-         language_id: "47",
+         language_id: "eng",
          modes: ["rich_messaging"],
          content_type: "image",
          mime_type: "image/png",
@@ -91,9 +92,63 @@ A resource may provide one or many values within it. This provides flexibility t
 
 The `mime_type` field should be provided for all values; when provided, this must be an IANA media type \(RFC 6838\).
 
-### Language Identifiers
+The `language_id` must correspond to a [Language Identifier](flows.md#language-identifiers) described in the Flow's languages.
 
-TODO
+### Language Objects and Identifiers
+
+Flows describe a list of languages they have content for. Flows use the ISO 639-3 language coding to describe nearly all spoken and written languages. They also support multiple languages with the same ISO 639-3 code \(referred to as language _variants_\), to support use-cases where organizations might have distinct sets of content for the same language. A common example of variants could be "English - India" and "English - East Africa", or "English - Male voice" and "English - Female voice". 
+
+Language objects must have the following keys:
+
+| Key | Description |
+| :--- | :--- |
+| `id` \(string\) | Language Identifier, described below, e.g. "`eng-female`" |
+| `iso_639_3` \(string\) | [ISO 639-3 code](https://iso639-3.sil.org/code_tables/639/data) for the language. This is a 3-letter string, e.g. "`eng`".  "`mis`" is the ISO 639-3 code for languages not yet included in ISO 639-3. |
+| `variant` \(string, optional\) | Where multiple languages/content sets are used with the same ISO 639-3 code, `variant` describes the specialization, e.g. "`east_africa`". |
+| `bcp_47` \(string, optional\) | The [BCP 47 ](https://tools.ietf.org/html/bcp47)locale code for this language, e.g. "`en-GB`". These codes are often useful in conjunction with speech synthesis and speech recognition tools.  |
+
+#### Language Identifiers
+
+The _recommended_ structure for Language Identifier strings is:
+
+* &lt;`iso_639_3`&gt;-&lt;`variant`&gt;, where the variant is not null.
+* &lt;`iso_639_3`&gt;, when the variant is null.
+
+#### Language Example
+
+```text
+languages: [
+   {
+      id: "eng-male",
+      label: "English - Male Voice",
+      iso_639_3: "eng",
+      variant: "male",
+      bcp_47: "en-US"
+   },
+   {
+      id: "eng-female",
+      label: "English - Female Voice",
+      iso_639_3: "eng",
+      variant: "female",
+      bcp_47: "en-US"
+   },
+   {
+      id: "mis-mysecretlanguage",
+      label: "My secret code language",
+      iso_639_3: "mis",
+      variant: "mysecretlanguage",
+      bcp_47: null
+   },
+   {
+      id: "fre",
+      label: "Francais",
+      iso_639_3: "fre",
+      variant: null,
+      bcp_47: fr-FR
+   }
+]
+
+```
 
 ### UUID Format
 
@@ -103,10 +158,6 @@ The term "uuid" refers to a universally unique identifier. Implementations may u
 "uuid":"2b375764-9fcc-11e7-abc4-cec278b6b50a"
 ```
 
-### Media IDs
-
-TODO
-
 ## Top-level Specification Elements
 
 ### Containers
@@ -115,18 +166,26 @@ A Container is a "package" document containing one or more Flow Definitions, use
 
 | Key | Description |
 | :--- | :--- |
-| `specification_version` \(string\) | The version of the Flow Spec that this package is compliant with. |
-| `uuid` \(64 bit integer TODO\) | A globally unique identifier for this Container. FLOIP uses \[TODO format of uuids\] |
+| `specification_version` \(string\) | The version of the Flow Spec that this package is compliant with, e.g. `1.0.0-rc1` |
+| `uuid` \(uuid\) | A globally unique identifier for this Container. \(See [UUID Format](flows.md#uuid-format).\) |
 | `name` \(string\) | A human-readable name for the Container content. |
 | `description` \(string\) | An extended human-readable description of the content. |
-| `platform_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific Platform. |
+| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `flows` \(array\) | A list of the Flows within the Container \(see below\) |
 | `resources` \(object\) | A set of the Resources needed for executing the Flows in the Container, keyed by resource uuid. |
 
 #### Example
 
 ```text
-TODO
+{
+   "specification_version": "1.0.0-rc1",
+   "uuid": "95f29456-8a33-4d26-b22a-00b0b169056c",
+   "name": "Summary Case Report Test",
+   "description": "Summary Case Report Test",
+   "vendor_metadata": {},
+   "flows": [...],
+   "resources": [...]
+}
 ```
 
 ### Flows
@@ -140,12 +199,16 @@ A Flow represents a set of Blocks and their direct connections. The required key
 | `label` \(string, optional\) | An extended user-provided description for the flow. |
 | `last_modified` \(timestamp, UTC\) | The time when this flow was last modified, in UTC, with microsecond precision: "2016-12-25 13:42:05.234598" |
 | `interaction_timeout` \(integer\) | The number of seconds of inactivity after which Contact input for this flow is no longer accepted, and Runs in progress are terminated |
-| `platform_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific Platform. |
+| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `supported_modes` \(array\) | A list of the supported Modes that the Flow has content suitable for. \(See below\) |
-| `languages` \(array\) | A list of the languages that the Flow has suitable content for, expressed as ISO 639-3 codes. The first language in the list is considered the default/primary language. Example: `["eng","aka","dag"]` |
+| `first_block_id` \(uuid\) | The ID of the block in `blocks` that is at the beginning of the flow. |
+| `exit_block_id` \(uuid, optional\) | If provided, the ID of the block in`blocks`that will be jumped to if there is an error or deliberate exit condition during Flow Run. If not provided, the Flow Run will end immediately. |
+| `languages` \(array\) | A list of the languages that the Flow has suitable content for. See language object specification below. |
 | `blocks` \(array\) | A list of the Blocks in the flow \(see below\).  The flow will start execution at the _first_ block in this list. |
 
-Supported modes include: 
+#### Modes
+
+Possible modes for `supported_modes` are:
 
 * `text`: general text-based interactions. This includes SMS and USSD channels, which may have distinct behaviour while sharing the same content.
 * `sms`: content specific for SMS
@@ -154,10 +217,32 @@ Supported modes include:
 * `rich_messaging`: content used for data channels that support multimedia including text, audio, images, and video, such as social network chatbots \(Facebook Messenger, WhatsApp, Twitter, Telegram, etc.\)
 * `offline`: content used for mobile apps designed to run offline without a data connection.
 
-#### Example
+#### Flow Example
 
 ```text
-TODO
+{
+   "uuid": "06c912aa-0d36-4d9c-b144-0cd3a38e8293",
+   "name": "Summary Case Report Test",
+   "label": "Summary Case Report Test",
+   "last_modified": "2021-02-05 18:55:59.229Z",
+   "interaction_timeout": 172800,
+   "supported_modes": [
+      "sms",
+      "ussd",
+      "rich_messaging"
+   ],
+   "languages": [
+      {
+         "id": "eng",
+         "label": "English",
+         "iso_639_3": "eng",
+         "variant": null,
+         "bcp_47": "en-UK"
+      }
+   ],
+   "vendor_metadata": {},
+   "blocks": [...]
+}
 ```
 
 ### Blocks
@@ -169,13 +254,15 @@ The required keys for a Block are:
 | `uuid` \(uuid\) | A globally unique identifier for this Block \(See [UUID Format](flows.md#uuid-format).\) |
 | `name` \(string, word-characters only\) | A human-readable "variable name" for this block. This must be restricted to word characters so that it can be used as a variable name in expressions. When blocks write results output, they write to a variable corresponding the `name` of the block. |
 | `label` \(string, optional\) | A human-readable free-form description for this Block. |
-| `semantic_label` \(string, optional\) | A user-controlled field that can be used to label the meaning of the data collected by this block, e.g.: an ICD10 category name or other semantic classification system. \("ICD10::gender"\) |
-| `platform_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific Platform. |
-| `type` \(string\) | A specific string designating the type or "subclass" of this Block. This must be one of the Block type names within the specification, such as `Core\RunFlow` or `MobilePrimitives\Message`. |
+| `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Gender finding"\) |
+| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `type` \(string\) | A specific string designating the type or "subclass" of this Block. This must be one of the Block type names within the specification, such as `Core.RunFlow` or `MobilePrimitives.Message`. |
 | `config` \(object\) | Additional parameters that are specific to the type of the block. Details are provided within the Block documentation. |
 | `exits` \(array\) | a list of all the exits for the block. Exits must contain the required keys below, and can contain additional keys based on the Block type |
 
-Each exit must contain:
+#### Exit node specification
+
+Each exit node in `exits` must contain:
 
 | Key | Description |
 | :--- | :--- |
@@ -183,13 +270,58 @@ Each exit must contain:
 | `label` \(resource\) | This is the human-readable name of the exit \(as a translated resource\), which might be presented to a contact. |
 | `tag` \(string, word characters only\) | This is an identifier for the exit, suitable for use as a variable name in rolling up results \(e.g.: "male"\). It does not need to be unique within the block; multiple exits may be tagged the same. \(Some authoring tools may choose to auto-generate the tag from the label's primary language, to avoid usability problems with these getting out of sync.\) |
 | `destination_block` \(uuid\) | This is the uuid of the Block this exit connects to. It can be null if the exit does not connect to a block \(if it is the final block\). |
-| `semantic_label` \(string, optional\) | A user-controlled field that can be used to label the meaning of the exit, e.g.: an ICD10 category name or other semantic classification system. \("ICD10::female"\) |
+| `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Feminine Gender"\) |
 | `test` \(expression, optional\) | For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen. |
+| `default` \(boolean, optional\) | If this key is present and true, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true..  |
 | `config` \(object\) | This contains additional information required for each mode supported by the block. Details are provided within the Block documentation |
 
-#### Example
+Each exit must specify one of either `test` or `default`. Each block must have exactly one `default` exit. Conventionally the `default` exit is listed last in the list.
+
+#### Setting Contact Properties
+
+A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this common use-case, all blocks have a standard capability to specify how a contact property should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` object within the Block `config`:
 
 ```text
-TODO
+config {
+   ...,
+   set_contact_property: {
+      property_key: <string>
+      property_value: <Expression>
+   }
+}
+```
+
+The `property_key` is a string attribute within the context of the Contact, and is not further restricted by this specification. For complete block interoperability across vendors, vendors would need to agree on the format and identity of `property_key`. \(e.g. `property_key` could be "gender" , or it could be a UUID referenced to an external taxonomy service.\)
+
+#### Block Example
+
+```text
+{
+   "uuid": "0a0da5ab-66bc-4cd5-94c1-1e97f1875ee0",
+   "vendor_metadata": {},
+   "type": "MobilePrimitives.OpenResponse",
+   "name": "patient_id",
+   "label": "Patient ID",
+   "semantic_label": "VMO::Person::Patient::ID",
+   "exits": [
+      {
+         "uuid": "3b5c4568-6f8e-43d8-9c23-e0f444c9fd26",
+         "tag": "Default",
+         "label": "Default",
+         "default": true,
+         "config": {},
+         "destination_block": "80a8a17e-2438-454b-b2f0-4b64fd06d700"
+      },
+      {
+         "uuid": "c834028d-0646-431e-9d30-33a0f5388073",
+         "tag": "Error",
+         "label": "Error",
+         "config": {}
+      }
+   ],
+   "config": {
+      "prompt": "d99f9833-ace6-4f7f-957e-0a516e3dbb47"
+   }
+}
 ```
 
