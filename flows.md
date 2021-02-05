@@ -223,9 +223,10 @@ Possible modes for `supported_modes` are:
 {
    "uuid": "06c912aa-0d36-4d9c-b144-0cd3a38e8293",
    "name": "Summary Case Report Test",
-   "label": "Summary Case Report Test",
+   "label": "Summary Case Report Test for mHero Applications",
    "last_modified": "2021-02-05 18:55:59.229Z",
    "interaction_timeout": 172800,
+   "first_block_id": "08509fdf-2cd2-43a8-9627-011254d30aa7",
    "supported_modes": [
       "sms",
       "ussd",
