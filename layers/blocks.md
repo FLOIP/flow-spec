@@ -103,7 +103,28 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 ### Example
 
 ```text
-TODO
+[...]
+      "type": "Core\\Case",
+      "name": "CaseBlockExample",
+      "label": "Patient Age",
+      "semantic_label": "patient_age_logic",
+      "exits": [
+        {
+          "uuid": "4c0dd2c8-a08f-45f7-9bf6-82bbff3fa968",
+          "tag": "contact.patient_age <18",
+          "test": "contact.patient_age <18",
+          "label": "66c8ad7e-ea4a-4106-b704-434da2f568c7",
+          "config": {},
+          "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
+        },
+        {
+          "uuid": "8968deb6-c4f3-4163-b3fc-d518bea14332",
+          "tag": "contact.patient_age >18",
+          "test": "contact.patient_age >18",
+          "label": "a478eec5-2c40-4823-b7cb-b81a8ad39051",
+          "config": {},
+          "destination_block": "7e0cded0-4bb2-49d7-8001-8eedd9d14f3b"
+        },
 ```
 
 ## Run Another Flow Block
