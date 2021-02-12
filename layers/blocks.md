@@ -45,7 +45,30 @@ e.g.,
 ### Example
 
 ```text
-TODO
+[...]
+      "type": "Core\\Log",
+      "name": "LogBlock",
+      "label": "Test Log Block",
+      "semantic_label": "Test Log Block",
+      "exits": [
+        {
+          "uuid": "572f6e0d-6fd7-42f2-b5d4-fdcce49a1a12",
+          "tag": "Default",
+          "label": "Default",
+          "default": true,
+          "config": {}
+        }
+      ],
+      "config": {
+        "message": "bdd02d17-2baa-428e-8159-8d075b571d2d"
+      }
+    }
+  ],
+  "first_block_id": "752cc329-0fa9-47c9-8441-eaef61b02588"
+}
+],
+"resources": [...]
+}
 ```
 
 ## Case Block
