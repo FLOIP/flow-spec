@@ -110,10 +110,17 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
 ### Example
 
 ```text
-TODO
+    [...]
+    "type": "Core\\RunFlow",
+    "name": "RunAnotherFlow",
+    "label": "Another Flow",
+    "semantic_label": "another_flow",
+    "config": {
+      "flow_id": "ea5d7659-16cd-4e9a-86dc-28398cb41aed 
+"
+    },
+    "exits": [...]
 ```
-
-## Output Block
 
 * Type: `Core.Output`
 * Suggested number of exits: 1
