@@ -11,10 +11,12 @@ _Namespace_: `Core`
 * [Case Block](blocks.md#case-block)
 * [Run Another Flow Block](blocks.md#run-another-flow-block)
 * [Output Block](blocks.md#output-block)
+* [Set Contact Property Block](blocks.md#set-contact-property)
+* [Set Group Membership Block](blocks.md#set-group-membership)
 
 ## Log Block
 
-* Type: `Core\Log`
+* Type: `Core.Log`
 * Suggested number of exits: 1
 * Supported channels: all
 
@@ -43,12 +45,29 @@ e.g.,
 ### Example
 
 ```text
-TODO
+{
+  "type": "Core.Log",
+  "name": "LogBlock",
+  "label": "Test Log Block",
+  "semantic_label": null,
+  "exits": [
+    {
+      "uuid": "572f6e0d-6fd7-42f2-b5d4-fdcce49a1a12",
+      "tag": "Default",
+      "label": "Default",
+      "default": true,
+      "config": {}
+    }
+  ],
+  "config": {
+    "message": "bdd02d17-2baa-428e-8159-8d075b571d2d"
+  }
+}
 ```
 
 ## Case Block
 
-* Type: `Core\Case`
+* Type: `Core.Case`
 * Suggested number of exits: variable
 * Supported channels: all
 
@@ -60,12 +79,12 @@ This block evaluates a list of expressions, one for each exit, and terminates th
 | :--- | :--- |
 | none |  |
 
-Required keys for each `exit` are:
+Keys for each `exit` are:
 
 | Key | Description |
 | :--- | :--- |
 | `test` | The expression to be evaluated. If the expression evalutes to a "truthy" value, the block will terminate through this exit. |
-| `default` | If this key is present, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true. |
+| `default` \(boolean\) | If this key is present and true, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true. |
 
 Each exit must specify one of either `test` or `default`. Each Case block must have exactly one `default` exit. Conventionally the `default` exit is listed last in the list.
 
@@ -78,12 +97,33 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 ### Example
 
 ```text
-TODO
+[...]
+      "type": "Core\\Case",
+      "name": "CaseBlockExample",
+      "label": "Patient Age",
+      "semantic_label": "patient_age_logic",
+      "exits": [
+        {
+          "uuid": "4c0dd2c8-a08f-45f7-9bf6-82bbff3fa968",
+          "tag": "contact.patient_age <18",
+          "test": "contact.patient_age <18",
+          "label": "66c8ad7e-ea4a-4106-b704-434da2f568c7",
+          "config": {},
+          "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
+        },
+        {
+          "uuid": "8968deb6-c4f3-4163-b3fc-d518bea14332",
+          "tag": "contact.patient_age >18",
+          "test": "contact.patient_age >18",
+          "label": "a478eec5-2c40-4823-b7cb-b81a8ad39051",
+          "config": {},
+          "destination_block": "7e0cded0-4bb2-49d7-8001-8eedd9d14f3b"
+        },
 ```
 
 ## Run Another Flow Block
 
-* Type: `Core\RunFlow`
+* Type: `Core.RunFlow`
 * Suggested number of exits: 1 + error exit
 * Supported channels: all
 
@@ -108,12 +148,19 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
 ### Example
 
 ```text
-TODO
+    [...]
+    "type": "Core\\RunFlow",
+    "name": "RunAnotherFlow",
+    "label": "Another Flow",
+    "semantic_label": "another_flow",
+    "config": {
+      "flow_id": "ea5d7659-16cd-4e9a-86dc-28398cb41aed 
+"
+    },
+    "exits": [...]
 ```
 
-## Output Block
-
-* Type: `Core\Output`
+* Type: `Core.Output`
 * Suggested number of exits: 1
 * Supported channels: all
 
@@ -128,6 +175,67 @@ This block provides a connection to the Flow Results specification, by storing a
 ### Detailed Behaviour
 
 Not all block interactions and low-level logs are important to users; most users are concerned with a subset of results that have specific meaning -- the "Flow Results". \(See [Flow Results specification](https://github.com/FLOIP/flow-results/blob/master/specification.md).\) Any block type, as part of its specified runtime behaviour, may write to the Flow Results. The Output Block is a low-level block that does just simply one thing: write a named variable corresponding to the `name` of the block to the Flow Results, determined by the `value` expression.
+
+### Example
+
+```text
+TODO
+```
+
+## Set Contact Property
+
+* Type: `Core.SetContactProperty`
+* Suggested number of exits: 1
+* Supported channels: all
+
+A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this common use-case, all blocks have a [standard capability to specify how a contact property should be updated](../flows.md#setting-contact-properties). The SetContactProperty block is a simple block that performs only this single operation, and is consistent with the standard block specification.
+
+### Block `config`
+
+| Key | Description |
+| :--- | :--- |
+| `set_contact_property` \(object, required\) | See below |
+
+#### `set_contact_property` object
+
+| Key | Description |
+| :--- | :--- |
+| `property_key` \(string\) | The attribute of the Contact that will be set \(or updated if it already has a value set\). |
+| `property_value` \(expression\) | The expression that will be evaluated and stored. |
+
+### Detailed Behaviour
+
+The property update shall be evaluated and stored immediately prior to following the exit node out of the block.
+
+The `property_key` is a string attribute within the context of the Contact, and is not further restricted by this specification. For complete block interoperability across vendors, vendors would need to agree on the format and identity of `property_key`. \(For instance, `property_key` could be "gender" , or it could be a UUID referenced to an external taxonomy service.\)
+
+### Example
+
+```text
+TODO
+```
+
+## Set Group Membership
+
+* Type: `Core.SetGroupMembership`
+* Suggested number of exits: 1
+* Supported channels: all
+
+Another common operation for platforms that run flows on Contacts is to organize Contacts into groups based on the results of flow interactions. \(Examples include managing sign-ups for opt-in campaigns, organizing Contacts into demographic groups, etc.\)
+
+### Block `config`
+
+| Key | Description |
+| :--- | :--- |
+| `group_key` \(string\) | An identifier for the group that membership will be set within. |
+| `group_name` \(string, optional\) | A human-readable label in addition to the `group_key`, in cases where the `group_name` needs to be displayed to the Contact. |
+| `is_member` \(expression, boolean\) | Determines the membership state: falsy to remove the contact from the group, truthy to add, and null for no change to the existing membership. |
+
+### Detailed Behaviour
+
+The Contact's membership in the group shall be set according to the `is_member` expression, immediately before following the exit node out of the block.
+
+The `group_key` is a string and is not further restricted by the spec. For complete block interoperability across vendors, vendors would need to agree on the format and identity of `group_key`.
 
 ### Example
 
