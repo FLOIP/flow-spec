@@ -211,11 +211,15 @@ A Flow represents a set of Blocks and their direct connections. The required key
 Possible modes for `supported_modes` are:
 
 * `text`: general text-based interactions. This includes SMS and USSD channels, which may have distinct behaviour while sharing the same content.
-* `sms`: content specific for SMS
-* `ussd`: content specific for USSD
+  * `sms`: content specific for SMS
+  * `ussd`: content specific for USSD
 * `ivr`: content specific for interactive voice response
-* `rich_messaging`: content used for data channels that support multimedia including text, audio, images, and video, such as social network chatbots \(Facebook Messenger, WhatsApp, Twitter, Telegram, etc.\)
-* `offline`: content used for mobile apps designed to run offline without a data connection.
+* `rich_messaging`: content used for messaging platforms, for example:
+  * `twitter`
+  * `facebook_messenger`
+  * `wechat`
+  * `telegram`
+* `offline`: content used for offline data collection apps 
 
 #### Flow Example
 
