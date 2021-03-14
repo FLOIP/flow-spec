@@ -88,7 +88,7 @@ for example,
 }
 ```
 
-A resource may provide one or many values within it. This provides flexibility to use the same text or media for several modes, or to specify unique media or text in each mode. 
+A resource may provide one or many values within it. This provides flexibility to use the same text or media for several modes, or to specify unique media or text in each mode.
 
 The `mime_type` field should be provided for all values; when provided, this must be an IANA media type \(RFC 6838\).
 
@@ -96,7 +96,7 @@ The `language_id` must correspond to a [Language Identifier](flows.md#language-i
 
 ### Language Objects and Identifiers
 
-Flows describe a list of languages they have content for. Flows use the ISO 639-3 language coding to describe nearly all spoken and written languages. They also support multiple languages with the same ISO 639-3 code \(referred to as language _variants_\), to support use-cases where organizations might have distinct sets of content for the same language. A common example of variants could be "English - India" and "English - East Africa", or "English - Male voice" and "English - Female voice". 
+Flows describe a list of languages they have content for. Flows use the ISO 639-3 language coding to describe nearly all spoken and written languages. They also support multiple languages with the same ISO 639-3 code \(referred to as language _variants_\), to support use-cases where organizations might have distinct sets of content for the same language. A common example of variants could be "English - India" and "English - East Africa", or "English - Male voice" and "English - Female voice".
 
 Language objects must have the following keys:
 
@@ -105,7 +105,7 @@ Language objects must have the following keys:
 | `id` \(string\) | Language Identifier, described below, e.g. "`eng-female`" |
 | `iso_639_3` \(string\) | [ISO 639-3 code](https://iso639-3.sil.org/code_tables/639/data) for the language. This is a 3-letter string, e.g. "`eng`".  "`mis`" is the ISO 639-3 code for languages not yet included in ISO 639-3. |
 | `variant` \(string, optional\) | Where multiple languages/content sets are used with the same ISO 639-3 code, `variant` describes the specialization, e.g. "`east_africa`". |
-| `bcp_47` \(string, optional\) | The [BCP 47 ](https://tools.ietf.org/html/bcp47)locale code for this language, e.g. "`en-GB`". These codes are often useful in conjunction with speech synthesis and speech recognition tools.  |
+| `bcp_47` \(string, optional\) | The [BCP 47 ](https://tools.ietf.org/html/bcp47)locale code for this language, e.g. "`en-GB`". These codes are often useful in conjunction with speech synthesis and speech recognition tools. |
 
 #### Language Identifiers
 
@@ -147,7 +147,6 @@ languages: [
       bcp_47: fr-FR
    }
 ]
-
 ```
 
 ### UUID Format
@@ -204,7 +203,7 @@ A Flow represents a set of Blocks and their direct connections. The required key
 | `first_block_id` \(uuid\) | The ID of the block in `blocks` that is at the beginning of the flow. |
 | `exit_block_id` \(uuid, optional\) | If provided, the ID of the block in`blocks`that will be jumped to if there is an error or deliberate exit condition during Flow Run. If not provided, the Flow Run will end immediately. |
 | `languages` \(array\) | A list of the languages that the Flow has suitable content for. See language object specification below. |
-| `blocks` \(array\) | A list of the Blocks in the flow \(see below\).  The flow will start execution at the _first_ block in this list. |
+| `blocks` \(array\) | A list of the Blocks in the flow \(see below\).  |
 
 #### Modes
 
@@ -277,7 +276,7 @@ Each exit node in `exits` must contain:
 | `destination_block` \(uuid\) | This is the uuid of the Block this exit connects to. It can be null if the exit does not connect to a block \(if it is the final block\). |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Feminine Gender"\) |
 | `test` \(expression, optional\) | For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen. |
-| `default` \(boolean, optional\) | If this key is present and true, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true..  |
+| `default` \(boolean, optional\) | If this key is present and true, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true.. |
 | `config` \(object\) | This contains additional information required for each mode supported by the block. Details are provided within the Block documentation |
 
 Each exit must specify one of either `test` or `default`. Each block must have exactly one `default` exit. Conventionally the `default` exit is listed last in the list.
