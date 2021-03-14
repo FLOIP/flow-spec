@@ -103,6 +103,7 @@ Language objects must have the following keys:
 | Key | Description |
 | :--- | :--- |
 | `id` \(string\) | Language Identifier, described below, e.g. "`eng-female`" |
+| `label` \(string, optional\) | Human-readable description for this language and variant. |
 | `iso_639_3` \(string\) | [ISO 639-3 code](https://iso639-3.sil.org/code_tables/639/data) for the language. This is a 3-letter string, e.g. "`eng`".  "`mis`" is the ISO 639-3 code for languages not yet included in ISO 639-3. |
 | `variant` \(string, optional\) | Where multiple languages/content sets are used with the same ISO 639-3 code, `variant` describes the specialization, e.g. "`east_africa`". |
 | `bcp_47` \(string, optional\) | The [BCP 47 ](https://tools.ietf.org/html/bcp47)locale code for this language, e.g. "`en-GB`". These codes are often useful in conjunction with speech synthesis and speech recognition tools. |
