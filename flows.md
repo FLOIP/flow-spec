@@ -215,20 +215,7 @@ Possible modes for `supported_modes` are:
   * `SMS`: content specific for SMS
   * `USSD`: content specific for USSD
 * `IVR`: content specific for interactive voice response
-* `RICH_MESSAGING`: content used across all social messaging/rich data channels. For network-specialized content, see options below:
-  * `RM_DISCORD`
-  * `RM_FACEBOOK_MESSENGER`
-  * `RM_KIK_MESSENGER`
-  * `RM_LINE`
-  * `RM_RCS`
-  * `RM_SIGNAL`
-  * `RM_SKYPE`
-  * `RM_SLACK`
-  * `RM_TELEGRAM`
-  * `RM_TWITTER`
-  * `RM_VIBER`
-  * `RM_WECHAT`
-  * `RM_WHATSAPP`
+* `RICH_MESSAGING`: content used across all social messaging/rich data channels.
 * `OFFLINE`: content used for offline data collection apps 
 
 #### Flow Example
