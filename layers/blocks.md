@@ -98,7 +98,7 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 
 ```text
 [...]
-      "type": "Core\\Case",
+      "type": "Core.Case",
       "name": "CaseBlockExample",
       "label": "Patient Age",
       "semantic_label": "patient_age_logic",
@@ -149,7 +149,7 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
 
 ```text
     [...]
-    "type": "Core\\RunFlow",
+    "type": "Core.RunFlow",
     "name": "RunAnotherFlow",
     "label": "Another Flow",
     "semantic_label": "another_flow",
@@ -159,6 +159,10 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
     },
     "exits": [...]
 ```
+
+
+
+## Output Block
 
 * Type: `Core.Output`
 * Suggested number of exits: 1
