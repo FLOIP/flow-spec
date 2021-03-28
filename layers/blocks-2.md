@@ -13,7 +13,7 @@ _Namespace_: `MobilePrimitives`
 
 ## Message Block
 
-* Type: `MobilePrimitives\Message`
+* Type: `MobilePrimitives.Message`
 * Suggested number of exits: 1
 * Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
@@ -45,7 +45,7 @@ TODO
 
 ## Select One Response \(Multiple Choice Question\) Block
 
-* Type: `MobilePrimitives\SelectOneResponse`
+* Type: `MobilePrimitives.SelectOneResponse`
 * Suggested number of exits: 1 + error exit, or multiple based on choices
 * Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
@@ -82,7 +82,7 @@ TODO
 
 ## Numeric Response Block
 
-* Type: `MobilePrimitives\NumericResponse`
+* Type: `MobilePrimitives.NumericResponse`
 * Suggested number of exits: 1 + error exit, or multiple based on ranges of interest
 * Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
@@ -93,8 +93,8 @@ This block obtains a numeric response from the contact.
 | Key | Description |
 | :--- | :--- |
 | `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years." |
-| `validation_minimum` \(number\) | The minimum value \(inclusive\) that will be accepted as a response to this block; responses less than this will proceed through the error exit. |
-| `validation_maximum` \(number\) | The maximum value \(inclusive\) that will be accepted as a response to this block; responses greater than this will proceed through the error exit. |
+| `validation_minimum` \(number, optional\) | The minimum value \(inclusive\) that will be accepted as a response to this block; responses less than this will proceed through the error exit. |
+| `validation_maximum` \(number, optional\) | The maximum value \(inclusive\) that will be accepted as a response to this block; responses greater than this will proceed through the error exit. |
 
 #### Channel-specific `config`:
 
@@ -124,7 +124,7 @@ TODO
 
 ## Open Response \(Open-ended Question\) Block
 
-* Type: `MobilePrimitives\OpenResponse`
+* Type: `MobilePrimitives.OpenResponse`
 * Suggested number of exits: 1 + error exit, or multiple based on patterns of interest
 * Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
 
