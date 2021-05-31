@@ -1,6 +1,6 @@
 # Layer 3: Mobile Primitives
 
-Layer 3 contains the specification for I/O blocks that represent discrete single actions, that have direct analogues across several channels used in mobile messaging \(e.g. IVR, SMS, USSD\). Support for this layer should be implemented by all engines that target the `ivr`, `text` \(SMS and USSD\), and `rich_messaging` channels. These blocks may make use of the [Expression Specification](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/expressions.md) for generating output. Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
+Layer 3 contains the specification for I/O blocks that represent discrete single actions, that have direct analogues across several channels used in mobile messaging \(e.g. IVR, SMS, USSD\). Support for this layer should be implemented by all engines that target the `IVR`, `TEXT` \(SMS and USSD\), and `RICH_MESSAGING` channels. These blocks may make use of the [Expression Specification](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/expressions.md) for generating output. Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
 
 _Namespace_: `MobilePrimitives`
 
