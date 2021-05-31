@@ -45,6 +45,7 @@ SupportedContentType {
   AUDIO = 'AUDIO',
   IMAGE = 'IMAGE',
   VIDEO = 'VIDEO',
+  DATA = 'DATA'
 }
 
 SupportedMode {
@@ -170,8 +171,8 @@ A Container is a "package" document containing one or more Flow Definitions, use
 | `specification_version` \(string\) | The version of the Flow Spec that this package is compliant with, e.g. `1.0.0-rc1` |
 | `uuid` \(uuid\) | A globally unique identifier for this Container. \(See [UUID Format](flows.md#uuid-format).\) |
 | `name` \(string\) | A human-readable name for the Container content. |
-| `description` \(string\) | An extended human-readable description of the content. |
-| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `description` \(string, optional\) | An extended human-readable description of the content. |
+| `vendor_metadata` \(object, optional\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `flows` \(array\) | A list of the Flows within the Container \(see below\) |
 | `resources` \(object\) | A set of the Resources needed for executing the Flows in the Container, keyed by resource uuid. |
 
