@@ -206,18 +206,18 @@ A Flow represents a set of Blocks and their direct connections. The required key
 | `first_block_id` \(uuid\) | The ID of the block in `blocks` that is at the beginning of the flow. |
 | `exit_block_id` \(uuid, optional\) | If provided, the ID of the block in`blocks`that will be jumped to if there is an error or deliberate exit condition during Flow Run. If not provided, the Flow Run will end immediately. |
 | `languages` \(array\) | A list of the languages that the Flow has suitable content for. See language object specification below. |
-| `blocks` \(array\) | A list of the Blocks in the flow \(see below\).  The flow will start execution at the _first_ block in this list. |
+| `blocks` \(array\) | A list of the Blocks in the flow \(see below\). |
 
 #### Modes
 
 Possible modes for `supported_modes` are:
 
-* `text`: general text-based interactions. This includes SMS and USSD channels, which may have distinct behaviour while sharing the same content.
-* `sms`: content specific for SMS
-* `ussd`: content specific for USSD
-* `ivr`: content specific for interactive voice response
-* `rich_messaging`: content used for data channels that support multimedia including text, audio, images, and video, such as social network chatbots \(Facebook Messenger, WhatsApp, Twitter, Telegram, etc.\)
-* `offline`: content used for mobile apps designed to run offline without a data connection.
+* `TEXT`: general text-based interactions. This includes SMS and USSD channels, which may have distinct behaviour while sharing the same content.
+  * `SMS`: content specific for SMS
+  * `USSD`: content specific for USSD
+* `IVR`: content specific for interactive voice response
+* `RICH_MESSAGING`: content used for data channels that support multimedia including text, audio, images, and video, such as social network chatbots \(Facebook Messenger, WhatsApp, Twitter, Telegram, etc.
+* `OFFLINE`: content used for mobile apps designed to run offline without a data connection.
 
 #### Flow Example
 
@@ -230,9 +230,9 @@ Possible modes for `supported_modes` are:
    "interaction_timeout": 172800,
    "first_block_id": "08509fdf-2cd2-43a8-9627-011254d30aa7",
    "supported_modes": [
-      "sms",
-      "ussd",
-      "rich_messaging"
+      "SMS",
+      "USSD",
+      "RICH_MESSAGING"
    ],
    "languages": [
       {
