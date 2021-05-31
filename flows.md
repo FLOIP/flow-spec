@@ -41,19 +41,19 @@ ResourceValue {
 }
 
 SupportedContentType {
-  TEXT = 'text',
-  AUDIO = 'audio',
-  IMAGE = 'image',
-  VIDEO = 'video',
+  TEXT = 'TEXT',
+  AUDIO = 'AUDIO',
+  IMAGE = 'IMAGE',
+  VIDEO = 'VIDEO',
 }
 
 SupportedMode {
-  TEXT = 'text',
-  SMS = 'sms',
-  USSD = 'ussd',
-  IVR = 'ivr',
-  RICH_MESSAGING = 'rich_messaging',
-  OFFLINE = 'offline',
+  TEXT = 'TEXT',
+  SMS = 'SMS',
+  USSD = 'USSD',
+  IVR = 'IVR',
+  RICH_MESSAGING = 'RICH_MESSAGING',
+  OFFLINE = 'OFFLINE',
 }
 ```
 
@@ -65,22 +65,22 @@ for example,
    values: [
       {
          language_id: "eng",
-         modes: ["sms", "ussd"],
-         content_type: "text",
+         modes: ["SMS", "USSD"],
+         content_type: "TEXT",
          mime_type: "text/plain",
          value: "Howdy! You've reached the Museum of Interoperability!"
       },
       {
          language_id: "eng",
-         modes: ["rich_messaging"],
-         content_type: "text",
+         modes: ["RICH_MESSAGING"],
+         content_type: "TEXT",
          mime_type: "text/plain",
          value: "Howdy! You've reached the Museum of Interoperability! This is a long message for you because we've gone beyond the limitations for 180 characters. I'm your guide, Florian. I hope you're excited for this two hour tour through the history of interoperable data systems."
       },
       {
          language_id: "eng",
-         modes: ["rich_messaging"],
-         content_type: "image",
+         modes: ["RICH_MESSAGING"],
+         content_type: "IMAGE",
          mime_type: "image/png",
          value: "https://your-server-somewhere.flowinteroperability.org/example-image.png"
       }
@@ -103,6 +103,7 @@ Language objects must have the following keys:
 | Key | Description |
 | :--- | :--- |
 | `id` \(string\) | Language Identifier, described below, e.g. "`eng-female`" |
+| `label` \(string, optional\) | Human-readable description for this language and variant. |
 | `iso_639_3` \(string\) | [ISO 639-3 code](https://iso639-3.sil.org/code_tables/639/data) for the language. This is a 3-letter string, e.g. "`eng`".  "`mis`" is the ISO 639-3 code for languages not yet included in ISO 639-3. |
 | `variant` \(string, optional\) | Where multiple languages/content sets are used with the same ISO 639-3 code, `variant` describes the specialization, e.g. "`east_africa`". |
 | `bcp_47` \(string, optional\) | The [BCP 47 ](https://tools.ietf.org/html/bcp47)locale code for this language, e.g. "`en-GB`". These codes are often useful in conjunction with speech synthesis and speech recognition tools.  |

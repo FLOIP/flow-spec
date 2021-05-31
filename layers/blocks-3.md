@@ -12,7 +12,7 @@ Namespace: `SmartDevices`
 
 ## Location Response \(GPS\) Block
 
-* Type: `SmartDevices.LocationResponse`
+* Type: `SmartDevices\LocationResponse`
 * Suggested number of exits: 1 + error exit
 * Supported channels: `offline`, `rich_messaging`
 
@@ -23,7 +23,7 @@ This block allows a device user to capture a location on a map, e.g. using a GPS
 | Key | Description |
 | :--- | :--- |
 | `accuracy_threshold_meters` \(number, optional, default 5.0\) | The GPS resolution that a device should wait for and achieve before capturing this location. |
-| `accuracy_timeout_seconds` \(number, optional, default 120\) | The timeout in seconds that is a maximum that the device should wait for the required accuracy. |
+| `accuracy_timeout_seconds` \(number, optiona, default 120\) | The timeout in seconds that is a maximum that the device should wait for the required accuracy. |
 
 ### Detailed Behaviour
 
@@ -47,21 +47,12 @@ e.g.
 ### Example
 
 ```text
-[...]
-"type": "SmartDevices.LocationResponse",
-"name": "GPSCapture",
-"label": "GPS Capture",
-"semantic_label": "gps_coordinates",
-"exits": [...],
-"config": {
-"accuracy_threshold_meters": 5,
-"accuracy_timeout_seconds": 120
-[...]
+TODO
 ```
 
 ## Photo Response Block
 
-* Type: `SmartDevices.PhotoResponse`
+* Type: `SmartDevices\PhotoResponse`
 * Suggested number of exits: 1 + error exit
 * Supported channels: `offline`
 
