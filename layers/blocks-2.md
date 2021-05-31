@@ -25,7 +25,7 @@ This block presents a single message to the contact. The form of the message can
 | :--- | :--- |
 | `message` \(resource\) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering. |
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Sends `message` as an SMS to the contact.
 * `text` \(USSD\): Displays `message` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
@@ -40,7 +40,50 @@ None \(TODO: Should the length of message listened be reported in variables, or 
 ### Example
 
 ```text
-TODO
+[...]
+            "type": "MobilePrimitives.Message",
+            "name": "Welcome",
+            "label": "Welcome Message",
+            "semantic_label": "welcome_message",
+            "exits": [...]
+        "first_block_id": "cf1da5f5-2999-4b81-a9f5-bdcad860c49d"
+      }
+    ],
+    "resources": [...]
+          {
+            "language_id": "22",
+            "content_type": "text",
+            "modes": [
+              "sms"
+            ],
+            "value": "Happy Monday! Welcome to your 'beginning of the week' survey!"
+          },
+          {
+            "language_id": "22",
+            "content_type": "audio",
+            "modes": [
+              "ivr"
+            ],
+            "value": "mondayblues.mp3"
+          },
+          {
+            "language_id": "22",
+            "content_type": "text",
+            "modes": [
+              "rich_messaging"
+            ],
+            "value": "Happy Monday! Welcome to your 'beginning of the week' survey!"
+          },
+          {
+            "language_id": "22",
+            "content_type": "text",
+            "modes": [
+              "offline"
+            ],
+            "value": "Happy Monday! Welcome to your 'beginning of the week' survey!"
+          }
+        ]
+[...]]
 ```
 
 ## Select One Response \(Multiple Choice Question\) Block
@@ -62,7 +105,7 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. \(Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.\)
 * `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session, timeout, or invalid response: proceed through the error exit.\)
@@ -77,7 +120,202 @@ This block writes the tag of the selected choice to the output variable correspo
 ### Example
 
 ```text
-TODO
+[...]
+      "type": "MobilePrimitives.SelectOneResponse",
+      "name": "IceCreamQuestion",
+      "label": "Fav Ice Cream",
+      "semantic_label": "ice_cream",
+      "exits": [
+        {
+          "uuid": "78012084-b811-4177-88ea-5de5d3eba57d",
+          "tag": "Default",
+          "label": "Default",
+          "default": true,
+          "config": {}
+        },
+        {
+          "uuid": "560a86c4-98cd-47d9-8999-c834119c3f0a",
+          "tag": "Error",
+          "label": "Error",
+          "config": {}
+        },
+        {
+          "uuid": "95fd672c-92e9-4352-b761-7008b27cbe26",
+          "test": "block.value = 1",
+          "label": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
+          "tag": "",
+          "config": {}
+        },
+        {
+          "uuid": "9fab760c-a680-4e40-83b7-9b3f8c66ccdb",
+          "test": "block.value = 2",
+          "label": "b75fa302-8ff7-4f49-bf26-8f915e807222",
+          "tag": "",
+          "config": {}
+        },
+        {
+          "uuid": "d99d43ec-6f0a-42b4-97f9-aa1c50ddebe0",
+          "test": "block.value = 3",
+          "label": "22619b04-b06d-483e-af83-ee3ba9c8c867",
+          "tag": "",
+          "config": {}
+        }
+      ],
+      "config": {
+        "prompt": "42095857-6782-425d-809b-4226c4d53d4d",
+        "question_prompt": "f3d6d8da-c48c-4398-9a7e-7f96c18e1ef2",
+        "choices_prompt": "23fab37a-14f8-458a-acbb-669ab11bea58",
+        "choices": {
+          "1": "66623eff-fd17-4996-8edd-e41be3804bc8",
+          "2": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
+          "3": "b75fa302-8ff7-4f49-bf26-8f915e807222"
+        }
+      }
+    }
+  ][...]
+    {
+      "language_id": "22",
+      "content_type": "text",
+      "modes": [
+        "sms"
+      ],
+      "value": "What is your favorite kind of ice-cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry."
+    },
+[...]
+    {
+      "language_id": "22",
+      "content_type": "text",
+      "modes": [
+        "sms"
+      ],
+      "value": "\"chocolate\":[chocolate-resource]"
+    },
+    [...]]
+[...]
+    {
+      "language_id": "22",
+      "content_type": "text",
+      "modes": [
+        "sms"
+      ],
+      "value": "\"vanilla\":[vanilla-resource]"
+    },
+    [...]
+[...]
+    {
+      "language_id": "22",
+      "content_type": "text",
+      "modes": [
+        "sms"
+      ],
+      "value": "\"strawberry\":[strawberry-resource]"
+    },
+    [...]
+[...]
+```
+
+## Select Many Responses \(Multiple Choice Question\) Block
+
+* Type: `MobilePrimitives.SelectManyResponses`
+* Suggested number of exits: 1 + error exit, or multiple based on choices
+* Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+
+This block obtains the answer to a Multiple Choice question from the contact. The contact can select from zero to many options from a set of choices.
+
+### Block `config`
+
+| Key | Description |
+| :--- | :--- |
+| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What kinds of ice-cream do you like: chocolate, vanilla, strawberry? Select all that apply." |
+| `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What kinds of ice-cream do you like?". If included, must also provide `choices_prompt` and omit `prompt`. |
+| `choices_prompt` \(resource, optional, required by `question_prompt`\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "chocolate, vanilla, strawberry" |
+| `choices` \(mapping of choice tags to choice resources\) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`. |
+| `minimum_choices` \(integer, optional\) | The minimum number of choices the Contact must select to proceed. Default if not provided: 0. |
+| `maximum_choices` \(integer\) | The maximum number of choices the Contact can select. Default if not provided: unlimited \(ie: the total number of `choices`\). |
+
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
+
+### Detailed behaviour by mode
+
+* `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture multiple responses. \(Lack of the right number of responses after the flow's configured `timeout`, or an invalid response: proceed through the error exit.\)
+* `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture text describing multiple choices. \(Dismissal of the session, timeout, or invalid response: proceed through the error exit.\)
+* `ivr`: Play the prompt, according to the prompt configuration in `config` above, then wait to capture multiple DTMF responses. Implementations may choose to optimize the user experience for additional guidance on answering multiple options.  \(Hangup, timeout, or invalid response: proceed through the error exit.\)
+* `rich_messaging`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  \(If displaying menu items, platforms should display only `question_prompt`.\) \(Timeout or invalid response: proceed through the error exit.\)
+* offline: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to receive a menu confirmation.
+
+### Output behaviour
+
+This block writes an array of tags of the selected choices to the output variable corresponding to the `name` of the block.
+
+### Example
+
+```text
+[...]
+    "type": "MobilePrimitives.SelectManyResponse",
+    "name": "MultipleIceCream",
+    "label": "Ice Cream",
+    "semantic_label": "multiple_ice_cream",
+    "exits": [...]
+    
+    "config": {
+      "prompt": "9072902c-cc99-4586-921b-99a348835981",
+      "question_prompt": "2875befb-543a-4362-a5fd-6a5380f7db9c",
+      "choices_prompt": "b6278c43-6aaa-43d6-addb-c3c8f6b47ece",
+      "choices": {
+        "1": "c164ef23-2816-43ba-b4b7-bacdafcb06f3",
+        "2": "e18d179d-464d-4dc2-a056-fc6c1d742de6",
+        "3": "7a7377db-8cac-43f6-898b-0999f53f5964",
+      "minimum_choices": "1",
+      "maximum_choices": ""
+      }
+    }
+  }
+]
+[...]
+  "value": "\"chocolate\":[chocolate-resource]"
+},
+{
+  "language_id": "22",
+  "content_type": "audio",
+  "modes": [
+    "ivr"
+  ],
+  "value": "chocolate.mp3"
+},
+[...]
+  "value": "What kinds of ice-cream do you like: chocolate, vanilla, strawberry? Select all that apply."
+},
+{
+  "language_id": "22",
+  "content_type": "audio",
+  "modes": [
+    "ivr"
+  ],
+  "value": "icecreammultiple.mp3"
+},
+[...]
+  "value": "\"vanilla\":[vanilla-resource]"
+},
+{
+  "language_id": "22",
+  "content_type": "audio",
+  "modes": [
+    "ivr"
+  ],
+  "value": "vanilla.mp3"
+},
+[...]
+  "value": "\"strawberry\":[strawberry-resource]"
+},
+{
+  "language_id": "22",
+  "content_type": "audio",
+  "modes": [
+    "ivr"
+  ],
+  "value": "strawberry.mp3"
+},
+[...]
 ```
 
 ## Numeric Response Block
@@ -104,7 +342,7 @@ This block obtains a numeric response from the contact.
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. \(Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the error exit.\)
 * `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session, timeout, or invalid response: proceed through the error exit.\)
@@ -119,10 +357,48 @@ This block writes the numeric value received to the output variable correspondin
 ### Example
 
 ```text
-TODO
+[...]
+        "type": "MobilePrimitives.NumericResponse",
+        "name": "NumberBlock",
+        "label": "How old are you?",
+        "semantic_label": "patient_age",
+        "exits": [...],
+        "config": {
+          "prompt": "986a0f39-bfdf-4aa0-9fe2-28c90f422e1f",
+          "validation_minimum": 0,
+          "validation_maximum": 120
+        }
+      }
+    ],
+    "first_block_id": "1bb38f28-9bdd-491e-bc19-5700998b3b3e"
+  }
+],
+"resources": [
+  {
+    "uuid": "b69b8697-daec-40e7-89ac-d5e5596ac848",
+    "values": []
+  },
+  {
+    "uuid": "8f0067fb-2b35-423c-970b-7bbe397ea296",
+    "values": []
+  },
+  {
+    "uuid": "986a0f39-bfdf-4aa0-9fe2-28c90f422e1f",
+    "values": [
+      {
+        [...]
+        "language_id": "22",
+        "content_type": "text",
+        "modes": [
+          "sms"
+        ],
+        "value": "How old are you? Please reply with your age in years."
+      }
+    ]
+  [...]
 ```
 
-## Open Response \(Open-ended Question\) Block
+## Open Response Block
 
 * Type: `MobilePrimitives.OpenResponse`
 * Suggested number of exits: 1 + error exit, or multiple based on patterns of interest
@@ -132,9 +408,24 @@ This block obtains an open-ended response from the contact. Dependent on the cha
 
 ### Block `config`
 
-| Key | Description |
-| :--- | :--- |
-| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years." |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Key</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>prompt</code> (resource)</td>
+      <td style="text-align:left">
+        <p>The question prompt that should be displayed to the contact, e.g. &quot;Please
+          leave</p>
+        <p>us feedback on your experience at the Children&apos;s Hospital.&quot;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 #### Channel-specific `config`:
 
@@ -145,7 +436,7 @@ This block obtains an open-ended response from the contact. Dependent on the cha
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
 
-### Detailed behaviour
+### Detailed behaviour by mode
 
 * `text` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. \(Lack a response after the flow's configured `timeout`: proceed through the error exit.\)
 * `text` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session or timeout: proceed through the error exit.\)
@@ -162,6 +453,45 @@ TODO: Do we want to capture the length of the recording other than in the detail
 ### Example
 
 ```text
-TODO
+[...]
+        "type": "MobilePrimitives.OpenResponse",
+        "name": "OpenResponseFeedback",
+        "label": "Patient Feedback",
+        "semantic_label": "patient_feedback",
+        "exits": [...]],
+        "config": {
+          "prompt": "b969cd54-c894-4f5a-891e-f1b24e32982b",
+          "ivr": {
+            "max_duration_seconds": 120
+          },
+          "text": {
+            "max_response_characters": 160
+          }
+        }
+      }
+    ],
+    "first_block_id": "de3666bc-d42c-4152-b5e9-8c19ba05d143"
+  }
+],
+"resources": [...],
+    "values": [
+      [...]
+      {
+        "language_id": "22",
+        "content_type": "audio",
+        "modes": [
+          "ivr"
+        ],
+        "value": "feedback.mp3"
+      },
+      {
+        "language_id": "22",
+        "content_type": "text",
+        "modes": [
+          "sms"
+        ],
+        "value": "Please leave us your feedback on your patient experience at the Children's Hospital."
+      }
+    ]
 ```
 

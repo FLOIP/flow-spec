@@ -32,10 +32,6 @@ This block appends a low-level message to the Context's `log`.
 
 The Context for a Flow shall have a `log` key, which preserves a mapping of timestamps and log messages for debugging. These logs must be maintained for the duration of the Run, and may be maintained for a longer period. The Log Block provides one way for a Flow to write to this log. On executing this block, the platform will append a key/value pair to the `log` object within the Context as below, and then proceed to the next block.
 
-```text
-
-```
-
 e.g.,
 
 ```text
@@ -97,8 +93,9 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 ### Example
 
 ```text
-[...]
-      "type": "Core\\Case",
+{
+    [...]
+      "type": "Core.Case",
       "name": "CaseBlockExample",
       "label": "Patient Age",
       "semantic_label": "patient_age_logic",
@@ -119,6 +116,15 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
           "config": {},
           "destination_block": "7e0cded0-4bb2-49d7-8001-8eedd9d14f3b"
         },
+        {
+          "uuid": "4cfbab2d-132e-4583-8974-85424bff2424",
+          "tag": "",
+          "test": "",
+          "label": "76c8a31d-16d1-4d3c-8500-308aeadbe581",
+          "config": {}
+        }
+      ]
+    },
 ```
 
 ## Run Another Flow Block
@@ -149,16 +155,16 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
 
 ```text
     [...]
-    "type": "Core\\RunFlow",
+    "type": "Core.RunFlow",
     "name": "RunAnotherFlow",
     "label": "Another Flow",
-    "semantic_label": "another_flow",
     "config": {
-      "flow_id": "ea5d7659-16cd-4e9a-86dc-28398cb41aed 
-"
+      "flow_id": "ea5d7659-16cd-4e9a-86dc-28398cb41aed"
     },
     "exits": [...]
 ```
+
+## Output Block
 
 * Type: `Core.Output`
 * Suggested number of exits: 1
@@ -212,7 +218,23 @@ The `property_key` is a string attribute within the context of the Contact, and 
 ### Example
 
 ```text
-TODO
+{
+    "type": "Core.SetContactProperty",
+    "name": "ContactPBlock",
+    "label": "Test Contact Property",
+    "semantic_label": null,
+    "property_key": "gender",
+    "property_value": "male",
+    "exits": [
+      {
+        "uuid": "15e38cd1-0ed1-49ce-93d3-96b9e33a965a",
+        "tag": "Default",
+        "label": "Default",
+        "default": true,
+        "config": {}
+      }
+    ]
+}
 ```
 
 ## Set Group Membership
@@ -240,6 +262,23 @@ The `group_key` is a string and is not further restricted by the spec. For compl
 ### Example
 
 ```text
-TODO
+{
+    "type": "Core.SetGroupMembership",
+    "name": "ContactGMBlock",
+    "label": "Test Group Membership",
+    "semantic_label": null,
+    "group_key": "7294",
+    "group_name": "Healthcare workers",
+    "is_member": true,
+    "exits": [
+      {
+        "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
+        "tag": "Default",
+        "label": "Default",
+        "default": true,
+        "config": {}
+      }
+    ]
+  }
 ```
 
