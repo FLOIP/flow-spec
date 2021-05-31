@@ -18,7 +18,15 @@ This block prints a message to standard output, by evaluating an expression.
 ### Example
 
 ```text
-TODO
+[...]
+"type": "ConsoleIO.Print",
+"name": "PrintMessage",
+"label": "Print Message",
+"semantic_label": "print_message",
+"exits": [
+[...]
+"value": "Thanks @(WORD(contact.name, 1)) for your response!"
+[...]
 ```
 
 ## Read Block
@@ -38,6 +46,28 @@ This block has 2 exits: the first is chosen when all variables are read successf
 ### Example
 
 ```text
-TODO
+[...]
+"type": "ConsoleIO.Read",
+          "name": "ReadBlock",
+          "label": "Read Block Test",
+          "semantic_label": "read_block",
+          "config": {
+            "format_string": "{\n  char str [80];\n  int i;\n\n  printf (\"Enter your family name: \");\n  scanf (\"%79s\",str);  \n  printf (\"Enter your age: \");\n  scanf (\"%d\",&i);\n  printf (\"Mr. %s , %d years old.\\n\",str,i);\n    \n  return 0;\n}",
+            "destination_variables": []
+          },
+          "exits": [
+            {
+              "uuid": "a252e382-d51b-4f56-bd0a-61409aabf1fc",
+              "tag": "Default",
+              "label": "Default",
+              "default": true,
+              "config": {}
+            },
+            {
+              "uuid": "99ad7e39-4bc1-4a1f-9c07-d444db931188",
+              "tag": "Error",
+              "label": "Error",
+              "config": {}
+            } [...]
 ```
 

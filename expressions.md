@@ -8,9 +8,14 @@ Requirements:
 
 * Given a dictionary \(the context\) and a string expression, evaluates to a dictionary value and an error which can be null
 * Must allow easy variable substitutions within strings as this is the most common activity. ex: `Hi @contact.name`
-* Must solve the halting problem: we cannot let users build expressions which do not exit
-* Must not allow looping; these should be represented in the flows themselves. We don't want programs in expressions, the logic should be in the flow. Same goes for declaration of variables etc
-* Must allow for the vast majority of transformations users require, though we realize not all will be possible within an expression alone
+* Must solve halting problem, we cannot let users build expressions which do not exit
+* Must not allow looping, these should be represented in the flows themselves, we don't want programs
+
+  in expressions, the logic should be in the flow. Same goes for declaration of variables etc
+
+* Must allow for the vast majority of transformations users require, though we realize not all will be possible within
+
+  an expression alone
 
 ### Excellent - Excel Inspired Expressions
 
@@ -40,11 +45,10 @@ You can also join strings with the concatenate operator \(&\):
 
 Excellent will attempt to cast strings to the following types when used in functions:
 
-* **Strings**
-* **Number**: numeric \(including decimal\) values
-* **Datetimes**: \(ISO 8601\) or `dd-mm-yyyy HH:MM(:SS)` or `mm-dd-yyyy HH:MM(:SS)` or `mm-dd` or `dd-mm` or `mm-dd-yy` or `dd-mm-yy` \(environment will help with ambiguous cases\)
-* **Boolean**: `True` or `False` \(case insensitive\)
-* **Null value**: `NULL` \(case insensitive\)
+* Strings
+* Decimal values
+* Datetimes: \(ISO 8601\) or `dd-mm-yyyy HH:MM(:SS)` or `mm-dd-yyyy HH:MM(:SS)` or `mm-dd` or `dd-mm` or `mm-dd-yy` or `dd-mm-yy` \(environment will help with ambiguous cases\)
+* Boolean: True or False \(case insensitive\)
 
 #### Logical comparisons
 
@@ -54,13 +58,9 @@ A logical comparison is an expression which evaluates to TRUE or FALSE. These ma
 
 Note that when comparing text values, the equals \(=\) and not-equals \(&lt;&gt;\) operators are case-insensitive.
 
-The equality operator can be used to test against NULL, for example:
-
-* `contact.propertyThatIsNull = NULL` -&gt; `TRUE`
-
 ### Templating
 
-For templating, Expressions use the `@` character to denote either a single variable substitution or the beginning of an Excellent block. `@` was chosen as it is known how to type by a broad number of users regardless of keyboard. It does have the disadvantage of being used in email addresses and Twitter handles, but these are rarely ambiguous and escaping can be done easily via doubling of the character \(`@@`\).
+For templating, RapidPro uses the `@` character to denote either a single variable substitution or the beginning of an Excellent block. `@` was chosen as it is known how to type by a broad number of users regardless of keyboard. It does have the disadvantage of being used in email addresses and Twitter handles, but these are rarely ambiguous and escaping can be done easily via doubling of the character \(`@@`\).
 
 Functions are called by using the block syntax: `10 plus 4 is @(SUM(10, 4))` Within a block, `@` is not required to refer to variable in the context: `Hello @(contact.name)` A template can contain more than one substitution or block: `Hello @contact.name, you were born in @(YEAR(contact.birthday))`
 
@@ -327,53 +327,11 @@ Returns a numeric code for the first character in a text string
 
 Converts a text string to uppercase
 
-`Welcome @UPPER(contact)!`
+`WELCOME =UPPER(contact)!!`
 
 #### Excellent Specific Functions
 
 These functions are not found in Excel but have been provided for the sake of convenience.
-
-**BETWEEN\(testValue, minimum, maximum\)**
-
-Returns TRUE if `minimum <= testValue <= maximum`. This is intended to simplify common use-cases such as:
-
-`@(AND(DATEVALUE(‘2020-01-15’) >= DATEVALUE(‘2020-01-01’), DATEVALUE(‘2020-01-15’) <= DATEVALUE(‘2020-01-30’)))`
-
-to
-
-`@(BETWEEN(DATEVALUE(‘2020-01-15’), DATEVALUE(‘2020-01-01’), DATEVALUE(‘2020-01-30’))`
-
-**CONTAINS\(needle, haystack\)**
-
-Returns TRUE if a given string `needle` is contained within another string `haystack`. 
-
-Example: 
-
-`@(CONTAINS(‘foo’, ‘foobar’))` // result = TRUE 
-
-`@(CONTAINS(‘baz’, ‘foobar’))` // result = FALSE
-
-**IN\(testValue, arrayValue\)**
-
-Returns true if `testValue` is found within the constructed array `arrayValue`. Note: This function depends on the `ARRAY()` functionality.
-
-Example: 
-
-`@(IN(‘foo’, ARRAY(‘bar’, ‘foo’)))` // result = TRUE 
-
-`@(IN(‘foo’, ARRAY(‘foobar’, ‘bar’)))` // result = FALSE
-
-**ARRAY\(arg1, arg2, ... argN\)**
-
-Constructs an array datatype from a variable list of arguments, for use in other functions \(including `IN()`, `COUNT()`\)
-
-**COUNT\(arrayValue\)**
-
-Counts the number of items in a constructed array. This function depends on the `ARRAY()` functionality.
-
-Example:
-
-`@(COUNT(ARRAY(‘foo’, ‘bar’)))` // result = 2
 
 **FIRST\_WORD\(text\)**
 
@@ -417,13 +375,13 @@ Returns the number of words in the given text string. If by\_spaces is specified
 
 Extracts a substring of the words beginning at start, and up to but not-including stop. If stop is omitted then the substring will be all words from start until the end of the text. If stop is a negative number, then it is treated as count backwards from the end of the text. If by\_spaces is specified and is TRUE then the function splits the text into words only by spaces. Otherwise the text is split by punctuation characters as well
 
-`@WORD_SLICE("Excellent expressions are fun", 2, 4)` will return 2nd and 3rd words "expressions are"
+`@WORD_SLICE("RapidPro expressions are fun", 2, 4)` will return 2nd and 3rd words "expressions are"
 
-`@WORD_SLICE("Excellent expressions are fun", 2)` will return "expressions are fun"
+`@WORD_SLICE("RapidPro expressions are fun", 2)` will return "expressions are fun"
 
-`@WORD_SLICE("Excellent expressions are fun", 1, -2)` will return "Excellent expressions"
+`@WORD_SLICE("RapidPro expressions are fun", 1, -2)` will return "RapidPro expressions"
 
-`@WORD_SLICE("Excellent expressions are fun", -1)` will return "fun"
+`@WORD_SLICE("RapidPro expressions are fun", -1)` will return "fun"
 
 #### Type Checking Functions
 
@@ -431,17 +389,17 @@ Extracts a substring of the words beginning at start, and up to but not-includin
 
 Returns TRUE if the argument is a number.
 
-`@ISNUMBER(contact.age)` will return TRUE if the contact's age is a number.
+`@ISNUMBER(contact.age)`  will return TRUE if the contact's age is a number.
 
 **ISBOOL\(arg\)**
 
 Returns TRUE if the argument is a boolean.
 
-`@ISBOOL(block.value)` will return TRUE if the block returned a boolean value.
+`@ISBOOL(block.value)`  will return TRUE if the block returned a boolean value.
 
 **ISSTRING\(arg\)**
 
 Returns TRUE if the argument is a string.
 
-`@ISSTRING(contact.name)` will return TRUE if the contact's name is a string.
+`@ISSTRING(contact.name)`  will return TRUE if the contact's name is a string.
 

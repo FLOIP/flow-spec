@@ -179,7 +179,15 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
 ### Example
 
 ```text
-TODO
+    [...]
+    "type": "Core\\RunFlow",
+    "name": "RunAnotherFlow",
+    "label": "Another Flow",
+    "semantic_label": "another_flow",
+    "config": {
+      "flow_id": "ea5d7659-16cd-4e9a-86dc-28398cb41aed"
+    },
+    "exits": [...]
 ```
 
 ## Output Block
@@ -236,7 +244,23 @@ The `property_key` is a string attribute within the context of the Contact, and 
 ### Example
 
 ```text
-TODO
+{
+    "type": "Core.SetContactProperty",
+    "name": "ContactPBlock",
+    "label": "Test Contact Property",
+    "semantic_label": null,
+    "property_key": "gender",
+    "property_value": "male",
+    "exits": [
+      {
+        "uuid": "15e38cd1-0ed1-49ce-93d3-96b9e33a965a",
+        "tag": "Default",
+        "label": "Default",
+        "default": true,
+        "config": {}
+      }
+    ]
+}
 ```
 
 ## Set Group Membership
@@ -264,6 +288,23 @@ The `group_key` is a string and is not further restricted by the spec. For compl
 ### Example
 
 ```text
-TODO
+{
+    "type": "Core.SetGroupMembership",
+    "name": "ContactGMBlock",
+    "label": "Test Group Membership",
+    "semantic_label": null,
+    "group_key": "7294",
+    "group_name": "Healthcare workers",
+    "is_member": true,
+    "exits": [
+      {
+        "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
+        "tag": "Default",
+        "label": "Default",
+        "default": true,
+        "config": {}
+      }
+    ]
+  }
 ```
 
