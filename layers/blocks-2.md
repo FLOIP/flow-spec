@@ -8,6 +8,7 @@ _Namespace_: `MobilePrimitives`
 
 * [Message Block](blocks-2.md#message-block)
 * [Select One Response \(Multiple Choice Question\) Block](blocks-2.md#select-one-response-multiple-choice-question-block)
+* [Select Many Responses \(Multiple Choice Question\) Block](blocks-2.md#select-many-responses-multiple-choice-question-block)
 * [Numeric Response Block](blocks-2.md#numeric-response-block)
 * [Open Response \(Open-ended Question\) Block](blocks-2.md#open-response-open-ended-question-block)
 
@@ -15,9 +16,9 @@ _Namespace_: `MobilePrimitives`
 
 * Type: `MobilePrimitives.Message`
 * Suggested number of exits: 1
-* Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
-This block presents a single message to the contact. The form of the message can depend on the channel: e.g. a voice recording for the `ivr` channel, and text for the `text` channel.
+This block presents a single message to the contact. The form of the message can depend on the channel: e.g. a voice recording for the `IVR` channel, and text for the `TEXT` channel.
 
 ### Block `config`
 
@@ -27,10 +28,10 @@ This block presents a single message to the contact. The form of the message can
 
 ### Detailed behaviour by mode
 
-* `text` \(SMS\): Sends `message` as an SMS to the contact.
-* `text` \(USSD\): Displays `message` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
-* `ivr`: Plays `message` to the contact.
-* `rich_messaging`: Display `message` within the conversation with the contact. Optionally, platforms may attach the audio from the `message` resource \(if provided\) so that the contact can choose to play it.
+* `SMS` \(SMS\): Sends `message` as an SMS to the contact.
+* `USSD` \(USSD\): Displays `message` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
+* `IVR`: Plays `message` to the contact.
+* `RICH_MESSAGING`: Display `message` within the conversation with the contact. Optionally, platforms may attach the audio from the `message` resource \(if provided\) so that the contact can choose to play it.
 * `offline`: Display `message` within the session with the contact.
 
 ### Output behaviour
@@ -90,7 +91,7 @@ None \(TODO: Should the length of message listened be reported in variables, or 
 
 * Type: `MobilePrimitives.SelectOneResponse`
 * Suggested number of exits: 1 + error exit, or multiple based on choices
-* Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact must choose a single choice from a set of choices.
 
@@ -218,7 +219,7 @@ This block writes the tag of the selected choice to the output variable correspo
 
 * Type: `MobilePrimitives.SelectManyResponses`
 * Suggested number of exits: 1 + error exit, or multiple based on choices
-* Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact can select from zero to many options from a set of choices.
 
@@ -256,7 +257,7 @@ This block writes an array of tags of the selected choices to the output variabl
     "label": "Ice Cream",
     "semantic_label": "multiple_ice_cream",
     "exits": [...]
-    
+
     "config": {
       "prompt": "9072902c-cc99-4586-921b-99a348835981",
       "question_prompt": "2875befb-543a-4362-a5fd-6a5380f7db9c",
@@ -322,7 +323,7 @@ This block writes an array of tags of the selected choices to the output variabl
 
 * Type: `MobilePrimitives.NumericResponse`
 * Suggested number of exits: 1 + error exit, or multiple based on ranges of interest
-* Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains a numeric response from the contact.
 
@@ -402,7 +403,7 @@ This block writes the numeric value received to the output variable correspondin
 
 * Type: `MobilePrimitives.OpenResponse`
 * Suggested number of exits: 1 + error exit, or multiple based on patterns of interest
-* Supported channels: `ivr`, `text`, `rich_messaging`, `offline`
+* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains an open-ended response from the contact. Dependent on the channel, this is a text response, audio recording, or other type of media recording \(e.g. video\).
 
