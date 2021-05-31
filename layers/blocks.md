@@ -45,23 +45,34 @@ e.g.,
 ### Example
 
 ```text
-{
-  "type": "Core.Log",
-  "name": "LogBlock",
-  "label": "Test Log Block",
-  "semantic_label": null,
-  "exits": [
-    {
-      "uuid": "572f6e0d-6fd7-42f2-b5d4-fdcce49a1a12",
-      "tag": "Default",
-      "label": "Default",
-      "default": true,
-      "config": {}
-    }
-  ],
-  "config": {
-    "message": "bdd02d17-2baa-428e-8159-8d075b571d2d"
-  }
+"blocks": [{
+"uuid": "752cc329-0fa9-47c9-8441-eaef61b02588",
+"platform_metadata": {
+	"io_viamo": {
+		"ui_data": {
+			[...]
+		}
+	}
+},
+"type": "Core\\Log",
+"name": "LogBlock",
+"label": "Test Log Block",
+"semantic_label": "Test Log Block",
+"exits": [{
+	"uuid": "572f6e0d-6fd7-42f2-b5d4-fdcce49a1a12",
+	"tag": "Default",
+	"label": "Default",
+	"default": true,
+	"config": {}
+}],
+"config": {
+	"message": "bdd02d17-2baa-428e-8159-8d075b571d2d"
+}
+}],
+"first_block_id": "752cc329-0fa9-47c9-8441-eaef61b02588"
+}
+],
+"resources": [...]
 }
 ```
 
@@ -97,7 +108,8 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 ### Example
 
 ```text
-[...]
+{
+    [...]
       "type": "Core\\Case",
       "name": "CaseBlockExample",
       "label": "Patient Age",
@@ -119,6 +131,25 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
           "config": {},
           "destination_block": "7e0cded0-4bb2-49d7-8001-8eedd9d14f3b"
         },
+        {
+          "uuid": "4cfbab2d-132e-4583-8974-85424bff2424",
+          "tag": "",
+          "test": "",
+          "label": "76c8a31d-16d1-4d3c-8500-308aeadbe581",
+          "config": {}
+        }
+      ]
+    },
+    {
+      "uuid": "54ccfd77-a798-45b7-89e6-792883a243a3",
+      "platform_metadata": {
+        "io_viamo": {
+          "ui_data": {
+            "x_position": 1117,
+            "y_position": 205
+          }
+        }
+      }
 ```
 
 ## Run Another Flow Block
@@ -148,17 +179,10 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
 ### Example
 
 ```text
-    [...]
-    "type": "Core\\RunFlow",
-    "name": "RunAnotherFlow",
-    "label": "Another Flow",
-    "semantic_label": "another_flow",
-    "config": {
-      "flow_id": "ea5d7659-16cd-4e9a-86dc-28398cb41aed 
-"
-    },
-    "exits": [...]
+TODO
 ```
+
+## Output Block
 
 * Type: `Core.Output`
 * Suggested number of exits: 1
