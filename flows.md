@@ -256,10 +256,15 @@ The required keys for a Block are:
 | `name` \(string, word-characters only\) | A human-readable "variable name" for this block. This must be restricted to word characters so that it can be used as a variable name in expressions. When blocks write results output, they write to a variable corresponding the `name` of the block. |
 | `label` \(string, optional\) | A human-readable free-form description for this Block. |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Gender finding"\) |
-| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `tags` \(array\) | an arbitrary list of strings representing categories pertinent to this block's content |
+| `vendor_metadata` \(object\) | A set of key-value records that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `ui_metadata` | A set of key-value records that is populated with two entries: |
+| `ui_metadata.canvas_coordinates.{x,y}`              | Coordinates indicating location of this block on Flow Builder's canvas |
+| `ui_metadata.invalid_response_exit_behaviour`       | Behaviour when handling an invalid response, can be one of two modes which will surface to the user on Flow builder as having the block's default exit visible or not. `'end_call'` mode will hide the default exit from this block which forces the flow to end when an invalid response is received. `'continue_through_default'` mode will surface the default exit on this block, allowing the user to connect it to another block to continue the flow. |
 | `type` \(string\) | A specific string designating the type or "subclass" of this Block. This must be one of the Block type names within the specification, such as `Core.RunFlow` or `MobilePrimitives.Message`. |
 | `config` \(object\) | Additional parameters that are specific to the type of the block. Details are provided within the Block documentation. |
 | `exits` \(array\) | a list of all the exits for the block. Exits must contain the required keys below, and can contain additional keys based on the Block type |
+
 
 #### Exit node specification
 
