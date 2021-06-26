@@ -4,11 +4,11 @@ A container and data format for describing the _content and logic of digital int
 
 Flows represent a collection of actions \("Blocks"\) and the decision-making logic that links Blocks together into a flowchart-like description of an interactive mobile service, business process, or anything else that can be modelled as programmatic flow-chart.
 
-| Authors | Mark Boots \(VOTO Mobile\)  Peter Lubell-Doughtie \(Ona\)  Eduardo Jezierski \(InSTEDD\)  Gustavo Giráldez \(InSTEDD\)  Evan Wheeler \(UNICEF\) |
+| Authors | Mark Boots \(Viamo\)  Peter Lubell-Doughtie \(Ona\)  Eduardo Jezierski \(InSTEDD\)  Gustavo Giráldez \(InSTEDD\)  Evan Wheeler \(UNICEF\) |
 | :--- | :--- |
 | Media Type | TODO: once registered: application/vnd.org.flowinterop.flows+json |
-| Version | 1.0.0-rc.1 |
-| Last updated | 2019-03-16 |
+| Version | 1.0.0-rc.2 |
+| Last updated | 2021-06-26 |
 | Created | 2016-09-10 |
 |  |  |
 
@@ -22,7 +22,7 @@ Flows are a modern paradign for describing the logic of digital information syst
 
 ### Who is working on this?
 
-This is an initial collaboration between makers of Flow-like platforms and supporting tools: Nyaruka, InSTEDD, Ona, and VOTO Mobile. UNICEF and USAID are providing guidance and input. The project received initial funding from USAID. We intend that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations. For more information on how to contribute, see [Project Charter and Governance Rules](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/charter.md).
+This is an initial collaboration between makers of Flow-like platforms and supporting tools: Nyaruka, InSTEDD, Ona, and Viamo. UNICEF and USAID are providing guidance and input. The project received initial funding from USAID. We intend that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations. For more information on how to contribute, see [Project Charter and Governance Rules](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/charter.md).
 
 ## Specification - Table of Contents
 

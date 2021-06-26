@@ -6,7 +6,7 @@ The purpose of the project is to enable useful interoperability between Flow-bas
 
 ## Members
 
-The initial collaborating organisations are Nyaruka, InSTEDD, Ona, and VOTO Mobile.  UNICEF and USAID are providing guidance and input.  The project received initial funding from USAID. We recognize and hope that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations.
+The initial collaborating organisations are Nyaruka, InSTEDD, Ona, and Viamo.  UNICEF and USAID are providing guidance and input.  The project received initial funding from USAID. We recognize and hope that this project will outlast USAID funding and grow beyond the initial set of collaborating organisations.
 
 ## Scope
 
