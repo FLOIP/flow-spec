@@ -83,7 +83,7 @@ This block can be configured to have a single exit, or a number of exits with po
 * `IVR`: Play the prompt, according to the prompt configuration in `config` above, then wait to capture the DTMF response.  \(Timeout or invalid response: proceed through the default exit.\)
   * When `question_prompt` is provided, `prompt` is ignored, and the prompt presented to the contact is generated as follows:
     * "What is your favorite kind of ice cream?" "For chocolate," "Press 1". "For vanilla", "Press 2".  "For strawberry," "Press 3".
-    * `<question_prompt>` `<choices["chocolate"]>``<digit_prompts[0]>` `<choices["vanilla"]>``<digit_prompts[1]>` `<choices["strawberry"]>``<digit_prompts[2]>`
+    * `<question_prompt>`    `<choices["chocolate"]>` `<digit_prompts[0]>`    `<choices["vanilla"]>` `<digit_prompts[1]>`    `<choices["strawberry"]>` `<digit_prompts[2]>`
 * `RICH_MESSAGING`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  \(If displaying menu items, platforms should display only `question_prompt`.\) \(Timeout or invalid response: proceed through the default exit.\)
 * `OFFLINE`: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to capture a menu selection.
 
@@ -163,7 +163,7 @@ This block can be configured to have a single exit, or a number of exits with po
 * `IVR`: Play the prompt, according to the prompt configuration in `config` above, then wait to capture multiple DTMF responses. Implementations may choose to optimize the user experience for additional guidance on answering multiple options.  \(Timeout or invalid response: proceed through the default exit.\)
   * When `question_prompt` is provided, `prompt` is ignored, and the prompt presented to the contact is generated as follows:
     * "What is your favorite kind of ice cream?" "For chocolate," "Press 1". "For vanilla", "Press 2".  "For strawberry," "Press 3".
-    * `<question_prompt>` `<choices["chocolate"]>``<digit_prompts[0]>` `<choices["vanilla"]>``<digit_prompts[1]>` `<choices["strawberry"]>``<digit_prompts[2]>`
+    * `<question_prompt>`    `<choices["chocolate"]>` `<digit_prompts[0]>`    `<choices["vanilla"]>` `<digit_prompts[1]>`    `<choices["strawberry"]>` `<digit_prompts[2]>`
 * `RICH_MESSAGING`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  \(If displaying menu items, platforms should display only `question_prompt`.\) \(Timeout or invalid response: proceed through the default exit.\)
 * `OFFLINE`: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to receive a menu confirmation.
 
