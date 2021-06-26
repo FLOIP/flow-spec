@@ -1,6 +1,6 @@
 # Layer 3: Mobile Primitives
 
-Layer 3 contains the specification for I/O blocks that represent discrete single actions, that have direct analogues across several channels used in mobile messaging \(e.g. IVR, SMS, USSD\). Support for this layer should be implemented by all engines that target the `IVR`, `TEXT` \(SMS and USSD\), and `RICH_MESSAGING` channels. These blocks may make use of the [Expression Specification](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/expressions.md) for generating output. Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
+Layer 3 contains the specification for I/O blocks that represent discrete single actions, that have direct analogues across several channels used in mobile messaging \(e.g. IVR, SMS, USSD\). Support for this layer should be implemented by all engines that target the `IVR`, `TEXT` \(SMS and USSD\), and `RICH_MESSAGING` modes. These blocks may make use of the [Expression Specification](expressions.md) for generating output. Higher levels may make use of embedded Layer 3 primitives to describe more advanced functionality.
 
 _Namespace_: `MobilePrimitives`
 
@@ -16,9 +16,9 @@ _Namespace_: `MobilePrimitives`
 
 * Type: `MobilePrimitives.Message`
 * Suggested number of exits: 1
-* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
+* Supported modes: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
-This block presents a single message to the contact. The form of the message can depend on the channel: e.g. a voice recording for the `IVR` channel, and text for the `TEXT` channel.
+This block presents a single message to the contact. The form of the message can depend on the mode: e.g. a voice recording for the `IVR` mode, and text for the `TEXT` mode.
 
 ### Block `config`
 
@@ -36,61 +36,27 @@ This block presents a single message to the contact. The form of the message can
 
 ### Output behaviour
 
-None \(TODO: Should the length of message listened be reported in variables, or only be part of the detailed flow interaction logs?\)
+None
 
 ### Example
 
 ```text
-[...]
-            "type": "MobilePrimitives.Message",
-            "name": "welcome_message",
-            "label": "Welcome Message",
-            "exits": [...]
-        "first_block_id": "cf1da5f5-2999-4b81-a9f5-bdcad860c49d"
-      }
-    ],
-    "resources": [...]
-          {
-            "language_id": "22",
-            "content_type": "TEXT",
-            "modes": [
-              "SMS"
-            ],
-            "value": "Happy Monday! Welcome to your 'beginning of the week' survey!"
-          },
-          {
-            "language_id": "22",
-            "content_type": "AUDIO",
-            "modes": [
-              "IVR"
-            ],
-            "value": "mondayblues.mp3"
-          },
-          {
-            "language_id": "22",
-            "content_type": "TEXT",
-            "modes": [
-              "RICH_MESSAGING"
-            ],
-            "value": "Happy Monday! Welcome to your 'beginning of the week' survey!"
-          },
-          {
-            "language_id": "22",
-            "content_type": "TEXT",
-            "modes": [
-              "OFFLINE"
-            ],
-            "value": "Happy Monday! Welcome to your 'beginning of the week' survey!"
-          }
-        ]
-[...]]
+{
+  "type": "MobilePrimitives.Message",
+  "name": "welcome_message",
+  "label": "Welcome Message",
+  "exits": [...]
+  "config": {
+    "prompt": "42095857-6782-425d-809b-4226c4d53d4d"
+  }
+}
 ```
 
 ## Select One Response \(Multiple Choice Question\) Block
 
 * Type: `MobilePrimitives.SelectOneResponse`
 * Suggested number of exits: 1 + default exit (used in case of error or invalid input), or multiple exits based on choices
-* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
+* Supported modes: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact must choose a single choice from a set of choices.
 
@@ -98,18 +64,26 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 
 | Key | Description |
 | :--- | :--- |
-| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What is your favorite kind of ice-cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." |
-| `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice-cream?". If included, blocks must also provide `choices_prompt` and omit `prompt`. |
-| `choices_prompt` \(array of resources, optional, required by `question_prompt`\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." |
-| `choices` \(mapping of choice tags to choice resources\) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`. |
+| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What is your favorite kind of ice cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." |
+| `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice cream?". If included, blocks must provide suitable resources within `choices` to present the choices on each supported mode. For the `IVR` mode, they must also provide `digit_prompts`. |
+| `choices` \(mapping of choice tags to choice name resources\) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`. |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
+#### Channel-specific `config`:
+
+| Key | Description |
+| :--- | :--- |
+| `IVR`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
+
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
 
 ### Detailed behaviour by mode
 
 * `TEXT` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture a response. \(Lack a response after the flow's configured `timeout`, or an invalid response: proceed through the default exit.\)
 * `TEXT` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture the menu response. \(Dismissal of the session, timeout, or invalid response: proceed through the default exit.\)
 * `IVR`: Play the prompt, according to the prompt configuration in `config` above, then wait to capture the DTMF response.  \(Timeout or invalid response: proceed through the default exit.\)
+  * When `question_prompt` is provided, `prompt` is ignored, and the prompt presented to the contact is generated as follows:
+    * "What is your favorite kind of ice cream?" "For chocolate," "Press 1". "For vanilla", "Press 2".  "For strawberry," "Press 3".
+    * `<question_prompt>` `<choices["chocolate"]>``<digit_prompts[0]>` `<choices["vanilla"]>``<digit_prompts[1]>` `<choices["strawberry"]>``<digit_prompts[2]>`
 * `RICH_MESSAGING`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  \(If displaying menu items, platforms should display only `question_prompt`.\) \(Timeout or invalid response: proceed through the default exit.\)
 * `OFFLINE`: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to capture a menu selection.
 
@@ -120,7 +94,6 @@ This block writes the tag of the selected choice to the output variable correspo
 ### Example
 
 ```text
-[...]
 {
   "type": "MobilePrimitives.SelectOneResponse",
   "name": "favorite_ice_cream",
@@ -146,8 +119,9 @@ This block writes the tag of the selected choice to the output variable correspo
     }
     {
       "uuid": "78012084-b811-4177-88ea-5de5d3eba57d",
-      "name": "Default",
       "default": true,
+      "label": "10a11345-9575-4e4a-bf61-0e04758626e7",
+      "name": "Default",
     },
   ],
   "config": {
@@ -166,7 +140,7 @@ This block writes the tag of the selected choice to the output variable correspo
 
 * Type: `MobilePrimitives.SelectManyResponses`
 * Suggested number of exits: 1 + default exit (used in case of error or invalid input), or multiple exits based on choices
-* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
+* Supported modes: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact can select from zero to many options from a set of choices.
 
@@ -174,20 +148,22 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 
 | Key | Description |
 | :--- | :--- |
-| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What kinds of ice-cream do you like: chocolate, vanilla, strawberry? Select all that apply." |
-| `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What kinds of ice-cream do you like?". If included, blocks must also provide `choices_prompt` and omit `prompt`. |
-| `choices_prompt` \(array of resources, optional, required by `question_prompt`\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "chocolate, vanilla, strawberry" |
-| `choices` \(mapping of choice tags to choice resources\) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`. |
+| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What kinds of ice cream do you like: chocolate, vanilla, strawberry? Select all that apply." |
+| `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice cream?". If included, blocks must provide suitable resources within `choices` to present the choices on each supported mode. For the `IVR` mode, they must also provide `digit_prompts`. |
+| `choices` \(mapping of choice tags to choice name resources\) | This is a mapping of tags to localized names for choices, describing each choice in the multiple-choice set, e.g. `{"chocolate":[chocolate-resource], "vanilla":[vanilla-resource] , "strawberry":[strawberry-resource]}`. |
 | `minimum_choices` \(integer, optional\) | The minimum number of choices the Contact must select to proceed. Default if not provided: 0. |
 | `maximum_choices` \(integer, optional\) | The maximum number of choices the Contact can select. Default if not provided: unlimited \(ie: the total number of `choices`\). |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
 
 ### Detailed behaviour by mode
 
 * `TEXT` \(SMS\): Send an SMS with the prompt text, according to the prompt configuration in `config` above, and wait to capture multiple responses. \(Lack of the right number of responses after the flow's configured `timeout`, or an invalid response: proceed through the default exit.\)
 * `TEXT` \(USSD\): Display a USSD menu prompt with the prompt text, according to the prompt configuration in `config` above, then wait to capture text describing multiple choices. \(Dismissal of the session, timeout, or invalid response: proceed through the default exit.\)
 * `IVR`: Play the prompt, according to the prompt configuration in `config` above, then wait to capture multiple DTMF responses. Implementations may choose to optimize the user experience for additional guidance on answering multiple options.  \(Timeout or invalid response: proceed through the default exit.\)
+  * When `question_prompt` is provided, `prompt` is ignored, and the prompt presented to the contact is generated as follows:
+    * "What is your favorite kind of ice cream?" "For chocolate," "Press 1". "For vanilla", "Press 2".  "For strawberry," "Press 3".
+    * `<question_prompt>` `<choices["chocolate"]>``<digit_prompts[0]>` `<choices["vanilla"]>``<digit_prompts[1]>` `<choices["strawberry"]>``<digit_prompts[2]>`
 * `RICH_MESSAGING`: Display the prompt text according to the prompt configuration in `config` above. Platforms may wait to capture a text response, or display rich menu items for each choice and wait to capture a menu choice.  \(If displaying menu items, platforms should display only `question_prompt`.\) \(Timeout or invalid response: proceed through the default exit.\)
 * `OFFLINE`: Display the prompt text according to `question_prompt`, and a menu of items for all `choices`. Wait to receive a menu confirmation.
 
@@ -220,7 +196,7 @@ This block writes an array of tags of the selected choices to the output variabl
 
 * Type: `MobilePrimitives.NumericResponse`
 * Suggested number of exits: 1 + default exit (used in case of error or invalid input), or multiple based on ranges of interest
-* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
+* Supported modes: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains a numeric response from the contact.
 
@@ -238,7 +214,7 @@ This block obtains a numeric response from the contact.
 | :--- | :--- |
 | `IVR`: `max_digits` \(number\) | After receiving this many digits, do not wait for any more; accept the digits entered so far as the complete response. |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
+This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
 
 ### Detailed behaviour by mode
 
@@ -276,9 +252,9 @@ This block writes the numeric value received to the output variable correspondin
 
 * Type: `MobilePrimitives.OpenResponse`
 * Suggested number of exits: 1 + default exit (used in case of error or invalid input), or multiple based on patterns of interest
-* Supported channels: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
+* Supported modes: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
-This block obtains an open-ended response from the contact. Dependent on the channel, this is a TEXT response, audio recording, or other type of media recording \(e.g. video\).
+This block obtains an open-ended response from the contact. Dependent on the mode, this is a TEXT response, audio recording, or other type of media recording \(e.g. video\).
 
 ### Block `config`
 
@@ -308,7 +284,7 @@ This block obtains an open-ended response from the contact. Dependent on the cha
 | `IVR`: `max_duration_seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
 | `TEXT`: `max_response_characters` \(number, optional\) | The maximum number of characters to prompt for and accept. \(If not provided, no limit.\) |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](https://github.com/FLOIP/flow-spec/blob/s3/mobile-primitives/fundamentals/flows.md#blocks).
+This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
 
 ### Detailed behaviour by mode
 
@@ -320,9 +296,7 @@ This block can be configured to have a single exit, or a number of exits with po
 
 ### Output behaviour
 
-For `TEXT`, `OFFLINE`, and `RICH_MESSAGING` channels that capture a text response, this block writes the text received to the output variable corresponding to the `name` of the block. For responses captured as media \(`IVR`, `RICH_MESSAGING`\) the ID of the recording is written. \(For more information on standards for IDs of recordings, see [Captured Media Recording IDs](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/layer3/TODO/README.md).\)
-
-TODO: Do we want to capture the length of the recording other than in the detailed flow interaction log?
+For `TEXT`, `OFFLINE`, and `RICH_MESSAGING` modes that capture a text response, this block writes the text received to the output variable corresponding to the `name` of the block. For responses captured as media \(`IVR`, `RICH_MESSAGING`\) the ID or URL of the recording is written.
 
 ### Example
 
