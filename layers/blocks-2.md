@@ -153,9 +153,9 @@ This block writes the tag of the selected choice to the output variable correspo
   "config": {
     "prompt": "42095857-6782-425d-809b-4226c4d53d4d",
     "choices": {
-      "1": "66623eff-fd17-4996-8edd-e41be3804bc8",
-      "2": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
-      "3": "b75fa302-8ff7-4f49-bf26-8f915e807222"
+      "chocolate": "66623eff-fd17-4996-8edd-e41be3804bc8",
+      "vanilla": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
+      "strawberry": "b75fa302-8ff7-4f49-bf26-8f915e807222"
     }
   }
 }
