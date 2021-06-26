@@ -1,7 +1,7 @@
 # Layer 4: Smart Devices
 
 Layer 4 contains the specifications for blocks that represent functionality specific to using a flow player on a smart device \(e.g. smart phone, tablet\).  
-Support for this layer should be implemented by all engines that target the `offline` channel. These blocks may make use of the [Expression Specification](../expressions.md) for generating output.
+Support for this layer should be implemented by all engines that target the `OFFLINE` channel. These blocks may make use of the [Expression Specification](../expressions.md) for generating output.
 
 Namespace: `SmartDevices`
 
@@ -13,8 +13,8 @@ Namespace: `SmartDevices`
 ## Location Response \(GPS\) Block
 
 * Type: `SmartDevices\LocationResponse`
-* Suggested number of exits: 1 + error exit
-* Supported channels: `offline`, `rich_messaging`
+* Suggested number of exits: 1 + default exit (used in case of error or invalid input)
+* Supported channels: `OFFLINE`, `RICH_MESSAGING`
 
 This block allows a device user to capture a location on a map, e.g. using a GPS device, or by manual selection.
 
@@ -27,8 +27,8 @@ This block allows a device user to capture a location on a map, e.g. using a GPS
 
 ### Detailed Behaviour
 
-* `offline`: This block first queries the device's in-built GPS capability to return the current GPS location of the device. If the device is not GPS capable, the block presents the user with a map and waits for them to choose their location.  If the device is GPS capable but location services are disabled, the device may prompt the user to enable location services. This block then waits to receive a location via manual selection or from the location service that meets the accuracy threshold.  \(No selection provided or unable to capture the required accuracy: proceed through the error exit.\)
-* `rich_messaging`: This block prompts the Contact for permission to access their location from their device, or choose a location manually, and waits for a compatible response. \(No selection provided or unable to capture the required accuracy: proceed through the error exit.\)
+* `OFFLINE`: This block first queries the device's in-built GPS capability to return the current GPS location of the device. If the device is not GPS capable, the block presents the user with a map and waits for them to choose their location.  If the device is GPS capable but location services are disabled, the device may prompt the user to enable location services. This block then waits to receive a location via manual selection or from the location service that meets the accuracy threshold.  \(No selection provided or unable to capture the required accuracy: proceed through the default exit.\)
+* `RICH_MESSAGING`: This block prompts the Contact for permission to access their location from their device, or choose a location manually, and waits for a compatible response. \(No selection provided or unable to capture the required accuracy: proceed through the default exit.\)
 
 ### Output behaviour
 
@@ -53,8 +53,8 @@ TODO
 ## Photo Response Block
 
 * Type: `SmartDevices\PhotoResponse`
-* Suggested number of exits: 1 + error exit
-* Supported channels: `offline`
+* Suggested number of exits: 1 + default exit (used in case of error or invalid input)
+* Supported channels: `OFFLINE`
 
 ### Block `config`
 
@@ -64,7 +64,7 @@ TODO
 
 ### Detailed Behaviour
 
-* `offline`, `rich_messaging`: This block first prompts the user to activate the camera on the device and waits for the user to take a picture, or select a saved picture on the device. \(No picture selected or captured: proceed through the error exit.\)
+* `OFFLINE`, `RICH_MESSAGING`: This block first prompts the user to activate the camera on the device and waits for the user to take a picture, or select a saved picture on the device. \(No picture selected or captured: proceed through the default exit.\)
 
 ### Output behaviour
 

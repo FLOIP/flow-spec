@@ -130,7 +130,7 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 ## Run Another Flow Block
 
 * Type: `Core.RunFlow`
-* Suggested number of exits: 1 + error exit
+* Suggested number of exits: 1 + default exit (used in case of error or invalid input)
 * Supported channels: all
 
 This block starts and runs another Flow, and returns execution to the current Flow when finished.
