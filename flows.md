@@ -312,21 +312,19 @@ The `property_key` is a string attribute within the context of the Contact, and 
    "exits": [
       {
          "uuid": "3b5c4568-6f8e-43d8-9c23-e0f444c9fd26",
-         "tag": "Default",
+         "name": "default",
          "label": "Default",
          "default": true,
          "config": {},
          "destination_block": "80a8a17e-2438-454b-b2f0-4b64fd06d700"
-      },
-      {
-         "uuid": "c834028d-0646-431e-9d30-33a0f5388073",
-         "tag": "Error",
-         "label": "Error",
-         "config": {}
       }
    ],
    "config": {
       "prompt": "d99f9833-ace6-4f7f-957e-0a516e3dbb47"
+      "set_contact_property": {
+         "property_key": "gender"
+         "property_value": "block.value"
+      }
    }
 }
 ```

@@ -74,7 +74,7 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 | :--- | :--- |
 | `IVR`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
 ### Detailed behaviour by mode
 
@@ -154,7 +154,7 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 | `minimum_choices` \(integer, optional\) | The minimum number of choices the Contact must select to proceed. Default if not provided: 0. |
 | `maximum_choices` \(integer, optional\) | The maximum number of choices the Contact can select. Default if not provided: unlimited \(ie: the total number of `choices`\). |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
 ### Detailed behaviour by mode
 
@@ -214,7 +214,7 @@ This block obtains a numeric response from the contact.
 | :--- | :--- |
 | `IVR`: `max_digits` \(number\) | After receiving this many digits, do not wait for any more; accept the digits entered so far as the complete response. |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
+This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
 ### Detailed behaviour by mode
 
@@ -284,7 +284,7 @@ This block obtains an open-ended response from the contact. Dependent on the mod
 | `IVR`: `max_duration_seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
 | `TEXT`: `max_response_characters` \(number, optional\) | The maximum number of characters to prompt for and accept. \(If not provided, no limit.\) |
 
-This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](flows.md#blocks).
+This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
 ### Detailed behaviour by mode
 

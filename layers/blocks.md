@@ -43,13 +43,12 @@ e.g.,
 ```text
 {
   "type": "Core.Log",
-  "name": "LogBlock",
+  "name": "test_log_block",
   "label": "Test Log Block",
-  "semantic_label": null,
   "exits": [
     {
       "uuid": "572f6e0d-6fd7-42f2-b5d4-fdcce49a1a12",
-      "tag": "Default",
+      "name": "Default",
       "label": "Default",
       "default": true,
       "config": {}
@@ -94,37 +93,32 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 
 ```text
 {
-    [...]
-      "type": "Core.Case",
-      "name": "CaseBlockExample",
-      "label": "Patient Age",
-      "semantic_label": "patient_age_logic",
-      "exits": [
-        {
-          "uuid": "4c0dd2c8-a08f-45f7-9bf6-82bbff3fa968",
-          "tag": "contact.patient_age <18",
-          "test": "contact.patient_age <18",
-          "label": "66c8ad7e-ea4a-4106-b704-434da2f568c7",
-          "config": {},
-          "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
-        },
-        {
-          "uuid": "8968deb6-c4f3-4163-b3fc-d518bea14332",
-          "tag": "contact.patient_age >18",
-          "test": "contact.patient_age >18",
-          "label": "a478eec5-2c40-4823-b7cb-b81a8ad39051",
-          "config": {},
-          "destination_block": "7e0cded0-4bb2-49d7-8001-8eedd9d14f3b"
-        },
-        {
-          "uuid": "4cfbab2d-132e-4583-8974-85424bff2424",
-          "tag": "",
-          "test": "",
-          "label": "76c8a31d-16d1-4d3c-8500-308aeadbe581",
-          "config": {}
-        }
-      ]
+  "type": "Core.Case",
+  "name": "patient_age_decision",
+  "label": "Patient Age Decision",
+  "exits": [
+    {
+      "uuid": "4c0dd2c8-a08f-45f7-9bf6-82bbff3fa968",
+      "name": "under_18",
+      "test": "contact.patient_age < 18",
+      "label": "66c8ad7e-ea4a-4106-b704-434da2f568c7",
+      "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
     },
+    {
+      "uuid": "8968deb6-c4f3-4163-b3fc-d518bea14332",
+      "name": "over_18",
+      "test": "contact.patient_age >= 18",
+      "label": "a478eec5-2c40-4823-b7cb-b81a8ad39051",
+      "destination_block": "7e0cded0-4bb2-49d7-8001-8eedd9d14f3b"
+    },
+    {
+      "uuid": "4cfbab2d-132e-4583-8974-85424bff2424",
+      "name": "default",
+      "default": true,
+      "label": "76c8a31d-16d1-4d3c-8500-308aeadbe581",
+    }
+  ]
+},
 ```
 
 ## Run Another Flow Block
@@ -220,18 +214,20 @@ The `property_key` is a string attribute within the context of the Contact, and 
 ```text
 {
     "type": "Core.SetContactProperty",
-    "name": "ContactPBlock",
+    "name": "test_contact_property",
     "label": "Test Contact Property",
-    "semantic_label": null,
-    "property_key": "gender",
-    "property_value": "male",
+    "config": {
+      "set_contact_property": {
+        "property_key": "gender",
+        "property_value": "male"
+      }
+    },
     "exits": [
       {
         "uuid": "15e38cd1-0ed1-49ce-93d3-96b9e33a965a",
-        "tag": "Default",
+        "name": "Default",
         "label": "Default",
         "default": true,
-        "config": {}
       }
     ]
 }
@@ -266,17 +262,17 @@ The `group_key` is a string and is not further restricted by the spec. For compl
     "type": "Core.SetGroupMembership",
     "name": "ContactGMBlock",
     "label": "Test Group Membership",
-    "semantic_label": null,
-    "group_key": "7294",
-    "group_name": "Healthcare workers",
-    "is_member": true,
+    "config": {
+      "group_key": "7294",
+      "group_name": "Healthcare workers",
+      "is_member": true,
+    },
     "exits": [
       {
         "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
-        "tag": "Default",
+        "name": "Default",
         "label": "Default",
         "default": true,
-        "config": {}
       }
     ]
   }
