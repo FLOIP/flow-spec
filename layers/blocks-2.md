@@ -47,7 +47,7 @@ None
   "label": "Welcome Message",
   "exits": [...]
   "config": {
-    "prompt": "42095857-6782-425d-809b-4226c4d53d4d"
+    "message": "42095857-6782-425d-809b-4226c4d53d4d"
   }
 }
 ```
