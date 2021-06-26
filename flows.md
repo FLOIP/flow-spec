@@ -41,19 +41,19 @@ ResourceValue {
 }
 
 SupportedContentType {
-  TEXT = 'text',
-  AUDIO = 'audio',
-  IMAGE = 'image',
-  VIDEO = 'video',
+  TEXT = 'TEXT',
+  AUDIO = 'AUDIO',
+  IMAGE = 'IMAGE',
+  VIDEO = 'VIDEO',
 }
 
 SupportedMode {
-  TEXT = 'text',
-  SMS = 'sms',
-  USSD = 'ussd',
-  IVR = 'ivr',
-  RICH_MESSAGING = 'rich_messaging',
-  OFFLINE = 'offline',
+  TEXT = 'TEXT',
+  SMS = 'SMS',
+  USSD = 'USSD',
+  IVR = 'IVR',
+  RICH_MESSAGING = 'RICH_MESSAGING',
+  OFFLINE = 'OFFLINE',
 }
 ```
 
@@ -65,22 +65,22 @@ for example,
    values: [
       {
          language_id: "eng",
-         modes: ["sms", "ussd"],
-         content_type: "text",
+         modes: ["SMS", "USSD"],
+         content_type: "TEXT",
          mime_type: "text/plain",
          value: "Howdy! You've reached the Museum of Interoperability!"
       },
       {
          language_id: "eng",
-         modes: ["rich_messaging"],
-         content_type: "text",
+         modes: ["RICH_MESSAGING"],
+         content_type: "TEXT",
          mime_type: "text/plain",
          value: "Howdy! You've reached the Museum of Interoperability! This is a long message for you because we've gone beyond the limitations for 180 characters. I'm your guide, Florian. I hope you're excited for this two hour tour through the history of interoperable data systems."
       },
       {
          language_id: "eng",
-         modes: ["rich_messaging"],
-         content_type: "image",
+         modes: ["RICH_MESSAGING"],
+         content_type: "IMAGE",
          mime_type: "image/png",
          value: "https://your-server-somewhere.flowinteroperability.org/example-image.png"
       }
@@ -210,12 +210,12 @@ A Flow represents a set of Blocks and their direct connections. The required key
 
 Possible modes for `supported_modes` are:
 
-* `text`: general text-based interactions. This includes SMS and USSD channels, which may have distinct behaviour while sharing the same content.
-* `sms`: content specific for SMS
-* `ussd`: content specific for USSD
-* `ivr`: content specific for interactive voice response
-* `rich_messaging`: content used for data channels that support multimedia including text, audio, images, and video, such as social network chatbots \(Facebook Messenger, WhatsApp, Twitter, Telegram, etc.\)
-* `offline`: content used for mobile apps designed to run offline without a data connection.
+* `TEXT`: general text-based interactions. This includes SMS and USSD channels, which may have distinct behaviour while sharing the same content.
+* `SMS`: content specific for SMS
+* `USSD`: content specific for USSD
+* `IVR`: content specific for interactive voice response
+* `RICH_MESSAGING`: content used for data channels that support multimedia including text, audio, images, and video, such as social network chatbots \(Facebook Messenger, WhatsApp, Twitter, Telegram, etc.\)
+* `OFFLINE`: content used for mobile apps designed to run offline without a data connection.
 
 #### Flow Example
 
@@ -228,9 +228,9 @@ Possible modes for `supported_modes` are:
    "interaction_timeout": 172800,
    "first_block_id": "08509fdf-2cd2-43a8-9627-011254d30aa7",
    "supported_modes": [
-      "sms",
-      "ussd",
-      "rich_messaging"
+      "SMS",
+      "USSD",
+      "RICH_MESSAGING"
    ],
    "languages": [
       {
