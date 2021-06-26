@@ -256,10 +256,14 @@ The required keys for a Block are:
 | `name` \(string, word-characters only\) | A human-readable "variable name" for this block. This must be restricted to word characters so that it can be used as a variable name in expressions. When blocks write results output, they write to a variable corresponding the `name` of the block. |
 | `label` \(string, optional\) | A human-readable free-form description for this Block. |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Gender finding"\) |
-| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `tags` \(array of strings\) | an arbitrary list of strings for categorization of the block's content, meaning, etc. This has a similar purpose to `semantic_label`, but the assumption is that many related blocks might have the same tags. |
+| `vendor_metadata` \(object\) | A set of key-value records that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `ui_metadata` \(object\) | A set of key-value records describing information about how blocks are displayed on a UI/flowchart editor: |
+| `ui_metadata.canvas_coordinates.{x,y}` \(numbers, optional\)              | Coordinates indicating location of this block on the Flow Builder's canvas |
 | `type` \(string\) | A specific string designating the type or "subclass" of this Block. This must be one of the Block type names within the specification, such as `Core.RunFlow` or `MobilePrimitives.Message`. |
 | `config` \(object\) | Additional parameters that are specific to the type of the block. Details are provided within the Block documentation. |
 | `exits` \(array\) | a list of all the exits for the block. Exits must contain the required keys below, and can contain additional keys based on the Block type |
+
 
 #### Exit node specification
 
@@ -269,7 +273,7 @@ Each exit node in `exits` must contain:
 | :--- | :--- |
 | `uuid` \(uuid\) | A globally unique identifier for this Exit |
 | `label` \(resource\) | This is the human-readable name of the exit \(as a translated resource\), which might be presented to a contact. |
-| `tag` \(string, word characters only\) | This is an identifier for the exit, suitable for use as a variable name in rolling up results \(e.g.: "male"\). It does not need to be unique within the block; multiple exits may be tagged the same. \(Some authoring tools may choose to auto-generate the tag from the label's primary language, to avoid usability problems with these getting out of sync.\) |
+| `name` \(string, word characters only\) | This is an identifier for the exit, suitable for use as a variable name in rolling up results \(e.g.: "male"\). \(Some authoring tools may choose to auto-generate the name based on the label's primary language, to avoid usability problems with these getting out of sync.\) |
 | `destination_block` \(uuid\) | This is the uuid of the Block this exit connects to. It can be null if the exit does not connect to a block \(if it is the final block\). |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Feminine Gender"\) |
 | `test` \(expression, optional\) | For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen. |
