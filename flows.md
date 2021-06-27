@@ -273,10 +273,10 @@ Each exit node in `exits` must contain:
 | Key | Description |
 | :--- | :--- |
 | `uuid` \(uuid\) | A globally unique identifier for this Exit |
-| `label` \(resource\) | This is the human-readable name of the exit \(as a translated resource\), which might be presented to a contact. |
-| `name` \(string, word characters only\) | This is an identifier for the exit, suitable for use as a variable name in rolling up results \(e.g.: "male"\). \(Some authoring tools may choose to auto-generate the name based on the label's primary language, to avoid usability problems with these getting out of sync.\) |
+| `name` \(string, word characters only\) | This is an identifier for the exit, suitable for use as a variable name in rolling up results \(e.g.: "male"\). \(Authoring tools may choose to auto-generate the name based on the `label` to keep these in sync.\) |
+| `label` \(string, optional\) | This is a human-readable label for the exit, expanding on `name` if desired. On flow layout displays, `name` is shown if `label` is not provided. |
 | `destination_block` \(uuid\) | This is the uuid of the Block this exit connects to. It can be null if the exit does not connect to a block \(if it is the final block\). |
-| `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Feminine Gender"\) |
+| `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this exit in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Feminine Gender"\) |
 | `test` \(expression, optional\) | For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen. |
 | `default` \(boolean, optional\) | If this key is present and true, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true..  |
 | `config` \(object\) | This contains additional information required for each mode supported by the block. Details are provided within the Block documentation |
