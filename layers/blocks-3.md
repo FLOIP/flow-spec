@@ -12,7 +12,7 @@ Namespace: `SmartDevices`
 
 ## Location Response \(GPS\) Block
 
-* Type: `SmartDevices\LocationResponse`
+* Type: `SmartDevices.LocationResponse`
 * Suggested number of exits: 1 + default exit (used in case of error or invalid input)
 * Supported channels: `OFFLINE`, `RICH_MESSAGING`
 
@@ -52,7 +52,7 @@ TODO
 
 ## Photo Response Block
 
-* Type: `SmartDevices\PhotoResponse`
+* Type: `SmartDevices.PhotoResponse`
 * Suggested number of exits: 1 + default exit (used in case of error or invalid input)
 * Supported channels: `OFFLINE`
 
