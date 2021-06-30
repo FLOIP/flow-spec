@@ -72,9 +72,9 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 Each choice in `choices` has the following elements:
 | Key | Description |
 | :--- | :--- |
-| `name` \(string, word characters only\) | Key identifying this choice. This is what will be written into the block output (`block.value`) when a contact selects this choice, e.g. "chocolate". |
+| `name` \(string\) | Key identifying this choice. This is what will be written into the block output (`block.value`) when a contact selects this choice, e.g. "chocolate" or "Somewhat Agree". |
 | `test` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1" |
-| `resource` \(resource\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
+| `prompt` \(resource\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
 
 #### Channel-specific `config`:
 
@@ -137,7 +137,7 @@ This block writes the `name` of the selected choice to the output variable corre
     "choices": [
       {
         "name": "chocolate",
-        "resource": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
+        "prompt": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
         "test": "OR(
             AND(flow.mode = 'IVR', block.response = 7), 
             AND(flow.mode != 'IVR', 
@@ -150,7 +150,7 @@ This block writes the `name` of the selected choice to the output variable corre
       },
       {
         "name": "vanilla",
-        "resource": "b75fa302-8ff7-4f49-bf26-8f915e807222",
+        "prompt": "b75fa302-8ff7-4f49-bf26-8f915e807222",
         "test": "OR(
             AND(flow.mode = 'IVR', block.response = 8), 
             AND(flow.mode != 'IVR', 
@@ -163,7 +163,7 @@ This block writes the `name` of the selected choice to the output variable corre
       },
       {
         "name": "strawberry",
-        "resource": "22619b04-b06d-483e-af83-ee3ba9c8c867",
+        "prompt": "22619b04-b06d-483e-af83-ee3ba9c8c867",
         "test": "OR(
             AND(flow.mode = 'IVR', block.response = 9), 
             AND(flow.mode != 'IVR', 
@@ -314,9 +314,9 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 Each choice in `choices` has the following elements:
 | Key | Description |
 | :--- | :--- |
-| `name` \(string, word characters only\) | Key identifying this choice. This is what will be written into the block output (`block.value`) when a contact selects this choice, e.g. "chocolate". |
+| `name` \(string\) | Key identifying this choice. This is what will be written into the block output (`block.value`) when a contact selects this choice, e.g. "chocolate" or "Somewhat Agree". |
 | `test` \(expression\) | Any choice with an expression that evaluates to a truthy value is a selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1" |
-| `resource` \(resource\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
+| `prompt` \(resource\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
@@ -375,7 +375,7 @@ This block writes an array of `name`s of the selected choices to the output vari
     "choices": [
       {
         "name": "chocolate",
-        "resource": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
+        "prompt": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
         "test": "OR(
             AND(flow.mode = 'IVR', block.response = 7), 
             AND(flow.mode != 'IVR', 
@@ -388,7 +388,7 @@ This block writes an array of `name`s of the selected choices to the output vari
       },
       {
         "name": "vanilla",
-        "resource": "b75fa302-8ff7-4f49-bf26-8f915e807222",
+        "prompt": "b75fa302-8ff7-4f49-bf26-8f915e807222",
         "test": "OR(
             AND(flow.mode = 'IVR', block.response = 8), 
             AND(flow.mode != 'IVR', 
@@ -401,7 +401,7 @@ This block writes an array of `name`s of the selected choices to the output vari
       },
       {
         "name": "strawberry",
-        "resource": "22619b04-b06d-483e-af83-ee3ba9c8c867",
+        "prompt": "22619b04-b06d-483e-af83-ee3ba9c8c867",
         "test": "OR(
             AND(flow.mode = 'IVR', block.response = 9), 
             AND(flow.mode != 'IVR', 
