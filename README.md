@@ -7,7 +7,7 @@ Flows represent a collection of actions \("Blocks"\) and the decision-making log
 | Authors | Mark Boots \(Viamo\)  Peter Lubell-Doughtie \(Ona\)  Eduardo Jezierski \(InSTEDD\)  Gustavo Giráldez \(InSTEDD\)  Evan Wheeler \(UNICEF\) |
 | :--- | :--- |
 | Media Type | TODO: once registered: application/vnd.org.flowinterop.flows+json |
-| Version | 1.0.0-rc.2 |
+| Version | 1.0.0-rc2 |
 | Last updated | 2021-06-26 |
 | Created | 2016-09-10 |
 |  |  |
