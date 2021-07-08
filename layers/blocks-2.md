@@ -142,8 +142,8 @@ This block writes the `name` of the selected choice to the output variable corre
             AND(flow.mode = 'IVR', block.response = 7), 
             AND(flow.mode != 'IVR', 
               OR(
-                AND(flow.language = 'eng', OR(block.response = 1, lower(block.response) = 'chocolate')), 
-                AND(flow.language = 'fre', OR(block.response = 1, lower(block.response) = 'chocolat'))
+                AND(flow.language = 'eng', OR(block.response = 1, block.response = 'chocolate')), 
+                AND(flow.language = 'fre', OR(block.response = 1, block.response = 'chocolat'))
               )
             )
           )"
@@ -155,8 +155,8 @@ This block writes the `name` of the selected choice to the output variable corre
             AND(flow.mode = 'IVR', block.response = 8), 
             AND(flow.mode != 'IVR', 
               OR(
-                AND(flow.language = 'eng', OR(block.response = 2, lower(block.response) = 'vanilla')), 
-                AND(flow.language = 'fre', OR(block.response = 2, lower(block.response) = 'vanille'))
+                AND(flow.language = 'eng', OR(block.response = 2, block.response = 'vanilla')), 
+                AND(flow.language = 'fre', OR(block.response = 2, block.response = 'vanille'))
               )
             )
           )"
@@ -168,8 +168,8 @@ This block writes the `name` of the selected choice to the output variable corre
             AND(flow.mode = 'IVR', block.response = 9), 
             AND(flow.mode != 'IVR', 
               OR(
-                AND(flow.language = 'eng', OR(block.response = 3, lower(block.response) = 'strawberry')), 
-                AND(flow.language = 'fre', OR(block.response = 3, lower(block.response) = 'fraise'))
+                AND(flow.language = 'eng', OR(block.response = 3, block.response = 'strawberry')), 
+                AND(flow.language = 'fre', OR(block.response = 3, block.response = 'fraise'))
               )
             )
           )"
@@ -346,19 +346,19 @@ This block writes an array of `name`s of the selected choices to the output vari
   "exits": [
     {
       "uuid": "95fd672c-92e9-4352-b761-7008b27cbe26",
-      "test": "block.value = chocolate",
+      "test": "block.value = 'chocolate'",
       "label": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
       "name": "chocolate",
     },
     {
       "uuid": "9fab760c-a680-4e40-83b7-9b3f8c66ccdb",
-      "test": "block.value = vanilla",
+      "test": "block.value = 'vanilla'",
       "label": "b75fa302-8ff7-4f49-bf26-8f915e807222",
       "name": "vanilla",
     },
     {
       "uuid": "d99d43ec-6f0a-42b4-97f9-aa1c50ddebe0",
-      "test": "block.value = strawberry",
+      "test": "block.value = 'strawberry'",
       "label": "22619b04-b06d-483e-af83-ee3ba9c8c867",
       "name": "strawberry",
     }
@@ -380,8 +380,8 @@ This block writes an array of `name`s of the selected choices to the output vari
             AND(flow.mode = 'IVR', block.response = 7), 
             AND(flow.mode != 'IVR', 
               OR(
-                AND(flow.language = 'eng', OR(block.response = 1, lower(block.response) = 'chocolate')), 
-                AND(flow.language = 'fre', OR(block.response = 1, lower(block.response) = 'chocolat'))
+                AND(flow.language = 'eng', OR(block.response = 1, block.response = 'chocolate')), 
+                AND(flow.language = 'fre', OR(block.response = 1, block.response = 'chocolat'))
               )
             )
           )"
@@ -393,8 +393,8 @@ This block writes an array of `name`s of the selected choices to the output vari
             AND(flow.mode = 'IVR', block.response = 8), 
             AND(flow.mode != 'IVR', 
               OR(
-                AND(flow.language = 'eng', OR(block.response = 2, lower(block.response) = 'vanilla')), 
-                AND(flow.language = 'fre', OR(block.response = 2, lower(block.response) = 'vanille'))
+                AND(flow.language = 'eng', OR(block.response = 2, block.response = 'vanilla')), 
+                AND(flow.language = 'fre', OR(block.response = 2, block.response = 'vanille'))
               )
             )
           )"
@@ -406,8 +406,8 @@ This block writes an array of `name`s of the selected choices to the output vari
             AND(flow.mode = 'IVR', block.response = 9), 
             AND(flow.mode != 'IVR', 
               OR(
-                AND(flow.language = 'eng', OR(block.response = 3, lower(block.response) = 'strawberry')), 
-                AND(flow.language = 'fre', OR(block.response = 3, lower(block.response) = 'fraise'))
+                AND(flow.language = 'eng', OR(block.response = 3, block.response = 'strawberry')), 
+                AND(flow.language = 'fre', OR(block.response = 3, block.response = 'fraise'))
               )
             )
           )"
@@ -544,15 +544,3 @@ For `TEXT`, `OFFLINE`, and `RICH_MESSAGING` modes that capture a text response, 
   }
 }
 ```
-
-
-
-        OR(
-          AND(flow.mode = 'IVR', block.value = 1), 
-          AND(flow.mode != 'IVR', 
-            OR(block.value = 1, 
-              AND(flow.language = 'eng', lower(block.value) = 'chocolate'), 
-              AND(flow.language = 'fre', lower(block.value) = 'chocolat')
-            )
-          )
-        )
