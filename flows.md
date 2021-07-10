@@ -257,10 +257,10 @@ The required keys for a Block are:
 | `name` \(string, word-characters only\) | A human-readable "variable name" for this block. This must be restricted to word characters so that it can be used as a variable name in expressions. When blocks write results output, they write to a variable corresponding the `name` of the block. |
 | `label` \(string, optional\) | A human-readable free-form description for this Block. |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Gender finding"\) |
-| `tags` \(array of strings\) | an arbitrary list of strings for categorization of the block's content, meaning, etc. This has a similar purpose to `semantic_label`, but the assumption is that many related blocks might have the same tags. |
+| `tags` \(array of strings, optional\) | an arbitrary list of strings for categorization of the block's content, meaning, etc. This has a similar purpose to `semantic_label`, but the assumption is that many related blocks might have the same tags. |
 | `vendor_metadata` \(object\) | A set of key-value records that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `ui_metadata` \(object\) | A set of key-value records describing information about how blocks are displayed on a UI/flowchart editor: |
-| `ui_metadata.canvas_coordinates.{x,y}` \(numbers, optional\)              | Coordinates indicating location of this block on the Flow Builder's canvas |
+| `ui_metadata.canvas_coordinates.x`, `ui_metadata.canvas_coordinates.y` \(numbers\) | Coordinates indicating location of this block on the Flow Builder's canvas. Origin (0, 0) is top-left. |
 | `type` \(string\) | A specific string designating the type or "subclass" of this Block. This must be one of the Block type names within the specification, such as `Core.RunFlow` or `MobilePrimitives.Message`. |
 | `config` \(object\) | Additional parameters that are specific to the type of the block. Details are provided within the Block documentation. |
 | `exits` \(array\) | a list of all the exits for the block. Exits must contain the required keys below, and can contain additional keys based on the Block type |
