@@ -24,15 +24,15 @@ This block presents a single message to the contact. The form of the message can
 
 | Key | Description |
 | :--- | :--- |
-| `message` \(resource\) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering. |
+| `prompt` \(resource\) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering. |
 
 ### Detailed behaviour by mode
 
-* `SMS` \(SMS\): Sends `message` as an SMS to the contact.
-* `USSD` \(USSD\): Displays `message` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
-* `IVR`: Plays `message` to the contact.
-* `RICH_MESSAGING`: Display `message` within the conversation with the contact. Optionally, platforms may attach the audio from the `message` resource \(if provided\) so that the contact can choose to play it.
-* `OFFLINE`: Display `message` within the session with the contact.
+* `SMS` \(SMS\): Sends `prompt` as an SMS to the contact.
+* `USSD` \(USSD\): Displays `prompt` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
+* `IVR`: Plays `prompt` to the contact.
+* `RICH_MESSAGING`: Display `prompt` within the conversation with the contact. Optionally, platforms may attach the audio from the `prompt` resource \(if provided\) so that the contact can choose to play it.
+* `OFFLINE`: Display `prompt` within the session with the contact.
 
 ### Output behaviour
 
@@ -110,25 +110,21 @@ This block writes the `name` of the selected choice to the output variable corre
     {
       "uuid": "95fd672c-92e9-4352-b761-7008b27cbe26",
       "test": "block.value = chocolate",
-      "label": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
       "name": "chocolate",
     },
     {
       "uuid": "9fab760c-a680-4e40-83b7-9b3f8c66ccdb",
       "test": "block.value = vanilla",
-      "label": "b75fa302-8ff7-4f49-bf26-8f915e807222",
       "name": "vanilla",
     },
     {
       "uuid": "d99d43ec-6f0a-42b4-97f9-aa1c50ddebe0",
       "test": "block.value = strawberry",
-      "label": "22619b04-b06d-483e-af83-ee3ba9c8c867",
       "name": "strawberry",
     }
     {
       "uuid": "78012084-b811-4177-88ea-5de5d3eba57d",
       "default": true,
-      "label": "10a11345-9575-4e4a-bf61-0e04758626e7",
       "name": "Default",
     },
   ],
@@ -347,25 +343,21 @@ This block writes an array of `name`s of the selected choices to the output vari
     {
       "uuid": "95fd672c-92e9-4352-b761-7008b27cbe26",
       "test": "block.value = 'chocolate'",
-      "label": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
       "name": "chocolate",
     },
     {
       "uuid": "9fab760c-a680-4e40-83b7-9b3f8c66ccdb",
       "test": "block.value = 'vanilla'",
-      "label": "b75fa302-8ff7-4f49-bf26-8f915e807222",
       "name": "vanilla",
     },
     {
       "uuid": "d99d43ec-6f0a-42b4-97f9-aa1c50ddebe0",
       "test": "block.value = 'strawberry'",
-      "label": "22619b04-b06d-483e-af83-ee3ba9c8c867",
       "name": "strawberry",
     }
     {
       "uuid": "78012084-b811-4177-88ea-5de5d3eba57d",
       "default": true,
-      "label": "10a11345-9575-4e4a-bf61-0e04758626e7",
       "name": "Default",
     },
   ],

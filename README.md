@@ -8,7 +8,7 @@ Flows represent a collection of actions \("Blocks"\) and the decision-making log
 | :--- | :--- |
 | Media Type | TODO: once registered: application/vnd.org.flowinterop.flows+json |
 | Version | 1.0.0-rc3 |
-| Last updated | 2021-06-26 |
+| Last updated | 2021-07-11 |
 | Created | 2016-09-10 |
 |  |  |
 

@@ -22,6 +22,7 @@ This block allows a device user to capture a location on a map, e.g. using a GPS
 
 | Key | Description |
 | :--- | :--- |
+| `prompt` \(resource\) | The prompt to be presented to contacts to ask for the location. This is a localized resource; it supports parsing of expressions in rendering. |
 | `accuracy_threshold_meters` \(number, optional, default 5.0\) | The GPS resolution that a device should wait for and achieve before capturing this location. |
 | `accuracy_timeout_seconds` \(number, optiona, default 120\) | The timeout in seconds that is a maximum that the device should wait for the required accuracy. |
 
@@ -60,7 +61,7 @@ TODO
 
 | Key | Description |
 | :--- | :--- |
-| None |  |
+| `prompt` \(resource\) | The prompt to be presented to contacts to ask for the image. This is a localized resource; it supports parsing of expressions in rendering. |
 
 ### Detailed Behaviour
 
@@ -68,5 +69,5 @@ TODO
 
 ### Output behaviour
 
-This block writes the ID of the captured media to the output variable corresponding to the `name` of the block. \(For more information on standards for IDs of recordings, see [Captured Media Recording IDs](https://github.com/floip/flow-specification/tree/7a09ac6d0cd28370fd159bce33d69f61c8eb4c30/layers/layer4/TODO/README.md).\)
+This block writes the ID of the captured media to the output variable corresponding to the `name` of the block.
 
