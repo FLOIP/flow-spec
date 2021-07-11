@@ -24,15 +24,15 @@ This block presents a single message to the contact. The form of the message can
 
 | Key | Description |
 | :--- | :--- |
-| `message` \(resource\) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering. |
+| `prompt` \(resource\) | The content to be output. This is a localized resource; it supports parsing of expressions in rendering. |
 
 ### Detailed behaviour by mode
 
-* `SMS` \(SMS\): Sends `message` as an SMS to the contact.
-* `USSD` \(USSD\): Displays `message` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
-* `IVR`: Plays `message` to the contact.
-* `RICH_MESSAGING`: Display `message` within the conversation with the contact. Optionally, platforms may attach the audio from the `message` resource \(if provided\) so that the contact can choose to play it.
-* `OFFLINE`: Display `message` within the session with the contact.
+* `SMS` \(SMS\): Sends `prompt` as an SMS to the contact.
+* `USSD` \(USSD\): Displays `prompt` as the next USSD prompt to the user. \(Note on USSD session management: If there are following blocks in the flow, the user has an opportunity to reply with anything to proceed. If there are no following blocks, the contact is prompted to dismiss the session.\)
+* `IVR`: Plays `prompt` to the contact.
+* `RICH_MESSAGING`: Display `prompt` within the conversation with the contact. Optionally, platforms may attach the audio from the `prompt` resource \(if provided\) so that the contact can choose to play it.
+* `OFFLINE`: Display `prompt` within the session with the contact.
 
 ### Output behaviour
 

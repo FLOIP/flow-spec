@@ -273,7 +273,7 @@ Each exit node in `exits` must contain:
 | Key | Description |
 | :--- | :--- |
 | `uuid` \(uuid\) | A globally unique identifier for this Exit |
-| `name` \(string\) | This is an identifier for the exit, suitable for use in rolling up results \(e.g.: "male"\). Expressions can reference the name of the exit taken out of another block via `@(flow.block_name.exit)`. |
+| `name` \(string\) | This is an identifier for the exit, suitable for use in rolling up results \(e.g.: "male"\),  and to display on flowchart canvases. Expressions can reference the name of the exit taken out of another block via `@(flow.block_name.exit)`. |
 | `destination_block` \(uuid\) | This is the uuid of the Block this exit connects to. It can be null if the exit does not connect to a block \(if it is the final block\). |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this exit in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Feminine Gender"\) |
 | `test` \(expression, optional\) | For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen. |
