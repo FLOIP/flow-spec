@@ -49,10 +49,10 @@ This endpoint is used to publish a Container of Flows to an external system. The
 
 The receiving system should consider how it will manage resource media referenced within the Container (i.e.: whether it makes local copies of the resource media or depends on external availability, etc.)
 
-_URL_: POST \[Base URL\]/flow-spec/containers
+_URL_: PUT \[Base URL\]/flow-spec/containers
 
 _Query parameters_:
-* `update_mode` (Optional): One of the following values that determine when existing Flows are updated with the submitted definition. (`most_recent` is the default.) If an update would be rejected due to existing Flows under `most_recent` or `never`, the system must respond with `409 Conflict`.
+* `update_mode` (Optional): One of the following values that determine whether existing Flows are updated with the submitted definition. (`most_recent` is the default.) If an update would be rejected due to existing Flows under `most_recent` or `never`, the system must respond with `409 Conflict`.
   * `always`: Always update existing Flows with the same `uuid`s.
   * `most_recent`: Update existing Flows when the `last_modified` value is more recent than the system has already.
   * `never`: Never update existing Flows if they already exist on the system.
