@@ -35,9 +35,9 @@ Endpoints that paginate shall provide a `links` section with `self`, `next`, and
 
 ## API Endpoints
 
-TODO UPDATE Five standard API endpoints are defined for Flow servers operating in the Data Aggregator role. Two "push" endpoints are used to send flow results to a system playing the Data Aggregator role. Three "pull" endpoints are used to access flow results served by a Data Aggregator. TODO UPDATE
+### Base URL
 
-Endpoints are defined relative to a base URL chosen by the implementation, i.e.:
+Endpoints are defined relative to a base URL chosen by the implementing system, i.e.:
 
 _Base URL_: [https://my.example-flow-server/api/v1](https://my.example-flow-server/api/v1)
 
@@ -96,7 +96,7 @@ Accept: application/vnd.api+json
 
 _Response_:
 
-The response from the server must adhere to the [JSON API specification](http://jsonapi.org/format/#crud-creating-responses) for POST responses. Systems may make use of the `204 No Content` response mechanism to report acceptance to clients without sending back long documents. (This is supported when all UUIDs have been provided by the client.)
+The response from the server must adhere to the [JSON API specification](http://jsonapi.org/format/#crud-creating-responses) for POST responses. When Client-Generated IDs are provided, systems should make use of the `204 No Content` response mechanism to report acceptance to clients without sending back long documents.
 
 _Response example:_
 
