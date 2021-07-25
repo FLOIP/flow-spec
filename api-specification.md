@@ -39,7 +39,7 @@ Endpoints that paginate shall provide a `links` section with `self`, `next`, and
 
 Endpoints are defined relative to a base URL chosen by the implementing system, i.e.:
 
-_Base URL_: [https://my.example-flow-server/api/v1](https://my.example-flow-server/api/v1)
+_Base URL_: [https://my.example-flow-server.com/api/v1](https://my.example-flow-server.com/api/v1)
 
 ### Containers and Flows
 
@@ -102,7 +102,7 @@ _Response example:_
 
 ```text
 HTTP/1.1 201 Created
-Location: https://my.example-flow-server/api/v1/flow-spec/containers/0c364ee1-0305-42ad-9fc9-2ec5a80c55fa
+Location: https://my.example-flow-server.com/api/v1/flow-spec/containers/0c364ee1-0305-42ad-9fc9-2ec5a80c55fa
 Content-Type: application/vnd.api+json
 
 {  
@@ -128,7 +128,7 @@ Content-Type: application/vnd.api+json
       ]
     },
     "links":{  
-        "self":"https://my.example-flow-server/api/v1/containers/0c364ee1-0305-42ad-9fc9-2ec5a80c55fa"
+        "self":"https://my.example-flow-server.com/api/v1/containers/0c364ee1-0305-42ad-9fc9-2ec5a80c55fa"
     }
   }
 }
@@ -163,9 +163,9 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "https://my.example-flow-server/api/v1/flow-spec/flows?page=3&size=100",
+    "self": "https://my.example-flow-server.com/api/v1/flow-spec/flows?page=3&size=100",
     "next": null,
-    "previous": "https://my.example-flow-server/api/v1/flow-spec/flows?page=2&size=100"
+    "previous": "https://my.example-flow-server.com/api/v1/flow-spec/flows?page=2&size=100"
   },
   "data": [
     {
@@ -228,7 +228,7 @@ Content-Type: application/vnd.api+json
 
 {  
   "links":{  
-    "self":"https://my.example-flow-server/api/v1/flow-spec/flows/b15be41c-d29b-41fb-b981-26b2ebe8a6ff"
+    "self":"https://my.example-flow-server.com/api/v1/flow-spec/flows/b15be41c-d29b-41fb-b981-26b2ebe8a6ff"
   },
   "data":{  
     "type":"flows",
@@ -310,7 +310,7 @@ Content-Type: application/vnd.api+json
       ]
     },
     "links":{  
-        "self":"https://my.example-flow-server/api/v1/containers/0c364ee1-0305-42ad-9fc9-2ec5a80c55fa"
+        "self":"https://my.example-flow-server.com/api/v1/containers/0c364ee1-0305-42ad-9fc9-2ec5a80c55fa"
     }
   }
 }
@@ -322,7 +322,7 @@ Content-Type: application/vnd.api+json
 
 This endpoint is used to ask a system to run (launch) an outbound Flow against one or more Contacts. 
 
-Synchronization of Contact information between systems is a relevant (and difficult) problem to solve generally, especially when two-way synchronization and conflict resolution is required. The Flow Specification therefore leaves contact synchronization outside the scope of this API spec. However, there is a common requirement to ensure that systems running Flows at the request of another system have an up-to-date copy of Contact properties/parameters as of the start of a flow. This endpoint therefore includes a basic ability to transmit the current state of a Contact to populate context at the start of the Flow.
+Synchronization of Contact information between systems is a relevant (and difficult) problem to solve generally, especially when two-way synchronization and conflict resolution are required. The Flow Specification therefore leaves contact synchronization outside the scope of this API spec. However, there is a frequent requirement to ensure that systems running Flows at the request of another system have an up-to-date copy of Contact properties/parameters as of the start of a flow. This endpoint therefore includes a basic ability to transmit the current state of Contacts to populate context at the start of the Flow. Additional information can be transferred within `vendor_metadata`.
 
 _URL_: POST \[Base URL\]/flow-spec/run_requests
 
@@ -338,7 +338,7 @@ _Request body_: The request body shall specify the `type` of `run_requests`. It 
 | `default_mode` \(string\) | The default mode to run the Flow for all contacts, unless overriden by `preferred_mode`. |
 | `default_language` \(string\) | The default language (as a Flow Language Identifier) to run the Flow for all contacts, unless overriden by `preferred_language`. |
 | `delay_until` \(date-time, optional\) | Indicates the system must delay the start of flow runs until the specified date and time (GMT). |
-| `vendor_metadata` \(object, optional\) | Contains additional options on Flow runs that are relevant to specific vendor systems. |
+| `vendor_metadata` \(object, optional\) | Contains additional options on Flow runs that are relevant to specific vendor systems. Vendors must use namespaces within `vendor_metadata` to avoid collisions. Suggested namespaces use reverse domain name notation, with periods replaced by underscores (e.g.: A vendor with domain https://my.example-flow-server.com would place entries within `vendor_metadata.com_example-flow-server_my`). |
 
 _Request example:_
 

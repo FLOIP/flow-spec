@@ -159,6 +159,10 @@ The term "uuid" refers to a universally unique identifier. Implementations may u
 "uuid":"2b375764-9fcc-11e7-abc4-cec278b6b50a"
 ```
 
+### Vendor Metadata
+
+To enable extensions of the Specification, entities support the `vendor_metadata` optional field. This is intended for parameters that are not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. Vendors must use namespaces within `vendor_metadata` to avoid collisions. Suggested namespaces use reverse domain name notation, with periods replaced by underscores (e.g.: A vendor with domain https://my.example-flow-server.com would place entries within `vendor_metadata.com_example-flow-server_my`).
+
 ## Top-level Specification Elements
 
 ### Containers
@@ -171,7 +175,7 @@ A Container is a "package" document containing one or more Flow Definitions, use
 | `uuid` \(uuid\) | A globally unique identifier for this Container. \(See [UUID Format](flows.md#uuid-format).\) |
 | `name` \(string\) | A human-readable name for the Container content. |
 | `description` \(string\) | An extended human-readable description of the content. |
-| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `vendor_metadata` \(object, optional\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `flows` \(array\) | A list of the Flows within the Container \(see below\) |
 | `resources` \(object\) | A set of the Resources needed for executing the Flows in the Container, keyed by resource uuid. |
 
@@ -200,7 +204,7 @@ A Flow represents a set of Blocks and their direct connections. The required key
 | `label` \(string, optional\) | An extended user-provided description for the flow. |
 | `last_modified` \(timestamp, UTC\) | The time when this flow was last modified, in UTC, with microsecond precision: "2016-12-25 13:42:05.234598" |
 | `interaction_timeout` \(integer\) | The number of seconds of inactivity after which Contact input for this flow is no longer accepted, and Runs in progress are terminated |
-| `vendor_metadata` \(object\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `vendor_metadata` \(object, optional\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `supported_modes` \(array\) | A list of the supported Modes that the Flow has content suitable for. \(See below\) |
 | `first_block_id` \(uuid\) | The ID of the block in `blocks` that is at the beginning of the flow. |
 | `exit_block_id` \(uuid, optional\) | If provided, the ID of the block in`blocks`that will be jumped to if there is an error or deliberate exit condition during Flow Run. If not provided, the Flow Run will end immediately. |
@@ -258,7 +262,7 @@ The required keys for a Block are:
 | `label` \(string, optional\) | A human-readable free-form description for this Block. |
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this block in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Gender finding"\) |
 | `tags` \(array of strings, optional\) | an arbitrary list of strings for categorization of the block's content, meaning, etc. This has a similar purpose to `semantic_label`, but the assumption is that many related blocks might have the same tags. |
-| `vendor_metadata` \(object\) | A set of key-value records that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
+| `vendor_metadata` \(object, optional\) | A set of key-value records that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `ui_metadata` \(object\) | A set of key-value records describing information about how blocks are displayed on a UI/flowchart editor: |
 | `ui_metadata.canvas_coordinates.x`, `ui_metadata.canvas_coordinates.y` \(numbers\) | Coordinates indicating location of this block on the Flow Builder's canvas. Origin (0, 0) is top-left. |
 | `type` \(string\) | A specific string designating the type or "subclass" of this Block. This must be one of the Block type names within the specification, such as `Core.RunFlow` or `MobilePrimitives.Message`. |
