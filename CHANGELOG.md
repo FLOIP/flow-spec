@@ -14,7 +14,7 @@ This changelog documents material changes to the Flow Results specification. Ver
 
 ### Added
 
-- [API Specification](api-specification.md) for publishing, listing, and running Flows on external systems
+- [API Specification](api-specification.md) for publishing, listing, and running Flows on external systems. [(#58)](https://github.com/FLOIP/flow-spec/issues/58)
 - Add additional "test" functions for interoperability with RapidPro
 
 ## [1.0.0-rc2] - 2020-06-30
