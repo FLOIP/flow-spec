@@ -60,7 +60,7 @@ Note that when comparing text values, the equals \(=\) and not-equals \(&lt;&gt;
 
 ### Templating
 
-For templating, RapidPro uses the `@` character to denote either a single variable substitution or the beginning of an Excellent block. `@` was chosen as it is known how to type by a broad number of users regardless of keyboard. It does have the disadvantage of being used in email addresses and Twitter handles, but these are rarely ambiguous and escaping can be done easily via doubling of the character \(`@@`\).
+For templating, Expressions use the `@` character to denote either a single variable substitution or the beginning of an Excellent block. `@` was chosen as it is known how to type by a broad number of users regardless of keyboard. It does have the disadvantage of being used in email addresses and Twitter handles, but these are rarely ambiguous and escaping can be done easily via doubling of the character \(`@@`\).
 
 Functions are called by using the block syntax: `10 plus 4 is @(SUM(10, 4))` Within a block, `@` is not required to refer to variable in the context: `Hello @(contact.name)` A template can contain more than one substitution or block: `Hello @contact.name, you were born in @(YEAR(contact.birthday))`
 
@@ -403,3 +403,30 @@ Returns TRUE if the argument is a string.
 
 `@ISSTRING(contact.name)`  will return TRUE if the contact's name is a string.
 
+#### Functions for use within Tests
+
+The following functions are supported and included in the specification by reference for interoperability with RapidPro routing tests:
+
+- [Test Functions](https://textit.com/mr/docs/routing.html#tests)
+  - has_all_words
+  - has_any_word
+  - has_beginning
+  - has_date
+  - has_date_eq
+  - has_date_gt
+  - has_date_lt
+  - has_email
+  - has_group
+  - has_number
+  - has_number_eq
+  - has_number_gt
+  - has_number_gte
+  - has_number_lt
+  - has_number_lte
+  - has_only_phrase
+  - has_only_text
+  - has_pattern
+  - has_phone
+  - has_phrase
+  - has_text
+  - has_time
