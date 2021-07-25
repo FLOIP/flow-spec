@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Changelog](CHANGELOG.md)
 * [Glossary and Definitions](glossary.md)
 * [Flow Fundamentals](flows.md)
 * [Expressions](expressions.md)
