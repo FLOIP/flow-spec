@@ -12,7 +12,6 @@ This changelog documents material changes to the Flow Results specification. Ver
 
 - [API Specification](api-specification.md) for publishing, listing, and running Flows on external systems
 - Add additional "test" functions for interoperability with RapidPro
-- Clarify that "=" and "<>" comparisons in Expressions are case-insensitive by default.
 
 ## [1.0.0-rc2] - 2020-06-30
 
