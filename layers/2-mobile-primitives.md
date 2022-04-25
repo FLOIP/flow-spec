@@ -499,7 +499,6 @@ This block obtains an open-ended response from the contact. Dependent on the mod
 | Key | Description |
 | :--- | :--- |
 | `IVR`: `max_duration_seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
-| `TEXT`: `max_response_characters` \(number, optional\) | The maximum number of characters to prompt for and accept. \(If not provided, no limit.\) |
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
@@ -529,9 +528,6 @@ For `TEXT`, `OFFLINE`, and `RICH_MESSAGING` modes that capture a text response, 
     "prompt": "b969cd54-c894-4f5a-891e-f1b24e32982b",
     "IVR": {
       "max_duration_seconds": 120
-    },
-    "TEXT": {
-      "max_response_characters": 160
     }
   }
 }
