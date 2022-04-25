@@ -10,7 +10,7 @@ _Namespace_: `MobilePrimitives`
 * [Select One Response \(Multiple Choice Question\) Block](2-mobile-primitives.md#select-one-response-multiple-choice-question-block)
 * [Select Many Responses \(Multiple Choice Question\) Block](2-mobile-primitives.md#select-many-responses-multiple-choice-question-block)
 * [Numeric Response Block](2-mobile-primitives.md#numeric-response-block)
-* [Open Response \(Open-ended Question\) Block](2-mobile-primitives.md#open-response-open-ended-question-block)
+* [Open Response \(Open-ended Question\) Block](2-mobile-primitives.md#open-response-block)
 
 ## Message Block
 
