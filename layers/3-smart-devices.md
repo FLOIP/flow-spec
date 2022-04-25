@@ -7,8 +7,8 @@ Namespace: `SmartDevices`
 
 ## Contents
 
-* [Location Response \(GPS\) Block](blocks-3.md#location-response-gps-block)
-* [Photo Response Block](blocks-3.md#photo-response-block)
+* [Location Response \(GPS\) Block](3-smart-devices.md#location-response-gps-block)
+* [Photo Response Block](3-smart-devices.md#photo-response-block)
 
 ## Location Response \(GPS\) Block
 

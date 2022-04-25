@@ -6,11 +6,11 @@ _Namespace_: `MobilePrimitives`
 
 ## Contents
 
-* [Message Block](blocks-2.md#message-block)
-* [Select One Response \(Multiple Choice Question\) Block](blocks-2.md#select-one-response-multiple-choice-question-block)
-* [Select Many Responses \(Multiple Choice Question\) Block](blocks-2.md#select-many-responses-multiple-choice-question-block)
-* [Numeric Response Block](blocks-2.md#numeric-response-block)
-* [Open Response \(Open-ended Question\) Block](blocks-2.md#open-response-open-ended-question-block)
+* [Message Block](2-mobile-primitives.md#message-block)
+* [Select One Response \(Multiple Choice Question\) Block](2-mobile-primitives.md#select-one-response-multiple-choice-question-block)
+* [Select Many Responses \(Multiple Choice Question\) Block](2-mobile-primitives.md#select-many-responses-multiple-choice-question-block)
+* [Numeric Response Block](2-mobile-primitives.md#numeric-response-block)
+* [Open Response \(Open-ended Question\) Block](2-mobile-primitives.md#open-response-open-ended-question-block)
 
 ## Message Block
 

@@ -6,8 +6,8 @@
 * [Flow Fundamentals](flows.md)
 * [Expressions](expressions.md)
 * [Layers](layers/README.md)
-  * [Layer 1: Core](layers/blocks.md)
-  * [Layer 2: Mobile Primitives](layers/blocks-1.md)
-  * [Layer 3: Smart Devices](layers/blocks-2.md)
+  * [Layer 1: Core](layers/1-core.md)
+  * [Layer 2: Mobile Primitives](layers/2-mobile-primitives.md)
+  * [Layer 3: Smart Devices](layers/3-smart-devices.md)
 * [API Specification](api-specification.md)
 

@@ -7,12 +7,12 @@ _Namespace_: `Core`
 
 ## Contents
 
-* [Log Block](blocks.md#log-block)
-* [Case Block](blocks.md#case-block)
-* [Run Another Flow Block](blocks.md#run-another-flow-block)
-* [Output Block](blocks.md#output-block)
-* [Set Contact Property Block](blocks.md#set-contact-property)
-* [Set Group Membership Block](blocks.md#set-group-membership)
+* [Log Block](1-core.md#log-block)
+* [Case Block](1-core.md#case-block)
+* [Run Another Flow Block](1-core.md#run-another-flow-block)
+* [Output Block](1-core.md#output-block)
+* [Set Contact Property Block](1-core.md#set-contact-property)
+* [Set Group Membership Block](1-core.md#set-group-membership)
 
 ## Log Block
 
