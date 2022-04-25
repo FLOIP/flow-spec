@@ -177,7 +177,6 @@ A Container is a "package" document containing one or more Flow Definitions, use
 | `description` \(string\) | An extended human-readable description of the content. |
 | `vendor_metadata` \(object, optional\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `flows` \(array\) | A list of the Flows within the Container \(see below\) |
-| `resources` \(object\) | A set of the Resources needed for executing the Flows in the Container, keyed by resource uuid. |
 
 #### Example
 
@@ -188,8 +187,7 @@ A Container is a "package" document containing one or more Flow Definitions, use
    "name": "Summary Case Report Test",
    "description": "Summary Case Report Test",
    "vendor_metadata": {},
-   "flows": [...],
-   "resources": [...]
+   "flows": [...]
 }
 ```
 
@@ -210,6 +208,7 @@ A Flow represents a set of Blocks and their direct connections. The required key
 | `exit_block_id` \(uuid, optional\) | If provided, the ID of the block in`blocks`that will be jumped to if there is an error or deliberate exit condition during Flow Run. If not provided, the Flow Run will end immediately. |
 | `languages` \(array\) | A list of the languages that the Flow has suitable content for. See language object specification below. |
 | `blocks` \(array\) | A list of the Blocks in the flow \(see below\).  The flow will start execution at the _first_ block in this list. |
+| `resources` \(object\) | A set of the Resources needed for executing the Flow, keyed by resource uuid. |
 
 #### Modes
 
@@ -247,7 +246,8 @@ Possible modes for `supported_modes` are:
       }
    ],
    "vendor_metadata": {},
-   "blocks": [...]
+   "blocks": [...],
+   "resources": {...}
 }
 ```
 
