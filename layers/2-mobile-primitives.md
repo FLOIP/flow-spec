@@ -73,8 +73,22 @@ Each choice in `choices` has the following elements:
 | Key | Description |
 | :--- | :--- |
 | `name` \(string\) | Key identifying this choice. This is what will be written into the block output (`block.value`) when a contact selects this choice, e.g. "chocolate" or "Somewhat Agree". |
-| `test` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1" |
+| `ivr_test` \(object, optional\) | See below.|
+| `text_tests` \(array of objects, optional\) | See below|
 | `prompt` \(resource\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
+
+#### `ivr_test` object
+This test applies to IVR flows.
+| Key | Description |
+| :--- | :--- |
+| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the seelcted choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1". IVR responsed are not expected to vary across languages, so this test applies to all. \). |
+
+#### `text_test` object
+These tests apply to non-IVR flows. There may be multiple tests per choice: any matching test will indicate that the choice has been selected.
+| Key | Description |
+| :--- | :--- |
+| `language` \(string, optional\) |[Language Identifier](flows.md#language-identifiers) for which this test applies. If omitted, the test will apply to all languages. Multiple tests may apply to the same language. |
+| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the seelcted choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1" \). |
 
 #### Channel-specific `config`:
 
@@ -135,41 +149,62 @@ This block writes the `name` of the selected choice to the output variable corre
       {
         "name": "chocolate",
         "prompt": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
-        "test": "OR(
-            AND(flow.mode = 'IVR', block.response = 7), 
-            AND(flow.mode != 'IVR', 
-              OR(
-                AND(flow.language = 'eng', OR(block.response = 1, block.response = 'chocolate')), 
-                AND(flow.language = 'fre', OR(block.response = 1, block.response = 'chocolat'))
-              )
-            )
-          )"
+        "ivr_test": {
+          "test_expression": "block.response = '7'"
+        }
+        "text_tests": [
+          {
+            "test_expression": "block.response = '1'"
+          },
+          {
+            "language": "eng",
+            "test_expression": "block.response = 'chocolate'"
+          },
+          {
+            "language": "fre",
+            "test_expression": "block.response = 'chocolat'"
+          },
+        ]
       },
       {
         "name": "vanilla",
         "prompt": "b75fa302-8ff7-4f49-bf26-8f915e807222",
-        "test": "OR(
-            AND(flow.mode = 'IVR', block.response = 8), 
-            AND(flow.mode != 'IVR', 
-              OR(
-                AND(flow.language = 'eng', OR(block.response = 2, block.response = 'vanilla')), 
-                AND(flow.language = 'fre', OR(block.response = 2, block.response = 'vanille'))
-              )
-            )
-          )"
+        "ivr_test": {
+          "test_expression": "block.response = '8'"
+        }
+        "text_tests": [
+          {
+            "test_expression": "block.response = '2'"
+          },
+          {
+            "language": "eng",
+            "test_expression": "block.response = 'vanilla'"
+          },
+          {
+            "language": "fre",
+            "test_expression": "block.response = 'vanille'"
+          },
+        ]
       },
       {
         "name": "strawberry",
         "prompt": "22619b04-b06d-483e-af83-ee3ba9c8c867",
-        "test": "OR(
-            AND(flow.mode = 'IVR', block.response = 9), 
-            AND(flow.mode != 'IVR', 
-              OR(
-                AND(flow.language = 'eng', OR(block.response = 3, block.response = 'strawberry')), 
-                AND(flow.language = 'fre', OR(block.response = 3, block.response = 'fraise'))
-              )
-            )
-          )"
+        "ivr_test": {
+          "test_expression": "block.response = '9'"
+        }
+        "text_tests": [
+          {
+            "test_expression": "block.response = '3'"
+          },
+          {
+            "language": "eng",
+            "test_expression": "block.response = 'strawberry'"
+          },
+          {
+            "language": "fre",
+            "test_expression": "block.response = 'fraise'"
+          },
+        ]
       }
     ]
   }
