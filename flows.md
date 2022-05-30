@@ -288,7 +288,7 @@ Each exit must specify one of either `test` or `default`. Each block must have e
 
 #### Setting Contact Properties
 
-A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this common use-case, all blocks have a standard capability to specify how a contact property should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` object within the Block `config`:
+A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this common use-case, all blocks that can produce a result have a standard capability to specify how a contact property should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` object within the Block `config`:
 
 ```text
 config {

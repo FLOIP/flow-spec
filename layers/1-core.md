@@ -242,11 +242,11 @@ Another common operation for platforms that run flows on Contacts is to organize
 | :--- | :--- |
 | `group_key` \(string\) | An identifier for the group that membership will be set within. |
 | `group_name` \(string, optional\) | A human-readable label in addition to the `group_key`, in cases where the `group_name` needs to be displayed to the Contact. |
-| `is_member` \(expression, boolean\) | Determines the membership state: falsy to remove the contact from the group, truthy to add, and null for no change to the existing membership. |
+| `is_member` \(boolean\) | Determines the membership state: false to remove the contact from the group, true to add. |
 
 ### Detailed Behaviour
 
-The Contact's membership in the group shall be set according to the `is_member` expression, immediately before following the exit node out of the block.
+The Contact's membership in the group shall be set according to the `is_member` boolean, immediately before following the exit node out of the block.
 
 The `group_key` is a string and is not further restricted by the spec. For complete block interoperability across vendors, vendors would need to agree on the format and identity of `group_key`.
 

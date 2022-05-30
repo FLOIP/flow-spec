@@ -64,7 +64,7 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 
 | Key | Description |
 | :--- | :--- |
-| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What is your favorite kind of ice cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." |
+| `prompt` \(resource, optional\) | The question prompt that should be displayed to the contact, e.g. "What is your favorite kind of ice cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." `prompt` may be optional when `question_prompt` is provided.|
 | `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice cream?". If included, blocks must provide suitable resources within `choices` to present the choices on each supported mode. For the `IVR` mode, they must also provide `digit_prompts`. |
 | `choices` \(array of choices\) | Set of choices to select from. See choices configuration below. |
 
@@ -81,6 +81,7 @@ Each choice in `choices` has the following elements:
 | Key | Description |
 | :--- | :--- |
 | `IVR`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
+| `IVR`: `randomize_choice_order` \(boolean\) | In conjunction with `question_prompt`, `choices_prompt`, and `IVR.digit_prompts`, this indicates that the presentation of choices should be in random order.|
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
@@ -422,8 +423,8 @@ This block obtains a numeric response from the contact.
 | Key | Description |
 | :--- | :--- |
 | `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years." |
-| `validation_minimum` \(number, optional\) | The minimum value \(inclusive\) that will be accepted as a response to this block; responses less than this will proceed through the default exit. |
-| `validation_maximum` \(number, optional\) | The maximum value \(inclusive\) that will be accepted as a response to this block; responses greater than this will proceed through the default exit. |
+| `validation_minimum` \(number, optional\) | The minimum value \(inclusive\) that will be accepted as a response to this block; responses less than this will result in a block value of `null`. |
+| `validation_maximum` \(number, optional\) | The maximum value \(inclusive\) that will be accepted as a response to this block; responses greater than this will result in a block value of `null`. |
 
 #### Channel-specific `config`:
 
