@@ -81,14 +81,14 @@ Each choice in `choices` has the following elements:
 This test applies to IVR flows.
 | Key | Description |
 | :--- | :--- |
-| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the seelcted choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1". IVR responsed are not expected to vary across languages, so this test applies to all. \). |
+| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1". IVR responsed are not expected to vary across languages, so this test applies to all. \). |
 
 #### `text_test` object
 These tests apply to non-IVR flows. There may be multiple tests per choice: any matching test will indicate that the choice has been selected.
 | Key | Description |
 | :--- | :--- |
 | `language` \(string, optional\) |[Language Identifier](flows.md#language-identifiers) for which this test applies. If omitted, the test will apply to all languages. Multiple tests may apply to the same language. |
-| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the seelcted choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1" \). |
+| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1" \). |
 
 #### Channel-specific `config`:
 
