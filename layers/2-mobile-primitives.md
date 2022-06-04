@@ -75,7 +75,7 @@ Each choice in `choices` has the following elements:
 | `name` \(string\) | Key identifying this choice. This is what will be written into the block output (`block.value`) when a contact selects this choice, e.g. "chocolate" or "Somewhat Agree". |
 | `ivr_test` \(object, optional\) | See below.|
 | `text_tests` \(array of objects, optional\) | See below|
-| `prompt` \(resource\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
+| `prompt` \(resource, optional\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
 
 #### `ivr_test` object
 This test applies to IVR flows.
