@@ -1,107 +1,244 @@
 # Flow Context
 
-The Flow Context contains the variables available for a flow to read and write
+The Flow Context contains the variables available for a Flow to read and write
 during execution. The context is populated by the engine before and during
-execution, different variables will be available depending on which flow
-extensions are available.
+execution. The Context is referenced by expressions, for the purpose of evaluating branches, and displaying content to Contacts.
 
-## Flow Environment
+## Contact
 
-Environment variables live under the `@env` key in the context. They control
-the execution of the flow in various ways, mostly related to localization but
-also for flow control.
+The Contact (`@contact`) contains information about the person the Flow is running with.
 
- * default_exit_block: UUID of the block that flow will go to if reaching
-   an exit without a destination block
- * language: contains the language that the flow is currently running in
-       code: eng / fra / spa
-       name: English / French / Spanish
-       __string__: English
-       __value__: eng
- * timezone: contains the timezone that the flow is currently running in
-       code: UTC+500
-       name: US Pacific
-       __string__: US Pacific
-       __value__: UTC+500
- * localization: contains configuration details around localization of variables
-       date_format: whether we are day or month first
-       decimal_format: whether we use commas or periods
+The contact's properties are exposed by name directly on the contact, as long as these names don't conflict with reserved names.
+
+    contact: {
+      // phone number of the contact, in international E.164 format
+      phone: "233501112222",
+      // Other accounts the contact has, with service prefixes (such as social messaging accounts):
+      urns: [
+        "phone:233501112222",
+        "twitter:@exampleaccount",
+        "whatsapp:233501112222"
+      ],
+      // The contact's preferred mode of interaction (see Supported Modes)
+      preferred_mode: "IVR",
+      // The contact's preferred account to use
+      preferred_urn: "phone:233501112222",
+      // The contact's active account being used on this interaction
+      active_urn: "phone:233501112222",
+      // Time the contact was first seen/created on this system
+      created_at: "2017-03-05 12:33:42",
+      // Contact's timezone, in the format of the tzdata tz database. Null if unknown/not supported.
+      timezone: "Africa/Accra",
+      // Preferred language ID of the contact
+      language: "eng",
+      // Groups the contact is in (see below)
+      groups: [...],
+      // Properties of the contact (see below)
+      properties: [...],
+      // Example properties by name:
+      birthday: "2012-04-05",
+      gender: "female",
+      ...
+    }
+
+### Groups
+
+The groups the contact is a member of:
+
+    contact: {
+      groups: [
+        {
+          name: "Soybean Farmers",
+          __value__: "Soybean Farmers",
+          id: "1234-1234-1234-1234-1234"
+        },
+        {
+          name: "Savings Group A",
+          __value__: "Savings Group A",
+          id: "1234-1234-1234-1234-1235"
+        }
+      ]
+    }
+
+### Properties
+
+The custom properties of the Contact. These can be set and read by Blocks. They are keyed by the property name.
+
+TODO: Do we need to define data types for properties?
+
+    contact: {
+      properties: {
+        birthday: {
+          value: "2012-04-05",
+          __value__: "2012-04-05",
+          name: "birthday",
+          type: "date",
+          id: "1234-1234-1234-1234-1234"
+        },
+        gender: {
+          value: "female",
+          __value__: "female",
+          name: "gender",
+          type: "enum",
+          id: "1234-1234-1234-1234-1235"
+        }
+      }
+    }
+
+## Run
+
+The Run object (`@run`) contains information about the flow session in progress.
+
+    run: {
+      // Contains the language that the flow is currently running in. See [Language Objects and Identifiers](flows.md#language-objects-and-identifiers])
+      language: {
+        id: "eng-female"
+        label: "English, Female Voice"
+        variant: "female"
+        iso_639_3: "eng"
+        __value__: "eng-female"
+      }
+
+      // contains configuration details around localization of variables
+      localization: {
+        // Date format to present dates to users in (TODO)
+        // Decimal format: whether numbers use commas or periods (TODO)
+      }
+
+      // Start time of the run
+      entered_at: "2017-05-06 14:34:33",
+
+      // End time of the run, if finished
+      exited_at: "2017-05-06 16:31:12",
+
+      // The flow that is running
+      flow: {
+        id: "1234-1234-1234-1234-1234",
+        name: "Ice Cream Order Form",
+        __value__: "Ice Cream Order Form",
+      }
+
+      // The mode the flow is running in. See [Supported Modes](TODO)
+      mode: "IVR",
+
+      // A link to the results captured during this Run. (See @flow or @results, TODO depending on our name choice)
+      results: {...}
+    }
+
+## Parent
+
+In the case of nested Flows, the Parent object (`@parent`) is a link to the Run of the outer Flow that launched this Flow run. This allows accessing results collected in the parent Flow.
+
+## Child
+
+In the case of nested Flows, the Child object (`@child`) is a link to the Run of the most recently executed child Flow.  This allows accessing results collected in the child Flow.
+
+## Flow  (TODO: Should this be renamed 'results' for more clarity?? Flow would seem to be about the flow being run rather than results.)
+
+The Flow object (`@flow`) holds results written by blocks during the Run. These are keyed by the result name the block writes (`block.name`).
+
+    flow /* or 'results'*/ : {
+      // Example name (from block.value)
+      favorite_ice_cream {
+        // timestamp when the block was entered
+        entered_at: "2022-03-15 14:03:03",
+        // timestamp when the block was exited
+        exited_at: "2022-03-15 14:03:35",
+        // raw input response received from the contact, if applicable
+        response: "choc",
+        // parsed or standardized response. null if a valid response was not captured by the block.
+        value: "chocolate",
+        __value__: "chocolate",
+        // The block that wrote this variable
+        block: {
+          id: "1234-1234-1234-1234-1234",
+          name: "favorite_ice_cream",
+          __value__: "favorite_ice_cream",
+          label: "What's your favorite ice cream?"
+        }
+        // The exit that was selected coming out of this block
+        exit: {
+          name: "chocolate",
+          __value__: "chocolate",
+          id: "1234-1234-1234-1234-1234"
+        }
+      },
+      ...
+    }
+
+## Block
+
+The Block object (`@block`) presents the currently executing block. It's often used in choice categorization tests and branching logic.
+
+    block: {
+        // timestamp when the block was entered
+        entered_at: "2022-03-15 14:03:03",
+        // raw response received from the contact, if applicable. This could be text or an IVR digit.
+        response: "choc",
+    }
 
 ## Flow Steps
 
 The `@steps` variable contains information about the path taken by the flow
 during execution. Each block visited adds a single step upon entering the block.
 
-TODO: Do steps include any information about messages sent or received?
+TODO: Should this be removed? Is it useful within the context at all?
 
 ```
 [
   {
-    "block": "1234-1234-1234-1234-1234",
-    "arrived_on": "2017-01-17 14:14",
-    "left_on": "2017-01-17 14:15",
-    "flow_version": "2017-01-17 14:15" # to know what version of this flow processed this step?
+    // Describes the flow that ran this block. Could change in the case of nested flows.
+    flow: {
+      id: "1234-1234-1234-1234-1234",
+      name: "Ice Cream Order Form",
+      __value__: "Ice Cream Order Form",
+    }
+    block: {
+      id: "1234-1234-1234-1234-1234",
+      name: "favorite_ice_cream",
+      __value__: "favorite_ice_cream",
+      label: "What's your favorite ice cream?"
+    },
+    "entered_at": "2017-01-17 14:14",
+    "exited_at": "2017-01-17 14:15",
+    "response": "choc",
+    "value": "chocolate",
+    __value__: "chocolate",
+    // The exit that was selected coming out of this block
+    exit: {
+      name: "Chocolate",
+      __value__: "Chocolate",
+      id: "1234-1234-1234-1234-1234"
+    }
   },
   {
-    "block": "1234-1234-1234-1234-1234",
-    "arrived_on": "2017-01-17 14:14",
-    "left_on": "2017-01-17 14:15",
-    "flow_version": "2017-01-17 14:15" # to know what version of this flow processed this step?
+    flow: {
+      id: "1234-1234-1234-1234-1234",
+      name: "Ice Cream Order Form",
+      __value__: "Ice Cream Order Form",
+    }
+    block: {
+      id: "1234-1234-1234-1234-1235",
+      name: "quantity_ordered",
+      __value__: "quantity_ordered",
+      label: "How many would you like to order?"
+    },
+    "entered_at": "2017-01-17 14:27",
+    "exited_at": "2017-01-17 14:28",
+    "response": "I want 2",
+    "value": "2",
+    __value__: "2",
+    exit: {
+      name: "Valid",
+      __value__: "Valid",
+      id: "1234-1234-1234-1234-1234"
+    }
   }
 ]
 ```
+## Session Variables
 
-## Flow variables
+TODO: Consider.  What would be the mechanism for how these are written?
 
-The `@flow` variable contains a mapping of variables populated by Case blocks
-(or other blocks with names).
+Session variables (`@session`) provide temporary storage for the duration of the Run that blocks can write and read. They are not retained as part of results beyond the Run.  They are accessible and common to parent and child flows.
 
-```
-{
-  "age": {
-    "block": "1234-1234-1234-1234-1234",
-    "created_on": "2017-01-17 14:14",
-    "value": 36,
-    "input": "I am 36 years old",
-    "exit": "1234-1234-1234-1234-1234",
-    "exit_label": "Middle Aged",
-    "mime_type": "text/plain", # optional, assumed to be text/plain
-    __value__: 36
-  },
-  "gender": {
-    "block": "1234-1234-1234-1234-1234",
-    "created_on": "2017-01-17 14:14",
-    "value": "M",
-    "input": "m",
-    "exit": "1234-1234-1234-1234-1234",
-    "exit_label": "Male",
-    __value__: "M"
-  },
-  "voicemail": {
-    "block": "1234-1234-1234-1234-1234",
-    "created_on": "2017-01-17 14:14",
-    "value": "https://s3.aws/1234-1234-1234-1234.wav",
-    "mime_type": "audio/wav"
-    "input": "https://s3.aws/1234-1234-1234-1234.wav",
-    "exit": "1234-1234-1234-1234-1234",
-    "exit_label": "Long Message",
-    __value__: "https://s3.aws/1234-1234-1234-1234.wav",
-    "meta": {
-      "duration": 2332 # ms?
-    }
-  },
-  "mugshot": {
-    "block": "1234-1234-1234-1234-1234",
-    "created_on": "2017-01-17 14:14",
-    "value": "https://s3.aws/1234-1234-1234-1234.jpeg",
-    "mime_type": "image/jpeg"
-    "input": "https://s3.aws/1234-1234-1234-1234.jpeg",
-    "exit": "1234-1234-1234-1234-1234",
-    "exit_label": "Valid Image",
-    __value__: "https://s3.aws/1234-1234-1234-1234.jpeg",
-    "meta": {
-      "dimensions": "300x500"
-    }
-  }
-}
-```
