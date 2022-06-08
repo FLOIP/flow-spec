@@ -4,6 +4,16 @@ The Flow Context contains the variables available for a Flow to read and write
 during execution. The context is populated by the engine before and during
 execution. The Context is referenced by expressions, for the purpose of evaluating branches, and displaying content to Contacts.
 
+Top-level keys in the Context:
+
+* `@contact`: Information about the contact the Flow is running with
+* `@run`: Information about the current session
+* `@parent`: In the case of nested flows, the parent Flow's Run (Synonym: @run.parent)
+* `@child`: In the case of nested flows, the most recent child Flow's Run (Synonym: @run.child)
+* `@results`: Results collected by blocks in the Flow (Synonym: @run.results)
+* `@block`: Information collected by the current executing Block
+* `@session`: Temporary session variables set and read by Blocks
+
 ## Contact
 
 The Contact (`@contact`) contains information about the person the Flow is running with.
@@ -123,15 +133,21 @@ The Run object (`@run`) contains information about the flow session in progress.
 
       // A link to the results captured during this Run. (See @flow or @results, TODO depending on our name choice)
       results: {...}
+
+      // A link to the parent Flow's Run object (see below)
+      parent: {...}
+
+      // A link to the child Flow's Run object (see below)
+      child: {...}
     }
 
 ## Parent
 
-In the case of nested Flows, the Parent object (`@parent`) is a link to the Run of the outer Flow that launched this Flow run. This allows accessing results collected in the parent Flow.
+In the case of nested Flows, the Parent object (`@parent` or `@run.parent`) is a link to the [Run](#Run) of the outer Flow that launched this Flow run. This allows accessing results collected in the parent Flow, for example: `@parent.results.<block_name>.value`. More than one level up can be accessed, as in: `@parent.parent.results.<block_name>.value`.
 
 ## Child
 
-In the case of nested Flows, the Child object (`@child`) is a link to the Run of the most recently executed child Flow.  This allows accessing results collected in the child Flow.
+In the case of nested Flows, the Child object (`@child` or `@run.child`) is a link to the [Run](#Run) of the most recently executed child Flow.  This allows accessing results collected within a child Flow, for example: `@child.results.<block_name>.value`.
 
 ## Flow  (TODO: Should this be renamed 'results' for more clarity?? Flow would seem to be about the flow being run rather than results.)
 
