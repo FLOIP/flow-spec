@@ -128,10 +128,10 @@ The Run object (`@run`) contains information about the flow session in progress.
         __value__: "Ice Cream Order Form",
       }
 
-      // The mode the flow is running in. See [Supported Modes](TODO)
+      // The mode the flow is running in. See Supported Modes in Flow Fundamentals.
       mode: "IVR",
 
-      // A link to the results captured during this Run. (See @flow or @results, TODO depending on our name choice)
+      // A link to the results captured during this Run. (See @results)
       results: {...}
 
       // A link to the parent Flow's Run object (see below)
@@ -151,7 +151,7 @@ In the case of nested Flows, the Child object (`@child` or `@run.child`) is a li
 
 ## Results
 
-The Results object (`@flow`) holds values collected by blocks during the Run. These are keyed by the result name the block writes (`block.name`).
+The Results object (`@results`) holds values collected by blocks during the Run. These are keyed by the result name the block writes (`block.name`).
 
     results: {
       // Example name (from block.value)
@@ -195,7 +195,7 @@ The Block object (`@block`) presents the currently executing block. It's often u
 
 ## Session Variables
 
-TODO: Consider.  What would be the mechanism for how these are written?
-
 Session variables (`@session`) provide temporary storage for the duration of the Run that blocks can write and read. They are not retained as part of results beyond the Run.  They are accessible and common to parent and child flows.
+
+TODO: Consider.  What would be the mechanism for how these are written?
 
