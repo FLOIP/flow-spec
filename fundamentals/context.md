@@ -149,11 +149,11 @@ In the case of nested Flows, the Parent object (`@parent` or `@run.parent`) is a
 
 In the case of nested Flows, the Child object (`@child` or `@run.child`) is a link to the [Run](#Run) of the most recently executed child Flow.  This allows accessing results collected within a child Flow, for example: `@child.results.<block_name>.value`.
 
-## Flow  (TODO: Should this be renamed 'results' for more clarity?? Flow would seem to be about the flow being run rather than results.)
+## Results
 
-The Flow object (`@flow`) holds results written by blocks during the Run. These are keyed by the result name the block writes (`block.name`).
+The Results object (`@flow`) holds values collected by blocks during the Run. These are keyed by the result name the block writes (`block.name`).
 
-    flow /* or 'results'*/ : {
+    results: {
       // Example name (from block.value)
       favorite_ice_cream {
         // timestamp when the block was entered
