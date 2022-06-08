@@ -193,65 +193,6 @@ The Block object (`@block`) presents the currently executing block. It's often u
         response: "choc",
     }
 
-## Flow Steps
-
-The `@steps` variable contains information about the path taken by the flow
-during execution. Each block visited adds a single step upon entering the block.
-
-TODO: Should this be removed? Is it useful within the context at all?
-
-```
-[
-  {
-    // Describes the flow that ran this block. Could change in the case of nested flows.
-    flow: {
-      id: "1234-1234-1234-1234-1234",
-      name: "Ice Cream Order Form",
-      __value__: "Ice Cream Order Form",
-    }
-    block: {
-      id: "1234-1234-1234-1234-1234",
-      name: "favorite_ice_cream",
-      __value__: "favorite_ice_cream",
-      label: "What's your favorite ice cream?"
-    },
-    "entered_at": "2017-01-17 14:14",
-    "exited_at": "2017-01-17 14:15",
-    "response": "choc",
-    "value": "chocolate",
-    __value__: "chocolate",
-    // The exit that was selected coming out of this block
-    exit: {
-      name: "Chocolate",
-      __value__: "Chocolate",
-      id: "1234-1234-1234-1234-1234"
-    }
-  },
-  {
-    flow: {
-      id: "1234-1234-1234-1234-1234",
-      name: "Ice Cream Order Form",
-      __value__: "Ice Cream Order Form",
-    }
-    block: {
-      id: "1234-1234-1234-1234-1235",
-      name: "quantity_ordered",
-      __value__: "quantity_ordered",
-      label: "How many would you like to order?"
-    },
-    "entered_at": "2017-01-17 14:27",
-    "exited_at": "2017-01-17 14:28",
-    "response": "I want 2",
-    "value": "2",
-    __value__: "2",
-    exit: {
-      name: "Valid",
-      __value__: "Valid",
-      id: "1234-1234-1234-1234-1234"
-    }
-  }
-]
-```
 ## Session Variables
 
 TODO: Consider.  What would be the mechanism for how these are written?
