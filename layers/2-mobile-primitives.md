@@ -60,11 +60,13 @@ None
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact must choose a single choice from a set of choices.
 
+This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
+
 ### Block `config`
 
 | Key | Description |
 | :--- | :--- |
-| `prompt` \(resource, optional\) | The question prompt that should be displayed to the contact, e.g. "What is your favorite kind of ice cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." `prompt` may be optional when `question_prompt` is provided.|
+| `prompt` \(resource, optional\) | The question prompt that should be displayed to the contact, e.g. "What is your favorite kind of ice cream? Reply 1 for chocolate, 2 for vanilla, and 3 for strawberry." Either `prompt` or `question_prompt` should be provided. (For legacy compatibility, implementations may omit prompts completely when guidance has been given to the Contact in a previous block, but this is not recommended. In this case, the block will wait silently for a response.) |
 | `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice cream?". If included, blocks must provide suitable resources within `choices` to present the choices on each supported mode. For the `IVR` mode, they must also provide `digit_prompts`. |
 | `choices` \(array of choices\) | Set of choices to select from. See choices configuration below. |
 
@@ -77,13 +79,13 @@ Each choice in `choices` has the following elements:
 | `text_tests` \(array of objects, optional\) | See below|
 | `prompt` \(resource, optional\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
 
-#### `ivr_test` object
+##### `ivr_test` object
 This test applies to IVR flows.
 | Key | Description |
 | :--- | :--- |
 | `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1". IVR responses are not expected to vary across languages, so this test applies to all. \). |
 
-#### `text_tests` object
+##### `text_tests` object
 These tests apply to non-IVR flows. There may be multiple tests per choice: any matching test will indicate that the choice has been selected.
 | Key | Description |
 | :--- | :--- |
@@ -95,9 +97,7 @@ These tests apply to non-IVR flows. There may be multiple tests per choice: any 
 | Key | Description |
 | :--- | :--- |
 | `IVR`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
-| `IVR`: `randomize_choice_order` \(boolean\) | In conjunction with `question_prompt`, `choices_prompt`, and `IVR.digit_prompts`, this indicates that the presentation of choices should be in random order.|
-
-This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
+| `IVR`: `randomize_choice_order` \(boolean, optional\) | Indicates that the choices should be presented in a random order to each Contact. (Used to minimize response order bias in surveying). Default false. Requires the use of `question_prompt`, `choices_prompt`, and `IVR.digit_prompts` to present choices individually. |
 
 ### Detailed behaviour by mode
 
@@ -331,7 +331,7 @@ This block writes the `name` of the selected choice to the output variable corre
 ## Select Many Responses \(Multiple Choice Question\) Block
 
 * Type: `MobilePrimitives.SelectManyResponses`
-* Suggested number of exits: 1 + default exit (used in case of error or invalid input), or multiple exits based on choices
+* Suggested number of exits: 1 + default exit (used in case of error or invalid input).
 * Supported modes: `IVR`, `TEXT`, `RICH_MESSAGING`, `OFFLINE`
 
 This block obtains the answer to a Multiple Choice question from the contact. The contact can select from zero to many options from a set of choices.
@@ -340,7 +340,7 @@ This block obtains the answer to a Multiple Choice question from the contact. Th
 
 | Key | Description |
 | :--- | :--- |
-| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "What kinds of ice cream do you like: chocolate, vanilla, strawberry? Select all that apply." |
+| `prompt` \(resource, optional\) | The question prompt that should be displayed to the contact, e.g. "What kinds of ice cream do you like: chocolate, vanilla, strawberry? Select all that apply." Either `prompt` or `question_prompt` should be provided. (For legacy compatibility, implementations may omit prompts completely when guidance has been given to the Contact in a previous block, but this is not recommended. In this case, the block will wait silently for a response.) |
 | `question_prompt` \(resource, optional\) | For instances when the question prompt should be separated from the presentation of choices, e.g. "What is your favorite kind of ice cream?". If included, blocks must provide suitable resources within `choices` to present the choices on each supported mode. For the `IVR` mode, they must also provide `digit_prompts`. |
 | `choices` \(array of choices\) | Set of choices to select from. See choices configuration below. |
 | `minimum_choices` \(integer, optional\) | The minimum number of choices the Contact must select to proceed. Default if not provided: 0. |
@@ -351,10 +351,31 @@ Each choice in `choices` has the following elements:
 | Key | Description |
 | :--- | :--- |
 | `name` \(string\) | Key identifying this choice. This is what will be written into the block output (`block.value`) when a contact selects this choice, e.g. "chocolate" or "Somewhat Agree". |
-| `test` \(expression\) | Any choice with an expression that evaluates to a truthy value is a selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1" |
+| `ivr_test` \(object, optional\) | See below.|
+| `text_tests` \(array of objects, optional\) | See below|
 | `prompt` \(resource\) | Resource used to present/display/announce this choice to contacts, appropriate for the language and mode. |
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
+
+##### `ivr_test` object
+This test applies to IVR flows.
+| Key | Description |
+| :--- | :--- |
+| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1". IVR responses are not expected to vary across languages, so this test applies to all. \). |
+
+##### `text_tests` object
+These tests apply to non-IVR flows. There may be multiple tests per choice: any matching test will indicate that the choice has been selected.
+| Key | Description |
+| :--- | :--- |
+| `language` \(string, optional\) |[Language Identifier](flows.md#language-identifiers) for which this test applies. If omitted, the test will apply to all languages. Multiple tests may apply to the same language. |
+| `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1". |
+
+#### Channel-specific `config`:
+
+| Key | Description |
+| :--- | :--- |
+| `IVR`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
+| `IVR`: `randomize_choice_order` \(boolean, optional\) | Indicates that the choices should be presented in a random order to each Contact. (Used to minimize response order bias in surveying). Default false. Requires the use of `question_prompt`, `choices_prompt`, and `IVR.digit_prompts` to present choices individually. |
 
 ### Detailed behaviour by mode
 
@@ -408,41 +429,66 @@ This block writes an array of `name`s of the selected choices to the output vari
       {
         "name": "chocolate",
         "prompt": "b0f6d3ec-b9ec-4761-b280-6777d965deab",
-        "test": "OR(
-            AND(flow.mode = 'IVR', block.response = 7), 
-            AND(flow.mode != 'IVR', 
-              OR(
-                AND(flow.language = 'eng', OR(block.response = 1, block.response = 'chocolate')), 
-                AND(flow.language = 'fre', OR(block.response = 1, block.response = 'chocolat'))
-              )
-            )
-          )"
+        "ivr_test": {
+          "test_expression": "block.response = '7'"
+        }
+        "text_tests": [
+          {
+            "test_expression": "block.response = '1'"
+          },
+          {
+            "language": "eng",
+            "test_expression": "block.response = 'chocolate'"
+          },
+          {
+            "language": "fre",
+            "test_expression": "block.response = 'chocolat'"
+          },
+        ]
       },
       {
         "name": "vanilla",
         "prompt": "b75fa302-8ff7-4f49-bf26-8f915e807222",
-        "test": "OR(
-            AND(flow.mode = 'IVR', block.response = 8), 
-            AND(flow.mode != 'IVR', 
-              OR(
-                AND(flow.language = 'eng', OR(block.response = 2, block.response = 'vanilla')), 
-                AND(flow.language = 'fre', OR(block.response = 2, block.response = 'vanille'))
-              )
-            )
-          )"
+        "ivr_test": {
+          "test_expression": "block.response = '8'"
+        }
+        "text_tests": [
+          {
+            "test_expression": "block.response = '2'"
+          },
+          {
+            "language": "eng",
+            "test_expression": "block.response = 'vanilla'"
+          },
+          {
+            "language": "eng",
+            "test_expression": "block.response = 'plain'"
+          },
+          {
+            "language": "fre",
+            "test_expression": "block.response = 'vanille'"
+          },
+        ]
       },
       {
         "name": "strawberry",
         "prompt": "22619b04-b06d-483e-af83-ee3ba9c8c867",
-        "test": "OR(
-            AND(flow.mode = 'IVR', block.response = 9), 
-            AND(flow.mode != 'IVR', 
-              OR(
-                AND(flow.language = 'eng', OR(block.response = 3, block.response = 'strawberry')), 
-                AND(flow.language = 'fre', OR(block.response = 3, block.response = 'fraise'))
-              )
-            )
-          )"
+        "ivr_test": {
+          "test_expression": "block.response = '9'"
+        }
+        "text_tests": [
+          {
+            "test_expression": "block.response = '3'"
+          },
+          {
+            "language": "eng",
+            "test_expression": "block.response = 'strawberry'"
+          },
+          {
+            "language": "fre",
+            "test_expression": "block.response = 'fraise'"
+          },
+        ]
       }
     ]
   }
@@ -461,7 +507,7 @@ This block obtains a numeric response from the contact.
 
 | Key | Description |
 | :--- | :--- |
-| `prompt` \(resource\) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years." |
+| `prompt` \(resource, optional\) | The question prompt that should be displayed to the contact, e.g. "How old are you? Please reply with your age in years." (For legacy compatibility, implementations may omit the prompt when guidance has been given to the Contact in a previous block, but this is not recommended. In this case, the block will wait silently for a response.) |
 | `validation_minimum` \(number, optional\) | The minimum value \(inclusive\) that will be accepted as a response to this block; responses less than this will result in a block value of `null`. |
 | `validation_maximum` \(number, optional\) | The maximum value \(inclusive\) that will be accepted as a response to this block; responses greater than this will result in a block value of `null`. |
 
@@ -513,36 +559,20 @@ This block writes the numeric value received to the output variable correspondin
 
 This block obtains an open-ended response from the contact. Dependent on the mode, this is a TEXT response, audio recording, or other type of media recording \(e.g. video\).
 
+This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
+
 ### Block `config`
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Key</th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>prompt</code> (resource)</td>
-      <td style="text-align:left">
-        <p>The question prompt that should be displayed to the contact, e.g. &quot;Please
-          leave</p>
-        <p>us feedback on your experience at the Children&apos;s Hospital.&quot;</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Key | Description |
+| :--- | :--- |
+| `prompt` \(resource, optional\) | The question prompt that should be displayed to the contact, e.g. "Please leave us feedback on your experience at the Childrens Hospital." (For legacy compatibility, implementations may omit the prompt when guidance has been given to the Contact in a previous block, but this is not recommended. In this case, the block will wait silently for a response.) |
 
 #### Channel-specific `config`:
 
 | Key | Description |
 | :--- | :--- |
 | `IVR`: `max_duration_seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
-| `IVR`: `end_recording_digits` \(string, optional\) | A set of key-press buttons that finish an open-ended recording. |
-
-
-This block can be configured to have a single exit, or a number of exits with possibilities based on patterns in the response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
+| `IVR`: `end_recording_digits` \(string, optional\) | A set of key-press digits that terminate an open-ended recording, e.g.: "1789#" |
 
 ### Detailed behaviour by mode
 
