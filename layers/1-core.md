@@ -234,33 +234,67 @@ The `property_key` is a string attribute within the context of the Contact, and 
 * Suggested number of exits: 1
 * Supported channels: all
 
-Another common operation for platforms that run flows on Contacts is to organize Contacts into groups based on the results of flow interactions. \(Examples include managing sign-ups for opt-in campaigns, organizing Contacts into demographic groups, etc.\)
+Another common operation for platforms that run flows on Contacts is to organize Contacts into groups based on the results of flow interactions. \(Examples include managing sign-ups for opt-in campaigns, organizing Contacts into demographic groups, etc.\) This block adds or removes the Contact from one or more groups. It can also clear all existing group memberships.
 
 ### Block `config`
 
 | Key | Description |
 | :--- | :--- |
+| `groups` \(array, optional\) | A list of groups to add or remove the Contact from. (See below)
+| `is_member` \(boolean, optional\) | Determines the membership state: false to remove the contact from the group, true to add. |
+| `clear` \(boolean, optional\) | Used instead of `groups` and `is_member`, to remove a Contact from all the groups they are in. This is useful to clear group membership without needing to know all of the Contact's existing groups. |
+
+#### `groups` array items
+
+| Key | Description |
+| :--- | :--- |
 | `group_key` \(string\) | An identifier for the group that membership will be set within. |
 | `group_name` \(string, optional\) | A human-readable label in addition to the `group_key`, in cases where the `group_name` needs to be displayed to the Contact. |
-| `is_member` \(boolean\) | Determines the membership state: false to remove the contact from the group, true to add. |
 
 ### Detailed Behaviour
 
-The Contact's membership in the group shall be set according to the `is_member` boolean, immediately before following the exit node out of the block.
+- When `groups` and `is_member` is provided: The Contact will be added to the groups when `is_member` is true, and removed from the groups (if present) when `is_member` is false. This is done immediately before following the exit node out of the block.
+- When `clear` is provided and set to `true`: The Contact is removed from all of their existing groups.
 
 The `group_key` is a string and is not further restricted by the spec. For complete block interoperability across vendors, vendors would need to agree on the format and identity of `group_key`.
 
 ### Example
 
-```text
+#### Adding a Contact to a group:
+
+```
 {
     "type": "Core.SetGroupMembership",
     "name": "ContactGMBlock",
     "label": "Test Group Membership",
     "config": {
-      "group_key": "7294",
-      "group_name": "Healthcare workers",
+      groups: [
+        {
+          "group_key": "7294",
+          "group_name": "Healthcare workers",
+        }
+      ],
       "is_member": true,
+    },
+    "exits": [
+      {
+        "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
+        "name": "Default",
+        "default": true,
+      }
+    ]
+  }
+```
+
+#### Removing a Contact from all their existing groups:
+
+```
+{
+    "type": "Core.SetGroupMembership",
+    "name": "ContactGMBlock",
+    "label": "Remove all Group Memberships",
+    "config": {
+      "clear": true,
     },
     "exits": [
       {
