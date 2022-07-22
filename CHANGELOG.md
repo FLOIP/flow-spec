@@ -29,9 +29,6 @@ This changelog documents material changes to the Flow Results specification. Ver
 - Clarification on what the block’s behaviour is when an invalid input is given.
 “responses less than this will proceed through the default exit” change to “responses less than this will result in a block value of null.”
 
-#### Set Contact Property component
-- Update set contact property component’s definition to consider "blocks with results" instead of all blocks.
-
 #### `Core.SetGroupMembership`
 - Change is_member to boolean on Set Group Membership.
 
