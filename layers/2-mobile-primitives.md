@@ -83,7 +83,7 @@ This test applies to IVR flows.
 | :--- | :--- |
 | `test_expression` \(expression\) | The first choice with an expression that evaluates to a truthy value is the selected choice. Often this expression would examine the raw response from the contact, e.g. "block.response = 1". IVR responses are not expected to vary across languages, so this test applies to all. \). |
 
-#### `text_test` object
+#### `text_tests` object
 These tests apply to non-IVR flows. There may be multiple tests per choice: any matching test will indicate that the choice has been selected.
 | Key | Description |
 | :--- | :--- |
