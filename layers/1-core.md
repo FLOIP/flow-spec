@@ -34,13 +34,13 @@ The Context for a Flow shall have a `log` key, which preserves a mapping of time
 
 e.g.,
 
-```text
+```json
 "2017-03-05T12:30:42.123+00:00":"This is a sample log message."
 ```
 
 ### Example
 
-```text
+```json
 {
   "type": "Core.Log",
   "name": "test_log_block",
@@ -90,7 +90,7 @@ Truthy values include all values that are not `0`, `false`, `null`, or `undefine
 
 ### Example
 
-```text
+```json
 {
   "type": "Core.Case",
   "name": "patient_age_decision",
@@ -143,7 +143,7 @@ Multiple levels of nested Flows shall be supported. When an inner Flow terminate
 
 ### Example
 
-```text
+```json
     [...]
     "type": "Core.RunFlow",
     "name": "RunAnotherFlow",
@@ -174,7 +174,7 @@ Not all block interactions and low-level logs are important to users; most users
 
 ### Example
 
-```text
+```json
 TODO
 ```
 

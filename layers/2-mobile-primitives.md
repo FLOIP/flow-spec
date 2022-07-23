@@ -40,7 +40,7 @@ None
 
 ### Example
 
-```text
+```json
 {
   "type": "MobilePrimitives.Message",
   "name": "welcome_message",
@@ -116,7 +116,7 @@ This block writes the `name` of the selected choice to the output variable corre
 
 ### Example
 
-```text
+```json
 {
   "type": "MobilePrimitives.SelectOneResponse",
   "name": "favorite_ice_cream",
@@ -394,7 +394,7 @@ This block writes an array of `name`s of the selected choices to the output vari
 
 ### Example
 
-```text
+```json
 [...]
 {
   "type": "MobilePrimitives.SelectManyResponses",
@@ -533,7 +533,7 @@ This block writes the numeric value received to the output variable correspondin
 
 ### Example
 
-```text
+```json
 [...]
 {
   "type": "MobilePrimitives.NumericResponse",
@@ -588,7 +588,7 @@ For `TEXT`, `OFFLINE`, and `RICH_MESSAGING` modes that capture a text response, 
 
 ### Example
 
-```text
+```json
 [...]
 {
   "type": "MobilePrimitives.OpenResponse",

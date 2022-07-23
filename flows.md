@@ -26,7 +26,7 @@ Throughout the specification, the terms "string", "object", and "array" refer to
 
 A Resource describes a collection of localized strings or media resources, used when content needs to be presented to Contacts in multiple languages. Resources have the following logical structure:
 
-```text
+```json
 Resource {
   uuid: string,
   values: ResourceValue[]
@@ -59,7 +59,7 @@ SupportedMode {
 
 for example,
 
-```text
+```json
 {
    uuid: "c2dbafbd-e9bd-408f-aabc-25cf67040002",
    values: [
@@ -117,7 +117,7 @@ The _recommended_ structure for Language Identifier strings is:
 
 #### Language Example
 
-```text
+```json
 languages: [
    {
       id: "eng-male",
@@ -155,7 +155,7 @@ languages: [
 
 The term "uuid" refers to a universally unique identifier. Implementations may use any UUID version from [RFC4122](https://tools.ietf.org/html/rfc4122) or [Version 6 IDs](https://bradleypeabody.github.io/uuidv6/). Platforms are recommended to use version 6 IDs for performance and compatibility. The hyphenated string representation of the UUID must be used within JSON documents, for instance:
 
-```text
+```json
 "uuid":"2b375764-9fcc-11e7-abc4-cec278b6b50a"
 ```
 
@@ -180,7 +180,7 @@ A Container is a "package" document containing one or more Flow Definitions, use
 
 #### Example
 
-```text
+```json
 {
    "specification_version": "1.0.0-rc1",
    "uuid": "95f29456-8a33-4d26-b22a-00b0b169056c",
@@ -223,7 +223,7 @@ Possible modes for `supported_modes` are:
 
 #### Flow Example
 
-```text
+```json
 {
    "uuid": "06c912aa-0d36-4d9c-b144-0cd3a38e8293",
    "name": "Summary Case Report Test",
@@ -290,7 +290,7 @@ Each exit must specify one of either `test` or `default`. Each block must have e
 
 A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this use-case, all blocks have a standard capability to specify how a contact's properties should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` array within the Block `config`:
 
-```text
+```json
 config {
    ...,
    set_contact_property: [
@@ -311,7 +311,7 @@ The `property_key` is a string attribute within the context of the Contact, and 
 
 #### Block Example
 
-```text
+```json
 {
    "uuid": "0a0da5ab-66bc-4cd5-94c1-1e97f1875ee0",
    "vendor_metadata": {},

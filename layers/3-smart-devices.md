@@ -35,19 +35,19 @@ This block allows a device user to capture a location on a map, e.g. using a GPS
 
 This block writes the location coordinates to the output variable corresponding to the `name` of the block. The format of the coordinates is an array of 4 floating point numbers: latitude, longitude, elevation \(in meters\), and accuracy \(in meters\):
 
-```text
+```json
 [lat, long, elevation, accuracy]
 ```
 
 e.g.
 
-```text
+```json
 [52.0835780,-106.6104880, 501.23, 0.5]
 ```
 
 ### Example
 
-```text
+```json
 TODO
 ```
 
