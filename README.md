@@ -4,7 +4,7 @@ A container and data format for describing the _content and logic of digital int
 
 Flows represent a collection of actions ("Blocks") and the decision-making logic that links Blocks together into a flowchart-like description of an interactive mobile service, business process, or anything else that can be modelled as programmatic flow-chart.
 
-| Authors      | Mark Boots (Viamo) Peter Lubell-Doughtie (Ona) Eduardo Jezierski (InSTEDD) Gustavo Giráldez (InSTEDD) Evan Wheeler (UNICEF) |
+| Authors      | Mark Boots (Viamo) Peter Lubell-Doughtie (Ona) Eduardo Jezierski (InSTEDD) Gustavo Giráldez (InSTEDD) Evan Wheeler (UNICEF) Simon de Haan (Turn) Joao Almeida (Weni) |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | Media Type   | TODO: once registered: application/vnd.org.flowinterop.flows+json                                                           |
 | Version      | 1.0.0-rc4                                                                                                                   |
