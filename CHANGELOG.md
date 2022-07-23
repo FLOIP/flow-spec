@@ -4,9 +4,40 @@ This changelog documents material changes to the Flow Results specification. Ver
 
 ## \[Unreleased]
 
-### Added
+### Deprecated
 
+- `Console.IO` and `ConsoleUI.Print` had theoretical use-cases that did not materialize. They have been removed.
+- Given that the `Console` namespace no longer has blocks, it has been removed.
+
+### Added
 * Webhook block type within the Core namespace (`Core.Webhook`), for asynchronous or synchronous requests to external endpoints during Flow runs. [(#24)](https://github.com/FLOIP/flow-spec/issues/24)
+
+### Changed
+#### Resources
+- Resources have been re-located from the container to the flow to which they apply. Including resources with the flows they belong to is more straightforward for implementers. If a resource needs to be used in multiple places the same URL can be used, but referenced from multiple resources.
+
+#### Response Blocks (`OpenResponse`, `Numeric`, `SelectOne`, `SelectMany`)
+- Clarify that prompts are optional (but recommended). This enables legacy conversions where prompts have been sent to the Contact in a previous Message block, and it's not possible to merge the Message block with the Response block. In the case where no prompt exists, the block will wait silently for a response.
+
+#### `MobilePrimitives.OpenResponse`
+- `TEXT.max_response_characters` removed. Behaviour for this feature is unclear. Would the message from a user be rejected if it was too long? Would it be truncated? Since most channels have character inherent character limits anyways, suggest to remove this from the spec and allow vendors to configure a limit with vendor metadata if needed.
+- `IVR.end_recording_digits` added. These will allow a caller to end a recording, instead of waiting for timeout.
+
+#### `MobilePrimitives.SelectOne` and `MobilePrimitives.SelectMany`
+- `IVR.randomize_choice_order` added. This field works in conjunction with pre-existing `question_prompt`, `choices.prompt` and `IVR.digit_prompts` to present choices in random order to reduce response bias.
+- Clarification: prompt is optional when question_prompt is provided. On IVR, A prompt doesn’t need to be provided for each choice unless question_prompt is provided.
+- Choice tests refactored. IVR and Text test cases are now separate, with text tests defined per-language. 
+
+#### `MobilePrimitives.Numeric`
+- Clarification on what the block’s behaviour is when an invalid input is given.
+“responses less than this will proceed through the default exit” change to “responses less than this will result in a block value of null.”
+
+#### `Core.SetGroupMembership`
+- Allow a list of groups, to add to or remove a Contact from multiple groups at once.
+- Add a new action "clear", which removes a Contact from all existing groups without needing to specify them.
+
+#### `Core.SetContactProperty` and `block.config.set_contact_property`
+- Allow setting an array of multiple contact properties within one block. This simplifies common flows compared to using multiple blocks, and improves interoperability.
 
 ## \[1.0.0-rc3] - 2021-07-30
 

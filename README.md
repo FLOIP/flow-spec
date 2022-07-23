@@ -35,8 +35,8 @@ This is an initial collaboration between makers of Flow-like platforms and suppo
 4. [Expressions](expressions.md)
 5. [Layers in the Specification](layers/)
    1. [Layer 1: Core](layers/1-core.md)
-   2. [Layer 2: Mobile Primitives](layers/1-mobile-primitives.md)
-   4. [Layer 3: Smart Devices](layers/3-smart-devices.md)
+   2. [Layer 2: Mobile Primitives](layers/2-mobile-primitives.md)
+   3. [Layer 3: Smart Devices](layers/3-smart-devices.md)
 
 ## Language
 
