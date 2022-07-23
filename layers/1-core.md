@@ -269,48 +269,50 @@ The `group_key` is a string and is not further restricted by the spec. For compl
 
 #### Adding a Contact to a group:
 
-```
+```json
 {
-    "type": "Core.SetGroupMembership",
-    "name": "ContactGMBlock",
-    "label": "Test Group Membership",
-    "config": {
-      groups: [
-        {
-          "group_key": "7294",
-          "group_name": "Healthcare workers",
-        }
-      ],
-      "is_member": true,
-    },
-    "exits": [
+  "type": "Core.SetGroupMembership",
+  "name": "ContactGMBlock",
+  "label": "Test Group Membership",
+  "config": {
+    "groups": [
       {
-        "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
-        "name": "Default",
-        "default": true,
+        "group_key": "7294",
+        "group_name": "Healthcare workers",
       }
-    ]
-  }
+    ],
+    "is_member": true,
+  },
+  "exits": [
+    {
+      "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
+      "name": "Default",
+      "default": true,
+      "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
+    }
+  ]
+}
 ```
 
 #### Removing a Contact from all their existing groups:
 
-```
+```json
 {
-    "type": "Core.SetGroupMembership",
-    "name": "ContactGMBlock",
-    "label": "Remove all Group Memberships",
-    "config": {
-      "clear": true,
-    },
-    "exits": [
-      {
-        "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
-        "name": "Default",
-        "default": true,
-      }
-    ]
-  }
+  "type": "Core.SetGroupMembership",
+  "name": "ContactGMBlock",
+  "label": "Remove all Group Memberships",
+  "config": {
+    "clear": true,
+  },
+  "exits": [
+    {
+      "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
+      "name": "Default",
+      "default": true,
+      "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
+    }
+  ]
+}
 ```
 
 ## Webhook Block
@@ -356,15 +358,13 @@ In asynchronous mode (`wait_for_response=false`), the block will
   - `block.value` will be 202 (Accepted)
   - `block.response` will be null.
 
-### Suggested exits
-
-- "Succeeded": Test example might be `AND(block.value >= 200, block.value < 300)`
-- "Failed": Default exit
-
 ### Example
 
 ```json
 {
+  "type": "Core.Webhook",
+  "name": "WebhookBlock1",
+  "label": "Webhook BLock Test",
   "config": {
     // string.
     "method": "GET",
@@ -403,7 +403,21 @@ In asynchronous mode (`wait_for_response=false`), the block will
     "timeout": 30000,
 
     // boolean, optional, default true.  If false, the flow execution does not need to wait for a response from the endpoint to proceed on with the flow. ("asynchronous" webhook block, used to share flow results/contact updates with a 3rd party system, waiting for network availability if needed).  The `block.value` will be  202 (Accepted), and the raw `block.response` will be null.
-    "wait_for_response": false
-  }
+    "wait_for_response": true
+  },
+  "exits": [
+    {
+      "uuid": "9b5c0eb4-46ca-4b54-86c5-f9d3d4e30538",
+      "name": "Success",
+      "test": "AND(block.value >= 200, block.value < 300)",
+      "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
+    },
+    {
+      "uuid": "c43106ba-be75-4a86-8da4-837de8348a22",
+      "name": "Fail",
+      "default": true,
+      "destination_block": "338d216f-996c-4c6a-a1f5-fa2d1abe67a3"
+    }
+  ]
 }
 ```
