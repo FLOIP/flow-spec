@@ -190,9 +190,9 @@ A common use-case for platforms that run flows on Contacts is to modify the Cont
 
 | Key | Description |
 | :--- | :--- |
-| `set_contact_property` \(object, required\) | See below |
+| `set_contact_property` \(array, required\) | See below |
 
-#### `set_contact_property` object
+#### `set_contact_property` array items
 
 | Key | Description |
 | :--- | :--- |
@@ -207,16 +207,22 @@ The `property_key` is a string attribute within the context of the Contact, and 
 
 ### Example
 
-```text
+```
 {
     "type": "Core.SetContactProperty",
     "name": "test_contact_property",
     "label": "Test Contact Property",
     "config": {
-      "set_contact_property": {
-        "property_key": "gender",
-        "property_value": "male"
-      }
+      "set_contact_property": [
+        {
+          "property_key": "gender",
+          "property_value": "male"
+        },
+        {
+          "property_key": "age_range",
+          "property_value": "18_to_30"
+        }
+      ]
     },
     "exits": [
       {

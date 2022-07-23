@@ -36,6 +36,8 @@ This changelog documents material changes to the Flow Results specification. Ver
 - Allow a list of groups, to add to or remove a Contact from multiple groups at once.
 - Add a new action "clear", which removes a Contact from all existing groups without needing to specify them.
 
+#### `Core.SetContactProperty` and `block.config.set_contact_property`
+- Allow setting an array of multiple contact properties within one block. This simplifies common flows compared to using multiple blocks, and improves interoperability.
 
 ## \[1.0.0-rc3] - 2021-07-30
 

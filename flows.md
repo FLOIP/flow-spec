@@ -288,15 +288,22 @@ Each exit must specify one of either `test` or `default`. Each block must have e
 
 #### Setting Contact Properties
 
-A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this common use-case, all blocks have a standard capability to specify how a contact property should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` object within the Block `config`:
+A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this use-case, all blocks have a standard capability to specify how a contact's properties should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` array within the Block `config`:
 
 ```text
 config {
    ...,
-   set_contact_property: {
-      property_key: <string>
-      property_value: <Expression>
-   }
+   set_contact_property: [
+      {
+         property_key: <string>
+         property_value: <Expression>
+      },
+      {
+         property_key: <string>
+         property_value: <Expression>
+      },
+      ...
+   ]
 }
 ```
 
@@ -323,10 +330,12 @@ The `property_key` is a string attribute within the context of the Contact, and 
    ],
    "config": {
       "prompt": "d99f9833-ace6-4f7f-957e-0a516e3dbb47"
-      "set_contact_property": {
-         "property_key": "gender"
-         "property_value": "block.value"
-      }
+      "set_contact_property": [
+         {
+            "property_key": "gender"
+            "property_value": "block.value"
+         }
+      ]
    }
 }
 ```
