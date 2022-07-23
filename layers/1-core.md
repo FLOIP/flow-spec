@@ -393,11 +393,11 @@ In asynchronous mode (`wait_for_response=false`), the block will
     "max_content_length": 20000,
 
     // string, optional. Request body. Supports expressions evaluated at runtime.
-    "body": "{
+    "body": "\{
         \"operation\": \"new\",
         \"date\": \"2021-03-06\",
         \"person_id\": \"@contact.national_id\",
-      }",
+      \}",
 
     // integer, optional, default 10000.  Specifies the number of milliseconds before the request times out.  If the request takes longer than `timeout`, the request will be aborted, the status (`block.value`) will be 408 and the raw `block.response` will be null.
     "timeout": 30000,
