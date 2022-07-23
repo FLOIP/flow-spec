@@ -2,15 +2,14 @@
 
 A container and data format for describing the _content and logic of digital interactions_, using the Flow Data paradigm. It provides for the open publication, exchange, and analysis of Flow-like content across supporting platforms.
 
-Flows represent a collection of actions \("Blocks"\) and the decision-making logic that links Blocks together into a flowchart-like description of an interactive mobile service, business process, or anything else that can be modelled as programmatic flow-chart.
+Flows represent a collection of actions ("Blocks") and the decision-making logic that links Blocks together into a flowchart-like description of an interactive mobile service, business process, or anything else that can be modelled as programmatic flow-chart.
 
-| Authors | Mark Boots \(Viamo\)  Peter Lubell-Doughtie \(Ona\)  Eduardo Jezierski \(InSTEDD\)  Gustavo Giráldez \(InSTEDD\)  Evan Wheeler \(UNICEF\) |
-| :--- | :--- |
-| Media Type | TODO: once registered: application/vnd.org.flowinterop.flows+json |
-| Version | 1.0.0-rc3 |
-| Last updated | 2021-07-11 |
-| Created | 2016-09-10 |
-|  |  |
+| Authors      | Mark Boots (Viamo) Peter Lubell-Doughtie (Ona) Eduardo Jezierski (InSTEDD) Gustavo Giráldez (InSTEDD) Evan Wheeler (UNICEF) |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| Media Type   | TODO: once registered: application/vnd.org.flowinterop.flows+json                                                           |
+| Version      | 1.0.0-rc4                                                                                                                   |
+| Last updated | 2022-07-22                                                                                                                  |
+| Created      | 2016-09-10                                                                                                                  |
 
 ## Introduction
 
@@ -18,7 +17,7 @@ The purpose of the project is to enable useful interoperability between Flow-bas
 
 ### What are Flows?
 
-Flows are a modern paradign for describing the logic of digital information systems that interact with individuals, often for the purpose of \(a\) collecting data or \(b\) providing information through interactive requests. Some common examples of this are in mobile services using voice-based or SMS-based conversations over basic mobile phones. Flows follow the "flowchart" paradigm, consisting of actions \(nodes\) and connections between actions, which can incorporate decision-making logic.
+Flows are a modern paradign for describing the logic of digital information systems that interact with individuals, often for the purpose of (a) collecting data or (b) providing information through interactive requests. Some common examples of this are in mobile services using voice-based or SMS-based conversations over basic mobile phones. Flows follow the "flowchart" paradigm, consisting of actions (nodes) and connections between actions, which can incorporate decision-making logic.
 
 ### Who is working on this?
 
@@ -45,7 +44,6 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 ## Dates
 
-All dates are RFC 3339 5.6 date-time, with offset-based timezone and space instead of T option. 
+All dates are RFC 3339 5.6 date-time, with offset-based timezone and space instead of T option.
 
 Example: **2017-06-30 15:35:27.134+00:00**
-
