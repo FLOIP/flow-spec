@@ -208,7 +208,7 @@ The `property_key` is a string attribute within the context of the Contact, and 
 
 ### Example
 
-```
+```json
 {
     "type": "Core.SetContactProperty",
     "name": "test_contact_property",
