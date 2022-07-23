@@ -26,7 +26,7 @@ Throughout the specification, the terms "string", "object", and "array" refer to
 
 A Resource describes a collection of localized strings or media resources, used when content needs to be presented to Contacts in multiple languages. Resources have the following logical structure:
 
-```text
+```json
 Resource {
   uuid: string,
   values: ResourceValue[]
@@ -59,7 +59,7 @@ SupportedMode {
 
 for example,
 
-```text
+```json
 {
    uuid: "c2dbafbd-e9bd-408f-aabc-25cf67040002",
    values: [
@@ -117,7 +117,7 @@ The _recommended_ structure for Language Identifier strings is:
 
 #### Language Example
 
-```text
+```json
 languages: [
    {
       id: "eng-male",
@@ -155,7 +155,7 @@ languages: [
 
 The term "uuid" refers to a universally unique identifier. Implementations may use any UUID version from [RFC4122](https://tools.ietf.org/html/rfc4122) or [Version 6 IDs](https://bradleypeabody.github.io/uuidv6/). Platforms are recommended to use version 6 IDs for performance and compatibility. The hyphenated string representation of the UUID must be used within JSON documents, for instance:
 
-```text
+```json
 "uuid":"2b375764-9fcc-11e7-abc4-cec278b6b50a"
 ```
 
@@ -177,19 +177,17 @@ A Container is a "package" document containing one or more Flow Definitions, use
 | `description` \(string\) | An extended human-readable description of the content. |
 | `vendor_metadata` \(object, optional\) | A set of key-value elements that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 | `flows` \(array\) | A list of the Flows within the Container \(see below\) |
-| `resources` \(object\) | A set of the Resources needed for executing the Flows in the Container, keyed by resource uuid. |
 
 #### Example
 
-```text
+```json
 {
    "specification_version": "1.0.0-rc1",
    "uuid": "95f29456-8a33-4d26-b22a-00b0b169056c",
    "name": "Summary Case Report Test",
    "description": "Summary Case Report Test",
    "vendor_metadata": {},
-   "flows": [...],
-   "resources": [...]
+   "flows": [...]
 }
 ```
 
@@ -210,6 +208,7 @@ A Flow represents a set of Blocks and their direct connections. The required key
 | `exit_block_id` \(uuid, optional\) | If provided, the ID of the block in`blocks`that will be jumped to if there is an error or deliberate exit condition during Flow Run. If not provided, the Flow Run will end immediately. |
 | `languages` \(array\) | A list of the languages that the Flow has suitable content for. See language object specification below. |
 | `blocks` \(array\) | A list of the Blocks in the flow \(see below\).  The flow will start execution at the _first_ block in this list. |
+| `resources` \(object\) | A set of the Resources needed for executing the Flow, keyed by resource uuid. |
 
 #### Modes
 
@@ -224,7 +223,7 @@ Possible modes for `supported_modes` are:
 
 #### Flow Example
 
-```text
+```json
 {
    "uuid": "06c912aa-0d36-4d9c-b144-0cd3a38e8293",
    "name": "Summary Case Report Test",
@@ -247,7 +246,8 @@ Possible modes for `supported_modes` are:
       }
    ],
    "vendor_metadata": {},
-   "blocks": [...]
+   "blocks": [...],
+   "resources": {...}
 }
 ```
 
@@ -288,15 +288,22 @@ Each exit must specify one of either `test` or `default`. Each block must have e
 
 #### Setting Contact Properties
 
-A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this common use-case, all blocks have a standard capability to specify how a contact property should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` object within the Block `config`:
+A common use-case for platforms that run flows on Contacts is to modify the Contact's properties based on the interactions within a flow. To simplify this use-case, all blocks have a standard capability to specify how a contact's properties should be updated. This update shall happen immediately prior to following the exit node out of the block. This is specified via the optional `set_contact_property` array within the Block `config`:
 
-```text
+```json
 config {
    ...,
-   set_contact_property: {
-      property_key: <string>
-      property_value: <Expression>
-   }
+   set_contact_property: [
+      {
+         property_key: <string>
+         property_value: <Expression>
+      },
+      {
+         property_key: <string>
+         property_value: <Expression>
+      },
+      ...
+   ]
 }
 ```
 
@@ -304,7 +311,7 @@ The `property_key` is a string attribute within the context of the Contact, and 
 
 #### Block Example
 
-```text
+```json
 {
    "uuid": "0a0da5ab-66bc-4cd5-94c1-1e97f1875ee0",
    "vendor_metadata": {},
@@ -323,10 +330,12 @@ The `property_key` is a string attribute within the context of the Contact, and 
    ],
    "config": {
       "prompt": "d99f9833-ace6-4f7f-957e-0a516e3dbb47"
-      "set_contact_property": {
-         "property_key": "gender"
-         "property_value": "block.value"
-      }
+      "set_contact_property": [
+         {
+            "property_key": "gender"
+            "property_value": "block.value"
+         }
+      ]
    }
 }
 ```
