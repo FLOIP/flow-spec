@@ -5,6 +5,7 @@
 * [Glossary and Definitions](glossary.md)
 * [Flow Fundamentals](flows.md)
 * [Expressions](expressions.md)
+* [Context](context.md)
 * [Layers](layers/README.md)
   * [Layer 1: Core](layers/1-core.md)
   * [Layer 2: Mobile Primitives](layers/2-mobile-primitives.md)
