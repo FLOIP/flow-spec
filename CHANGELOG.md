@@ -2,7 +2,7 @@
 
 This changelog documents material changes to the Flow Results specification. Versions of the specification adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## \[1.0.0-rc4] - 2022-07-22
+## \[1.0.0-rc4] - 2022-07-04
 
 ### Deprecated
 
