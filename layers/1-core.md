@@ -13,6 +13,7 @@ _Namespace_: `Core`
 * [Output Block](1-core.md#output-block)
 * [Set Contact Property Block](1-core.md#set-contact-property)
 * [Set Group Membership Block](1-core.md#set-group-membership)
+* [Webhook Block](1-core.md#webhook-block)
 
 ## Log Block
 
@@ -246,7 +247,7 @@ Another common operation for platforms that run flows on Contacts is to organize
 
 | Key | Description |
 | :--- | :--- |
-| `groups` \(array, optional\) | A list of groups to add or remove the Contact from. (See below)
+| `groups` \(array, optional\) | A list of groups to add or remove the Contact from. (See below) |
 | `is_member` \(boolean, optional\) | Determines the membership state: false to remove the contact from the group, true to add. |
 | `clear` \(boolean, optional\) | Used instead of `groups` and `is_member`, to remove a Contact from all the groups they are in. This is useful to clear group membership without needing to know all of the Contact's existing groups. |
 
@@ -312,3 +313,97 @@ The `group_key` is a string and is not further restricted by the spec. For compl
   }
 ```
 
+## Webhook Block
+
+* Type: `Core.Webhook`
+* Suggested number of exits: 2 (Successful operation, and default exit on failure)
+* Supported channels: all
+
+This block is used to connect flows to external API services: to notify external services of events during flows, and/or to retrieve personalized content to display to Contacts.
+The block can be used in two modes: in synchronous mode (`wait_for_response=true`), the block will wait for a response from the external service, parse the response, and make the response content available within Expressions.  In asynchronous mode (`wait_for_response=false`), the Flow does not need to wait for a response from the external service before proceeding to the next block. This is useful for "notification only" use-cases where there might be high latency or unreliability in reaching the external service.
+
+### Block `config`
+
+| Key | Description |
+| :--- | :--- |
+| `method` \(string\) | The HTTP method to use, e.g.: "GET", "POST", "PUT", etc. |
+| `url` \(string, expression\) | The destination endpoint of the external service. Supports expressions evaluated at runtime. |
+| `query_params` \(object, optional\) | Query-string parameters that are appended to the `url`. The value of each parameter supports expressions evaluated at runtime. |
+| `headers` \(object, optional\) | Headers to set in the HTTP request. The value of each key supports expressions evaluated at runtime. |
+| `auth` \(object, optional\) | Used for HTTP basic authentication. This will set an `Authorization` header, overwriting any existing `Authorization` custom headers you have set within `headers`.  Values support expressions evaluated at runtime. |
+| `max_content_length` \(integer, optional\) | Defines the max size of the http response content in bytes allowed. Designed to prevent external endpoints from overloading runtimes. Default 10000 bytes. |
+| `body` \(string, optional\) | The contents of the request body. Supports expressions evaluated at runtime. This should be pre-encoded properly for the destination endpoint; the block does not perform any additional encoding. |
+| `timeout` \(integer, optional\) | Specifies the number of milliseconds before the request times out.  If the request takes longer than `timeout`, the request will be aborted, the status (`block.value`) will be 408 and the raw `block.response` will be null. Default 10000. |
+| `wait_for_response` \(boolean, optional\) | If false, the flow execution does not need to wait for a response from the endpoint to proceed on with the flow. (Used for "asynchronous" webhook blocks, to share flow results/contact updates with an external system, waiting for network availability if needed).  When specified false, the `block.value` will be 202 (Accepted), and the raw `block.response` will be null. Default true. |
+
+### Detailed Behaviour
+
+In synchronous mode (`wait_for_response=true`), the block will:
+
+- Reach the external webhook service on `url` with `method`, `query_params`, and `body`.
+- Wait up to `timeout` milliseconds for the response
+- Make the response available to expressions as indicated:
+  - `block.value`: the HTTP response integer status code (e.g.: 200, 404, etc.)
+  - `block.response`: the response body received from the endpoint. If the response `Content-type` is `"application/json"`, the response is parsed as JSON and stored as an object under `block.response`. In other cases, the raw response bytes are made available as a string in `block.response`.
+  - `block.response_headers`: the headers of the response received from the endpoint, stored as an object.
+
+(As always, these are available via `@results.<block.name>.value` everywhere, and `@block.value` inside the current block.)
+
+In asynchronous mode (`wait_for_response=false`), the block will
+
+- Reach the external webhook service on `url` with `method`, `query_params`, and `body`, although not necessarily before proceeding through the exit.
+- Set the block results as indicated:
+  - `block.value` will be 202 (Accepted)
+  - `block.response` will be null.
+
+### Suggested exits
+
+- "Succeeded": Test example might be `AND(block.value >= 200, block.value < 300)`
+- "Failed": Default exit
+
+### Example
+
+```json
+{
+  "config": {
+    // string.
+    "method": "GET",
+
+    // string. Supports expressions evaluated at runtime.
+    "url": "https://this.isanexample.com/v1/test?user=@contact.user_id",
+
+    // object, optional. Query-string parameters appended to the URL. Values support expressions evaluated at runtime.
+    "query_params": {
+      "contact_name": "@contact.name",
+      "contact_pin": "@contact.pin"
+    },
+    
+    // object, optional. Values support expressions evaluated at runtime.
+    "headers": {     
+      "Authorization": "Token AAFFZZHH"
+    },
+
+    // object, optional.  For HTTP basic authentication. This will set an `Authorization` header, overwriting any existing `Authorization` custom headers you have set within `headers`.  Keys support expressions evaluated at runtime.
+    "auth": {
+        "username": "janedoe",
+        "password": "s00pers3cret"
+    },
+
+    // integer, optional, default 10000.  Defines the max size of the http response content in bytes allowed.
+    "max_content_length": 20000,
+
+    // string, optional. Request body. Supports expressions evaluated at runtime.
+    "body": "{
+        \"operation\": \"new\",
+        \"date\": \"2021-03-06\",
+        \"person_id\": \"@contact.national_id\",
+      }",
+
+    // integer, optional, default 10000.  Specifies the number of milliseconds before the request times out.  If the request takes longer than `timeout`, the request will be aborted, the status (`block.value`) will be 408 and the raw `block.response` will be null.
+    "timeout": 30000,
+
+    // boolean, optional, default true.  If false, the flow execution does not need to wait for a response from the endpoint to proceed on with the flow. ("asynchronous" webhook block, used to share flow results/contact updates with a 3rd party system, waiting for network availability if needed).  The `block.value` will be  202 (Accepted), and the raw `block.response` will be null.
+    "wait_for_response": false
+  }
+}
+```
