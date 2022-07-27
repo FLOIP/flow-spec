@@ -96,8 +96,8 @@ These tests apply to non-IVR flows. There may be multiple tests per choice: any 
 
 | Key | Description |
 | :--- | :--- |
-| `IVR`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
-| `IVR`: `randomize_choice_order` \(boolean, optional\) | Indicates that the choices should be presented in a random order to each Contact. (Used to minimize response order bias in surveying). Default false. Requires the use of `question_prompt`, `choices_prompt`, and `IVR.digit_prompts` to present choices individually. |
+| `ivr`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
+| `ivr`: `randomize_choice_order` \(boolean, optional\) | Indicates that the choices should be presented in a random order to each Contact. (Used to minimize response order bias in surveying). Default false. Requires the use of `question_prompt`, `choices_prompt`, and `IVR.digit_prompts` to present choices individually. |
 
 ### Detailed behaviour by mode
 
@@ -374,8 +374,8 @@ These tests apply to non-IVR flows. There may be multiple tests per choice: any 
 
 | Key | Description |
 | :--- | :--- |
-| `IVR`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
-| `IVR`: `randomize_choice_order` \(boolean, optional\) | Indicates that the choices should be presented in a random order to each Contact. (Used to minimize response order bias in surveying). Default false. Requires the use of `question_prompt`, `choices_prompt`, and `IVR.digit_prompts` to present choices individually. |
+| `ivr`: `digit_prompts` \(array of resources\) | An ordered set of audio prompts, with the same length as `choices`, with content such as "Press 1", "Press 2", "Press 3". This is required when using `question_prompt` to present choices individually.  |
+| `ivr`: `randomize_choice_order` \(boolean, optional\) | Indicates that the choices should be presented in a random order to each Contact. (Used to minimize response order bias in surveying). Default false. Requires the use of `question_prompt`, `choices_prompt`, and `IVR.digit_prompts` to present choices individually. |
 
 ### Detailed behaviour by mode
 
@@ -515,7 +515,7 @@ This block obtains a numeric response from the contact.
 
 | Key | Description |
 | :--- | :--- |
-| `IVR`: `max_digits` \(number\) | After receiving this many digits, do not wait for any more; accept the digits entered so far as the complete response. |
+| `ivr`: `max_digits` \(number\) | After receiving this many digits, do not wait for any more; accept the digits entered so far as the complete response. |
 
 This block can be configured to have a single exit, or a number of exits with possibilities based on the range of the numeric response given. The exit specification is as described in [Block `exits`](../flows.md#blocks).
 
@@ -571,8 +571,8 @@ This block can be configured to have a single exit, or a number of exits with po
 
 | Key | Description |
 | :--- | :--- |
-| `IVR`: `max_duration_seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
-| `IVR`: `end_recording_digits` \(string, optional\) | A set of key-press digits that terminate an open-ended recording, e.g.: "1789#" |
+| `ivr`: `max_duration_seconds` \(number\) | The maximum duration to record for, before proceeding to the next block. |
+| `ivr`: `end_recording_digits` \(string, optional\) | A set of key-press digits that terminate an open-ended recording, e.g.: "1789#" |
 
 ### Detailed behaviour by mode
 
