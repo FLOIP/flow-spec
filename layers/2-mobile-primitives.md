@@ -544,7 +544,7 @@ This block writes the numeric value received to the output variable correspondin
     "prompt": "986a0f39-bfdf-4aa0-9fe2-28c90f422e1f",
     "validation_minimum": 0,
     "validation_maximum": 120,
-    "IVR": {
+    "ivr": {
       "max_digits": 3
     }
   }
@@ -598,7 +598,7 @@ For `TEXT`, `OFFLINE`, and `RICH_MESSAGING` modes that capture a text response, 
   "exits": [...],
   "config": {
     "prompt": "b969cd54-c894-4f5a-891e-f1b24e32982b",
-    "IVR": {
+    "ivr": {
       "max_duration_seconds": 120,
       "end_recording_digits": "1234567890#*"
     }
