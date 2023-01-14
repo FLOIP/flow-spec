@@ -196,8 +196,10 @@ The Block object (`@block`) presents the currently executing block. It's often u
 block: {
     // timestamp when the block was entered
     entered_at: "2022-03-15 14:03:03",
-    // raw response received from the contact, if applicable. This could be text or an IVR digit.
+    // raw response received from the contact, if applicable. This could be text or an IVR digit. Typically used in internal block logic, such as choice evalution of SelectOneResponse.
     response: "choc",
+    // parsed response as the final output variable of the block. Typically used in exit tests for branching logic.
+    value: "Chocolate"
 }
 ```
 
