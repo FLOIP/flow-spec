@@ -282,7 +282,7 @@ Each exit node in `exits` must contain:
 | `semantic_label` \(string, optional\) | A user-controlled field that can be used to code the meaning of the data collected by this exit in a standard taxonomy or coding system, e.g.: a FHIR ValueSet, an industry-specific coding system like SNOMED CT, or an organization's internal taxonomy service. \(e.g. "SNOMEDCT::Feminine Gender"\) |
 | `test` \(expression, optional\) | For blocks that evaluate conditions, this is an expression that determines whether this exit will be selected as the path out of the block. The first exit with an expression that evaluates to a "truthy" value will be chosen. |
 | `default` \(boolean, optional\) | If this key is present and true, the exit is treated as the flow-through default in a case evaluation. The block will terminate through this exit if no test expressions in other exits evaluate true..  |
-| `config` \(object\) | This contains additional information required for each mode supported by the block. Details are provided within the Block documentation |
+| `vendor_metadata` \(object, optional\) | A set of key-value records that is not controlled by the Specification, but could be relevant to a specific vendor/platform/implementation. |
 
 Each exit must specify one of either `test` or `default`. Each block must have exactly one `default` exit. The `default` exit is listed last in the list.
 
