@@ -17,6 +17,16 @@ Requirements:
 
   an expression alone
 
+### Variables:
+#### Contact Variables
+[TBD]
+#### Flow Variables
+[TBD]
+#### Steps Variables
+[TBD]
+#### Date Variables
+[TBD]
+
 ### Excellent - Excel Inspired Expressions
 
 Excellent is an expression language which consists of the functions provided by Excel with a few additions. This provides a number of advantages:
@@ -422,6 +432,20 @@ Returns TRUE if the argument is a string.
 
 `@ISSTRING(contact.name)`  will return TRUE if the contact's name is a string.
 
+### Array Functions
+
+**ARRAY\(arg1, arg2, ... argN\)**
+Creates the array of arguments.
+
+`@ARRAY(5, 34, 'Ten')` will return `"5, 34, Ten"`
+
+`@COUNT(ARRAY(5, 34, 'Ten'))` will return `3`
+
+**COUNT\(arg\)**
+
+Returns the number of items in an array
+
+`@COUNT(contact.groups)` will return the number of groups the contact is in
 ### Functions for use within Tests
 
 The following functions are supported and included in the specification by reference for interoperability with RapidPro routing tests:
