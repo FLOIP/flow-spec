@@ -329,6 +329,25 @@ Converts a text string to uppercase
 
 `WELCOME =UPPER(contact)!!`
 
+### Random Number Generation Functions
+
+**@RAND()** 
+
+Returns a single random number between [0.0-1.0).
+
+`@(rand())` → 0.6075520156746239
+
+`@(rand())` → 0.48467757094734026
+
+**@RANDBETWEEN(2,55)**
+
+Returns a single random integer in the given inclusive range. 
+
+`@(RANDBETWEEN(1, 10))` → 10
+
+`@(RANDBETWEEN(1, 10))` → 2 
+
+
 ### Excellent Specific Functions
 
 These functions are not found in Excel but have been provided for the sake of convenience.
