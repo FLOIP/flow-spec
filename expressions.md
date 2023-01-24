@@ -17,16 +17,6 @@ Requirements:
 
   an expression alone
 
-### Variables:
-#### Contact Variables
-[TBD]
-#### Flow Variables
-[TBD]
-#### Steps Variables
-[TBD]
-#### Date Variables
-[TBD]
-
 ### Excellent - Excel Inspired Expressions
 
 Excellent is an expression language which consists of the functions provided by Excel with a few additions. This provides a number of advantages:
