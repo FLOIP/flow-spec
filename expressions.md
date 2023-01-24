@@ -335,9 +335,9 @@ Converts a text string to uppercase
 
 Returns a single random number between [0.0-1.0).
 
-`@(rand())` → 0.6075520156746239
+`@(RAND())` → 0.6075520156746239
 
-`@(rand())` → 0.48467757094734026
+`@(RAND())` → 0.48467757094734026
 
 **@RANDBETWEEN(2,55)**
 
