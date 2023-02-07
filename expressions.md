@@ -99,7 +99,7 @@ Examples below use the following context:
 
 Function arguments in square brackets \(\[ ... \]\) are optional.
 
-#### Date and time functions
+### Date and time functions
 
 **DATE\(year, month, day\)**
 
@@ -185,7 +185,7 @@ Returns only the year of a date
 
 `The current year is =YEAR(NOW())`
 
-#### Logical functions
+### Logical functions
 
 **AND\(arg1, arg2, ...\)**
 
@@ -205,7 +205,7 @@ Returns TRUE if any argument is TRUE
 
 `@OR(contact.state = "GA", contact.state = "WA", contact.state = "IN")`
 
-#### Math functions
+### Math functions
 
 **ABS\(number\)**
 
@@ -237,7 +237,7 @@ Returns the sum of all arguments, equivalent to the + operator
 
 `You have =SUM(contact.reports, contact.forms) reports and forms`
 
-#### Text functions
+### Text functions
 
 **CHAR\(number\)**
 
@@ -329,7 +329,26 @@ Converts a text string to uppercase
 
 `WELCOME =UPPER(contact)!!`
 
-#### Excellent Specific Functions
+### Random Number Generation Functions
+
+**@RAND()** 
+
+Returns a single random number between [0.0-1.0).
+
+`@(RAND())` → 0.6075520156746239
+
+`@(RAND())` → 0.48467757094734026
+
+**@RANDBETWEEN(2,55)**
+
+Returns a single random integer in the given inclusive range. 
+
+`@(RANDBETWEEN(1, 10))` → 10
+
+`@(RANDBETWEEN(1, 10))` → 2 
+
+
+### Excellent Specific Functions
 
 These functions are not found in Excel but have been provided for the sake of convenience.
 
@@ -383,7 +402,7 @@ Extracts a substring of the words beginning at start, and up to but not-includin
 
 `@WORD_SLICE("RapidPro expressions are fun", -1)` will return "fun"
 
-#### Type Checking Functions
+### Type Checking Functions
 
 **ISNUMBER\(arg\)**
 
@@ -403,7 +422,21 @@ Returns TRUE if the argument is a string.
 
 `@ISSTRING(contact.name)`  will return TRUE if the contact's name is a string.
 
-#### Functions for use within Tests
+### Array Functions
+
+**ARRAY\(arg1, arg2, ... argN\)**
+Creates the array of arguments.
+
+`@ARRAY(5, 34, 'Ten')` will return `"5, 34, Ten"`
+
+`@COUNT(ARRAY(5, 34, 'Ten'))` will return `3`
+
+**COUNT\(arg\)**
+
+Returns the number of items in an array
+
+`@COUNT(contact.groups)` will return the number of groups the contact is in
+### Functions for use within Tests
 
 The following functions are supported and included in the specification by reference for interoperability with RapidPro routing tests:
 
