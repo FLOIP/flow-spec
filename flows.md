@@ -208,7 +208,7 @@ A Flow represents a set of Blocks and their direct connections. The required key
 | `exit_block_id` \(uuid, optional\) | If provided, the ID of the block in`blocks`that will be jumped to if there is an error or deliberate exit condition during Flow Run. If not provided, the Flow Run will end immediately. |
 | `languages` \(array\) | A list of the languages that the Flow has suitable content for. See language object specification below. |
 | `blocks` \(array\) | A list of the Blocks in the flow \(see below\).  The flow will start execution at the _first_ block in this list. |
-| `resources` \(object\) | A set of the Resources needed for executing the Flow, keyed by resource uuid. |
+| `resources` \(array\) | A list of the Resources needed for executing the Flow. |
 
 #### Modes
 
